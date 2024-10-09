@@ -12,7 +12,7 @@
 - How often will we meet ?
 We will meet minimum 3-4 per week, the first one being in person.
 - What time?
-After 8 pm on Wednesday (STC)
+After 8 pm on Wednesday and Thursday (STC)
 - What do i have to do?
 Show up and keep a log of your meetings!
 
@@ -43,6 +43,6 @@ Teamates are expected to have their work done on time without excuse.
 
 - Disagrements should be handled as soon as possible in order to keep the flow of work going. 
 
-- Teamates are expected to review and understand other peoples code in order to potentially fix, or use their code in order to reduce redundancy
+- Teammates are expected to review and understand other peoples code in order to potentially fix, or use their code in order to reduce redundancy
 
  **Communication is key**
