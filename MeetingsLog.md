@@ -1,5 +1,6 @@
 # 10/11/2024 Friday 7:20pm, 1hr, online
 Attendees: Tommy, Haris, Aiden
+
 Note taker: Tommy
 ## problems
 * Re- set up our gitlab branches and finish TeamPolicy.md for submission
