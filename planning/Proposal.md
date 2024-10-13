@@ -48,11 +48,11 @@ This project will use two datasets to analyze the relationship between CO2 emiss
 
 ## Functionality
 - Users will be able to:
-  - Select specific countries and years to filter data.
+  - Select specific countries and years to filter data by using the checkboxes list. When a country is selected,
+  the data for that country will appear on the line chart. Unchecking a box will remove that country's data from the chart.
+  By selecting multiple checkboxes, users can compare data for several countries simulataneously on the same line chart.
   - View temperature trends and emission sources using interactive charts.
   - Hover over charts to see specific data points.
-  - Toggle between different countries to compare data.
-
 ---
 
 ## Features and Priorities
@@ -68,7 +68,7 @@ This project will use two datasets to analyze the relationship between CO2 emiss
 ---
 
 ## Dependencies
-
+- We plan to React-Plotly as the client-side visualization library as it offers more customization options compared to Chart.js. As of right now, we are not 100% confirmed to be using it. We might consider switching to Chart.js if we find that implementing Plotly becomes too complicated. We aim to choose the library that best fits our project's needs as we progress.
 
 ---
 
