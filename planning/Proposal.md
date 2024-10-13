@@ -42,8 +42,8 @@ This project will use two datasets to analyze the relationship between CO2 emiss
 ---
 
 ## Views
-![Desktop wireframe](./h.png)
-![Mobile wireframe](./h.png)
+![Desktop wireframe](./Desktop.png)
+![Mobile wireframe](./Mobile.png)
 
 On Desktop the fold should be below the "about climate change and its effects" text, making its existance obvious to the viewer.
 
