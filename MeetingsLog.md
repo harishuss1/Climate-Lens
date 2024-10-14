@@ -1,5 +1,5 @@
 # 10/11/2024 Friday 7:20pm, 1hr, online
-Attendees: Tommy, Haris, Aiden
+Attendees: Tommy, Haris, Aidan
 
 Note taker: Tommy
 ## problems
@@ -14,7 +14,7 @@ Note taker: Tommy
 ***
 
 # 10/13/2024 Sunday 4:00pm, 2hrs, online
-Attendees: Tommy, Haris, Aiden
+Attendees: Tommy, Haris, Aidan
 
 Note taker: Tommy
 ## problems
@@ -26,7 +26,21 @@ Note taker: Tommy
 * We discussed on what the 3 potential endpoints are
 * Each member began drafting a section in the proposal.md:
 - **Haris** filled in the API, Visualizations and Features and Priorities sections
-- **Aiden** filled the Views section
+- **Aidan** filled the Views section
 - **Tommy** filled the functionality and dependencies sections
 * Reviewed client-side visualizations library that we could use (Plotly, Chart.js as a backup)
 * Planned to finalize the wireframes and the proposal.md in our next meeting before the deadline
+
+***
+
+# 10/14/2024 Monday 7:00pm, 1hrs, online
+Attendees: Tommy, Haris, Aidan
+
+Note taker: Aidan
+## problems
+* Go over the Propsal and clean up some last changes.
+## discussion / work we have done during the meeting
+* Disscussed how to manage having multiple countries selected at once, decided on having two countried as the base functionality, and leave having more then two countried as a strech goal.
+* Changes where made to the proposal to reflect the disscusion, and corrected an issue where the graph in the proposal didnt save.
+* Tommy updated Formatting of the Choose Data issue.
+* Plans where made to make the final submission tomorrow, leaving time for further changes if needed.
