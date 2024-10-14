@@ -33,8 +33,8 @@ Note taker: Tommy
 
 ***
 
-# 10/14/2024 Monday 7:00pm, 1hrs, online
-Attendees: Tommy, Haris, Aidan
+# 10/14/2024 Monday 7:00pm, 45min, online
+Attendees: Tommy,, Aidan
 
 Note taker: Aidan
 ## problems
