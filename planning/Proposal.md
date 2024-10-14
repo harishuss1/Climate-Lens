@@ -63,13 +63,13 @@ On Mobile the fold should be right below the graph, just above the legend.
 ## Features and Priorities
 - **Core Features:**  
   - Interactive line chart for temperature data.  
-  - Pie chart showing CO2 emission breakdown.  
+  - Pie chart showing CO2 emission breakdown based on the selected countries (max 2)
   - Filter functionality by country and year.
-
+  
 - **Potential Cuts (if needed):**  
   - Advanced filtering for specific fossil fuel categories.  
   - Animations or transitions.
-
+  
 ---
 
 ## Dependencies
