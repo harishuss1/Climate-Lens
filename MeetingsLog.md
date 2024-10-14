@@ -34,13 +34,13 @@ Note taker: Tommy
 ***
 
 # 10/14/2024 Monday 7:00pm, 45min, online
-Attendees: Tommy,, Aidan
+Attendees: Tommy, Aidan
 
 Note taker: Aidan
 ## problems
-* Go over the Propsal and clean up some last changes.
+* Go over the Proposal and clean up some last changes.
 ## discussion / work we have done during the meeting
-* Disscussed how to manage having multiple countries selected at once, decided on having two countried as the base functionality, and leave having more then two countried as a strech goal.
-* Changes where made to the proposal to reflect the disscusion, and corrected an issue where the graph in the proposal didnt save.
+* Discussed how to manage having multiple countries selected at once, decided on having two countries as the base functionality, and leave having more then two countries as a stretch goal.
+* Changes were made to the proposal to reflect the disscusion, and corrected an issue where the graph in the screenshot was missing.
 * Tommy updated Formatting of the Choose Data issue.
-* Plans where made to make the final submission tomorrow, leaving time for further changes if needed.
+* Plans were made to make the final submission tomorrow, leaving time for further changes if needed.
