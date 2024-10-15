@@ -44,3 +44,21 @@ Note taker: Aidan
 * Changes were made to the proposal to reflect the disscusion, and corrected an issue where the graph in the screenshot was missing.
 * Tommy updated Formatting of the Choose Data issue.
 * Plans were made to make the final submission tomorrow, leaving time for further changes if needed.
+
+***
+
+# 10/15/2024 Tuesday 7:00pm, 30min, online
+Attendees: Tommy, Haris, Aidan
+
+Note taker: Aidan
+## problems
+* A final meeting before submitting the proposal
+## discussion / work we have done during the meeting
+* Made sure nobody had anything else to add.
+* Disscussed who should submit it, decided on Aidan based on the proposal spec.
+* Tommy made some final fixes and changes to the proposal
+* Realised the README was never filled out, Aidan then updated it.
+* merged proposal into staging
+* merged main into staging to update the README.md
+* made submission merge request
+* Aidan submitted links to the merge request and choose data issue
