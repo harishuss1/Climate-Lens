@@ -53,10 +53,10 @@ On Mobile the fold should be right below the graph, just above the legend.
 
 ## Functionality
 - Users will be able to:
-  - Select a year and up to two countries to fitler the data, via three dropdown boxes. When a country is selected,
+  - Select a year and up to two countries to fitler the data, via three dropdown boxes or checkboxes. When a country is selected,
   the data for that country will appear on the line chart. Unselecting it will remove that country's data from the chart.
   By selecting two countires, users can compare the data of the two countries simulataneously on the same line chart.
-  - Select specific countries and years to filter data by using the checkboxes list. 
+  - Select specific countries and years to filter data by using the dropdown or checkboxes list. 
   - View temperature trends and emission sources using interactive charts.
   - Hover over charts to see specific data points.
 ---
