@@ -53,9 +53,9 @@ On Mobile the fold should be right below the graph, just above the legend.
 
 ## Functionality
 - Users will be able to:
-  - Select a year and up to two countries to fitler the data, via three dropdown boxes or checkboxes. When a country is selected,
+  - Select a year and up to two countries to filter the data, via three dropdown boxes or checkboxes. When a country is selected,
   the data for that country will appear on the line chart. Unselecting it will remove that country's data from the chart.
-  By selecting two countires, users can compare the data of the two countries simulataneously on the same line chart.
+  By selecting two countries, users can compare the data of the two countries simultaneously on the same line chart.
   - Select specific countries and years to filter data by using the dropdown or checkboxes list. 
   - View temperature trends and emission sources using interactive charts.
   - Hover over charts to see specific data points.
@@ -74,7 +74,7 @@ On Mobile the fold should be right below the graph, just above the legend.
 ---
 
 ## Dependencies
-- We plan to React-Plotly as the client-side visualization library as it offers more customization options compared to Chart.js. As of right now, we are not 100% confirmed to be using it. We might consider switching to Chart.js if we find that implementing Plotly becomes too complicated. We aim to choose the library that best fits our project's needs as we progress.
+- We plan to use React-Plotly as the client-side visualization library as it offers more customization options compared to Chart.js. As of right now, we are not 100% confirmed to be using it. We might consider switching to Chart.js if we find that implementing Plotly becomes too complicated. We aim to choose the library that best fits our project's needs as we progress.
 
 ---
 
