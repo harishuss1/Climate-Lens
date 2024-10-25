@@ -1,0 +1,13 @@
+{
+  "name": "520-project-hussain-tran-holmes",
+  "version": "1.0.0",
+  "description": "Express + React app",
+  "main": "index.js",
+  "scripts": {
+    "start": "cd server && node bin/www",
+    "build": "cd client && npm install && npm run build && cd ../server && npm install",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Haris Hussain, Tommy Tran, Aidan Holmes",
+  "license": "ISC"
+}
