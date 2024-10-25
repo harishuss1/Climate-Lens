@@ -62,3 +62,17 @@ Note taker: Aidan
 * merged main into staging to update the README.md
 * made submission merge request
 * Aidan submitted links to the merge request and choose data issue
+
+***
+
+# 10/25/2024 Tuesday 1:00pm, 2h30min, in person 
+Attendees: Tommy, Haris, Aidan
+
+Note taker: Haris
+## problems
+* Going through submission feedback
+## discussion / work we have done during the meeting
+* Looked at the feedback all together and finding solutions to the missing features we had.
+* Added 2 new views to meet the requirements.
+* Changed Draw.io to match our new ideas and views.
+* Make a new branch for our initial set up and we will add our new draw.io to it as well.
