@@ -9,5 +9,8 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Haris Hussain, Tommy Tran, Aidan Holmes",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "520-project-hussain-tran-holmes": "file:"
+  }
 }
