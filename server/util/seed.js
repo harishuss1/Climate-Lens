@@ -53,8 +53,8 @@ async function readData(path) {
   try {
     // TODO replace cluster0 with your db name
     await db.connect('Cluster520Web2024', 'fossilFuel');
-    const fossilData = await readData('./db/fossilFuelCo2.json');
-    const temperatureData = await readData('./db/globalLandTemperature.json');
+    const fossilData = await readData('./data/fossilFuelCo2.json');
+    const temperatureData = await readData('./data/globalLandTemperature.json');
     const num = await db.createMany(fossilData);
     await db.changeCollection('CO2');
     const num2 = await db.createMany(temperatureData);
