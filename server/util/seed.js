@@ -1,4 +1,4 @@
-import {db} from '../db/db.js';
+import { db } from '../db/db.js';
 import * as fs from 'node:fs/promises';
 'use strict';
 
@@ -45,20 +45,20 @@ async function readData(path) {
       return dataJson;
     }
   } catch (error) {
-    throw Error('error reading file');
+    throw Error('error reading file : ' + error);
   }
 };
 
 (async () => {
   try {
     // TODO replace cluster0 with your db name
-    await db.connect('Cluster520Web2024', 'fossilFuel');
-    const fossilData = await readData('./data/fossilFuelCo2.json');
+    await db.connect('Cluster520Web2024', 'CO2Emissions');
+    const co2EmissionsData = await readData('./data/fossilFuelCo2.json');
     const temperatureData = await readData('./data/globalLandTemperature.json');
-    const num = await db.createMany(fossilData);
-    await db.changeCollection('CO2');
+    const num = await db.createMany(co2EmissionsData);
+    await db.changeCollection('CountryAverageTemperature');
     const num2 = await db.createMany(temperatureData);
-    console.log(`Inserted ${num} fossil data`);
+    console.log(`Inserted ${num} CO2Emissions data`);
     console.log(`Inserted ${num2} temperature data`);
   } catch (e) {
     console.error('could not seed');
