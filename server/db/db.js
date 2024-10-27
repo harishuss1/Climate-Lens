@@ -36,7 +36,7 @@ class DB {
 
   async changeCollection(collName) {
     if (!instance.db) {
-      throw new Error("No database connection. Please connect first.");
+      throw new Error('No database connection. Please connect first.');
     }
     instance.collection = await instance.db.collection(collName);
     console.log('Switched to collection: ' + collName);
