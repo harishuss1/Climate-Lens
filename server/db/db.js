@@ -1,8 +1,8 @@
-import 'dotenv/config'
+import 'dotenv/config';
 import { MongoClient, ServerApiVersion } from 'mongodb';
 
 const dbUrl = process.env.ATLAS_URI;
-let instance = null
+let instance = null;
 
 class DB {
   constructor() {
