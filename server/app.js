@@ -7,7 +7,7 @@ const app = express();
 
 app.use(express.json());
 const __dirname = import.meta.dirname;
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static('../client/dist'));
 
 // uses your route e.g below
 // app.use('/', quotes);
