@@ -34,6 +34,14 @@ class DB {
     instance.collection = await instance.db.collection(collName);
   }
 
+  async changeCollection(collName) {
+    if (!instance.db) {
+      throw new Error("No database connection. Please connect first.");
+    }
+    instance.collection = await instance.db.collection(collName);
+    console.log('Switched to collection: ' + collName);
+  }
+
   async close() {
     await instance.mongoClient.close();
     instance = null;
