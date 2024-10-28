@@ -11,7 +11,6 @@ app.use(express.json());
 app.use(express.static('../client/dist'));
 
 // uses your route e.g below
-// app.use('/', quotes);
 
 app.use('/api/temp', tempRouter);
 

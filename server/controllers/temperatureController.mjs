@@ -8,10 +8,6 @@ import { db } from '../db/db.js';
 export const getTemperatureData = async (req, res) => {
   const { country, year } = req.params;
 
-  if (!country) {
-    return res.status(404).json({ error: 'Country is required' });
-  }
-
   try {
     await db.changeCollection('CountryAverageTemperature');
   } catch (error) {
