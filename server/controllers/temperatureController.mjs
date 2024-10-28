@@ -20,6 +20,11 @@ export const getTemperatureData = async (req, res) => {
   };
 
   if (year) {
+    const validYears = ['2008', '2009', '2010', '2011', '2012', '2013'];
+    if (!validYears.includes(year)) {
+      return res.status(400).json({ error: 'Enter a valid year (2008-2013)' });
+    }
+
     query.dt = new RegExp(`^${year}`);
   }
 
