@@ -54,5 +54,18 @@ class DB {
   async createMany(quotes){
     return await instance.collection.insertMany(quotes);
   }
+
+  async readFiltered(query) {
+    if (!this.collection) {
+      throw new Error('No collection connected');
+    }
+    try {
+      const data = await this.collection.find(query).toArray();
+      return data;
+    } catch (error) {
+      console.error('Error reading filtered data:', error);
+      throw error;
+    }
+  }
 }
 export const db = new DB();
