@@ -9,7 +9,7 @@ export const getTemperatureData = async (req, res) => {
   const { country, year } = req.params;
 
   if (!country) {
-    return res.status(400).json({ error: 'Country is required' });
+    return res.status(404).json({ error: 'Country is required' });
   }
 
   try {
