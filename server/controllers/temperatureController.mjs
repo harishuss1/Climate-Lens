@@ -8,6 +8,10 @@ import { db } from '../db/db.js';
 export const getTemperatureData = async (req, res) => {
   const { country, year } = req.params;
 
+  if (!country) {
+    return res.status(400).json({ error: 'Country is required' });
+  }
+
   try {
     await db.changeCollection('CountryAverageTemperature');
   } catch (error) {
@@ -15,17 +19,21 @@ export const getTemperatureData = async (req, res) => {
     return res.status(500).json({ error: 'Failed to switch collection' });
   }
 
-  let query = {};
+  let query = {
+    Country: { $regex: new RegExp(`^${country}$`, 'i') } 
+  };
 
-  if (country) {
-    query.Country = { $regex: new RegExp(`^${country}$`, 'i') }; 
-  }
   if (year) {
-    query.dt = new RegExp(`^${year}`); 
+    query.dt = new RegExp(`^${year}`);
   }
 
   try {
     const tempData = await db.readFiltered(query);
+
+    if (!tempData || tempData.length === 0) {
+      return res.status(400).json({ error: 'Enter a valid country' });
+    }
+
     res.json(tempData);
   } catch (error) {
     console.error('Error fetching temperature data:', error);
