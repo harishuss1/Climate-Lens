@@ -2,12 +2,12 @@ import { expect } from 'chai';
 import sinon from 'sinon';
 import request from 'supertest';
 import express from 'express';
-import tempRouter from '../routers/temperature.js';
+import emissionRouter from '../routers/emissions.js';
 import { db } from '../db/db.js';
 
 const app = express();
 app.use(express.json());
-app.use('/api/emissions', tempRouter); 
+app.use('/api/emissions', emissionRouter); 
 
 const exampleData = {
   'Year':'2008',
@@ -48,7 +48,7 @@ describe('GET /api/emissions/:country/:year?', () => {
     const response = await request(app).get('/api/emissions/9999');
 
     expect(stubChangeCollection.calledOnceWith('CO2Emissions')).to.be.true;
-    expect(stubReadFiltered.calledOnceWith({ Year: Number(9999) })).to.be.true;
+    expect(stubReadFiltered.called).to.be.false;
     expect(response.status).to.equal(400);
     expect(response.body).to.have.property('error', 'Enter a valid year (2008-2013)');
   });
@@ -62,7 +62,7 @@ describe('GET /api/emissions/:country/:year?', () => {
     const response = await request(app).get('/api/emissions/');
 
     expect(stubChangeCollection.calledOnceWith('CO2Emissions')).to.be.true;
-    expect(stubReadAll.calledOnce()).to.be.true;
+    expect(stubReadAll.calledOnce).to.be.true;
     expect(response.status).to.equal(200);
     expect(response.body).to.deep.equal(exampleData);
   });
@@ -98,8 +98,7 @@ describe('GET /api/emissions/:country/:year?', () => {
     expect(response.body).to.deep.equal(exampleData);
   });
 
-  // ============================================================================================
-  // test for year with no country
+
   it('should return emissions data for a valid year', async () => {
     stubChangeCollection.resolves();
     stubReadFiltered.resolves(exampleData);
@@ -114,7 +113,6 @@ describe('GET /api/emissions/:country/:year?', () => {
   });
 
 
-  // test for year and country (in that order)
   it('should return emissions data for a valid year and country (in that order)', async () => {
     stubChangeCollection.resolves();
     stubReadFiltered.resolves(exampleData);
@@ -146,7 +144,7 @@ describe('GET /api/emissions/:country/:year?', () => {
 
   it('should return a 500 error if readFiltered fails', async () => {
     stubChangeCollection.resolves();
-    stubReadFiltered.rejects(new Error('Failed to fetch temperature data'));
+    stubReadFiltered.rejects(new Error('Failed to fetch emission data'));
 
     // Make a GET request with a valid country
     const response = await request(app).get('/api/emissions/Afghanistan');
@@ -154,6 +152,6 @@ describe('GET /api/emissions/:country/:year?', () => {
     expect(stubChangeCollection.calledOnceWith('CO2Emissions')).to.be.true;
     expect(stubReadFiltered.calledOnceWith({ Country: { $regex: /^Afghanistan$/i } })).to.be.true;
     expect(response.status).to.equal(500);
-    expect(response.body).to.have.property('error', 'Failed to fetch temperature data');
+    expect(response.body).to.have.property('error', 'Failed to fetch emission data');
   });
 });
