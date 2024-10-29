@@ -1,8 +1,8 @@
 import 'dotenv/config';
 import { MongoClient, ServerApiVersion } from 'mongodb';
 
-// If no uri use that as dburl, for ci 
-const dbUrl = process.env.ATLAS_URI || 'mongodb://localhost:3005/testdb';
+
+const dbUrl = process.env.ATLAS_URI;
 let instance = null;
 
 class DB {
@@ -27,7 +27,7 @@ class DB {
         deprecationErrors: true,
       }
     });
-    
+
     await instance.mongoClient.connect();
     instance.db = await instance.mongoClient.db(dbname);
     // Send a ping to confirm a successful connection
