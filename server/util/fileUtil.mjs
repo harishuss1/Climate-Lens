@@ -37,15 +37,12 @@ async function isFile(path) {
 }
 
 async function readData(path) {
-  try {
-    if (await validatePath(path) && await isFile(path)) {
-      const data = await fs.readFile(path, 'utf-8');
-      const dataJson = JSON.parse(data);
-      return dataJson;
-    }
-  } catch (error) {
-    throw Error('error reading file : ' + error);
+  if (await validatePath(path) && await isFile(path)) {
+    const data = await fs.readFile(path, 'utf-8');
+    const dataJson = JSON.parse(data);
+    return dataJson;
   }
+  throw new Error('File does not exist or is not a file');
 };
 
 export { validatePath, isFile, readData };

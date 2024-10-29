@@ -28,3 +28,22 @@ describe('isFile method', () => {
     expect(result).to.be.false;
   });
 });
+
+describe('readData method', () => {
+  it('should return parsed JSON content if it is a valid file path', async () => {
+    const result = await fileUtil.readData('./test/fakeFile.txt');
+    expect(result).to.deep.equal({ name: 'TommyT', department: 'CS' });
+  });
+
+  it('should throw an error when the file does not exist', async () => {
+    await expect(
+      fileUtil.readData('./dwadawdw')).
+      to.be.rejectedWith(Error, /File does not exist or is not a file/);
+  });
+
+  it('should throw an error when it isnt a file', async () => {
+    await expect(
+      fileUtil.readData('./fakeDirectory')).
+      to.be.rejectedWith(Error, /File does not exist or is not a file/);
+  });
+});
