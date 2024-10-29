@@ -1,6 +1,5 @@
 import { db } from '../db/db.js';
 
-let debugcount = 0;
 
 /**
  * Get emissions data from the CO2Emissions collection
@@ -10,8 +9,6 @@ let debugcount = 0;
 export const getEmissionData = async (
   req, res,) => {
 
-  debugcount++;
-  console.log(`this has been run ${debugcount} times`);
   const { country, year } = req.params;
 
   try {
@@ -22,11 +19,10 @@ export const getEmissionData = async (
   }
 
   const query = {};
-
+  // Country: { $regex: new RegExp(`^${country}$`, 'i') } 
   if (country) {
-    query.County = new RegExp(`^${country}$`, 'i');
+    query.Country = { $regex: new RegExp(`^${country}$`, 'i') };
   }
-
   if (year) {
     const validYears = ['2008', '2009', '2010', '2011', '2012', '2013'];
     if (!validYears.includes(year)) {
@@ -44,7 +40,6 @@ export const getEmissionData = async (
     } else {
       data = await db.readAll();
     }
-    data = await db.readFiltered(query);
     if (!data || data.length === 0) {
       return res.status(400).json({ error: 'No data was Found' });
     }
