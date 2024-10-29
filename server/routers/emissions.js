@@ -13,4 +13,6 @@ router.get('/:country/:year?', (req, res, next) => {
 
 router.get('/:year/:country?', getEmissionData);
 
+router.get('/', getEmissionData);
+
 export default router;
