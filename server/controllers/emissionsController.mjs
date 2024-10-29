@@ -1,12 +1,17 @@
 import { db } from '../db/db.js';
 
+let debugcount = 0;
 
 /**
  * Get emissions data from the CO2Emissions collection
  * @param {Object} req - Express request object
  * @param {Object} res - Express response object
  */
-export const getEmissionData = async (req, res) => {
+export const getEmissionData = async (
+  req, res,) => {
+
+  debugcount++;
+  console.log(`this has been run ${debugcount} times`);
   const { country, year } = req.params;
 
   try {
