@@ -4,7 +4,7 @@ import {readData} from './fileUtil.mjs';
 
 (async () => {
   try {
-    // TODO replace cluster0 with your db name
+
     await db.connect('Cluster520Web2024', 'CO2Emissions');
     const co2EmissionsData = await readData('./data/fossilFuelCo2.json');
     const temperatureData = await readData('./data/globalLandTemperature.json');
