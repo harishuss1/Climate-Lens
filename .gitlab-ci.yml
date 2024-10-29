@@ -29,14 +29,16 @@ stages:
 lint-server:
   stage: lint
   script:
-    - cd server && npm run lint 
+    - cd server 
+    - npx eslint
   allow_failure: false
 
 # Lint job for client
 lint-client:
   stage: lint
   script:
-    - cd client && npm run lint
+    - cd client
+    - npx eslint
 
 # Test job for server
 test-server:
