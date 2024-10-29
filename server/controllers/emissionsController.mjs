@@ -28,7 +28,7 @@ export const getEmissionData = async (req, res) => {
       return res.status(400).json({ error: 'Enter a valid year (2008-2013)' });
     }
 
-    query.Year = new RegExp(`^${year}`);
+    query.Year = Number(year);
   }
 
   try {
@@ -39,7 +39,7 @@ export const getEmissionData = async (req, res) => {
     } else {
       data = await db.readAll();
     }
-
+    data = await db.readFiltered(query);
     if (!data || data.length === 0) {
       return res.status(400).json({ error: 'No data was Found' });
     }
