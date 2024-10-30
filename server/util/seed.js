@@ -2,6 +2,17 @@ import { db } from '../db/db.js';
 import {readData} from './fileUtil.mjs';
 'use strict';
 
+/**
+ * Seeds the database with CO2 emissions and temperature data.
+ * 
+ * The script connects to the MongoDB database, reads data from JSON files,
+ * and inserts the data into the respective collections in the database.
+ *
+ * @async
+ * @function
+ * @throws {Error} Will throw an error if the database connection or file reading fails.
+ */
+
 (async () => {
   try {
 
