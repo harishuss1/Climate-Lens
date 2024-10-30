@@ -9,21 +9,35 @@ const app = express();
 app.use(express.json());
 app.use('/api/temp', tempRouter); 
 
+
+/**
+ * Test suite for GET /api/temp/:country/:year? endpoint.
+ */
 describe('GET /api/temp/:country/:year?', () => {
   let stubChangeCollection;
   let stubReadFiltered;
 
+  /**
+   * Set up stubs for db.changeCollection and db.readFiltered methods before each test.
+   */
   beforeEach(() => {
     // Mock the db.changeCollection and db.readFiltered methods
     stubChangeCollection = sinon.stub(db, 'changeCollection');
     stubReadFiltered = sinon.stub(db, 'readFiltered');
   });
 
+  /**
+   * Restore the stubs after each test.
+   */
   afterEach(() => {
     // Restore the stubbed methods after each test
     sinon.restore();
   });
 
+  /**
+   * Test case for an invalid country.
+   * Expected outcome: Returns a 400 error with 'Enter a valid country' message.
+   */
   it('should return a 400 error if an invalid country is provided', async () => {
     stubChangeCollection.resolves();
     stubReadFiltered.resolves([]);
@@ -36,6 +50,11 @@ describe('GET /api/temp/:country/:year?', () => {
     expect(response.body).to.have.property('error', 'Enter a valid country');
   });
 
+
+  /**
+   * Test case for a valid country.
+   * Expected outcome: Returns temperature data for the specified country.
+   */
   it('should return temperature data for a valid country', async () => {
     stubChangeCollection.resolves();
     stubReadFiltered.resolves([{ dt: '2008-03-01',
@@ -51,6 +70,11 @@ describe('GET /api/temp/:country/:year?', () => {
       AverageTemperature: 13.506, Country: 'Afghanistan' }]);
   });
 
+
+  /**
+   * Test case for a valid country and year.
+   * Expected outcome: Returns temperature data for the specified country and year.
+   */
   it('should return temperature data for a valid country and year', async () => {
     stubChangeCollection.resolves();
     stubReadFiltered.resolves([{ dt: '2008-03-01',
@@ -69,6 +93,11 @@ describe('GET /api/temp/:country/:year?', () => {
       AverageTemperature: 13.506, Country: 'Afghanistan' }]);
   });
 
+
+  /**
+   * Test case for failing changeCollection.
+   * Expected outcome: Returns a 500 error with 'Failed to switch collection' message.
+   */
   it('should return a 500 error if changeCollection fails', async () => {
     stubChangeCollection.rejects(new Error('Failed to switch collection'));
 
@@ -80,6 +109,11 @@ describe('GET /api/temp/:country/:year?', () => {
     expect(response.body).to.have.property('error', 'Failed to switch collection');
   });
 
+
+  /**
+   * Test case for failing readFiltered.
+   * Expected outcome: Returns a 500 error with 'Failed to fetch temperature data' message.
+   */
   it('should return a 500 error if readFiltered fails', async () => {
     stubChangeCollection.resolves();
     stubReadFiltered.rejects(new Error('Failed to fetch temperature data'));
