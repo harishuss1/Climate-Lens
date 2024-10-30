@@ -40,7 +40,9 @@ describe('GET /api/emissions/:country/:year?', () => {
     sinon.restore();
   });
 
-
+  /**
+   * testing invalid year, should result in an error.
+   */
   it('should return a 400 error if an invalid year is provided', async () => {
     stubChangeCollection.resolves();
     stubReadFiltered.resolves([]);
@@ -54,6 +56,9 @@ describe('GET /api/emissions/:country/:year?', () => {
   });
 
 
+  /**
+   * testing '/' route.
+   */
   it('should return emissions data without year or country input', async () => {
     stubChangeCollection.resolves();
     stubReadAll.resolves(exampleData);
@@ -67,7 +72,9 @@ describe('GET /api/emissions/:country/:year?', () => {
     expect(response.body).to.deep.equal(exampleData);
   });
 
-
+  /**
+   * testing '/:country' route.
+   */
   it('should return emissions data for a valid country', async () => {
     stubChangeCollection.resolves();
     stubReadFiltered.resolves(exampleData);
@@ -81,7 +88,9 @@ describe('GET /api/emissions/:country/:year?', () => {
     expect(response.body).to.deep.equal(exampleData);
   });
 
-
+  /**
+   * testing '/:country/:year?' route.
+   */
   it('should return emissions data for a valid country and year', async () => {
     stubChangeCollection.resolves();
     stubReadFiltered.resolves(exampleData);
@@ -98,7 +107,9 @@ describe('GET /api/emissions/:country/:year?', () => {
     expect(response.body).to.deep.equal(exampleData);
   });
 
-
+  /**
+   * testing '/:year' route.
+   */
   it('should return emissions data for a valid year', async () => {
     stubChangeCollection.resolves();
     stubReadFiltered.resolves(exampleData);
@@ -112,7 +123,9 @@ describe('GET /api/emissions/:country/:year?', () => {
     expect(response.body).to.deep.equal(exampleData);
   });
 
-
+  /**
+   * testing '/:year/:country?' route.
+   */
   it('should return emissions data for a valid year and country (in that order)', async () => {
     stubChangeCollection.resolves();
     stubReadFiltered.resolves(exampleData);
@@ -129,7 +142,9 @@ describe('GET /api/emissions/:country/:year?', () => {
     expect(response.body).to.deep.equal(exampleData);
   });
 
-
+  /**
+   * testing that it will return a 500 error if changeCollection fails
+   */
   it('should return a 500 error if changeCollection fails', async () => {
     stubChangeCollection.rejects(new Error('Failed to switch collection'));
 
@@ -141,7 +156,9 @@ describe('GET /api/emissions/:country/:year?', () => {
     expect(response.body).to.have.property('error', 'Failed to switch collection');
   });
 
-
+  /**
+   * testing that it will return a 500 error if readFiltered fails
+   */
   it('should return a 500 error if readFiltered fails', async () => {
     stubChangeCollection.resolves();
     stubReadFiltered.rejects(new Error('Failed to fetch emission data'));
