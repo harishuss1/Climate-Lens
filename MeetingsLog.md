@@ -76,3 +76,17 @@ Note taker: Haris
 * Added 2 new views to meet the requirements.
 * Changed Draw.io to match our new ideas and views.
 * Make a new branch for our initial set up and we will add our new draw.io to it as well.
+
+***
+
+# 10/29/2024 Tuesday 8:00pm, 1h, online
+Attendees: Tommy, Haris, Aidan
+
+Note taker: Haris
+## problems
+* Review submission
+## discussion / work we have done during the meeting
+* Merged all of our code together
+* Made sure everything was working all together
+* Read through the submission requirements and made sure everything was done
+* Add missing components if seen
