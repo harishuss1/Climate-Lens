@@ -42,6 +42,13 @@ export const getTemperatureData = async (req, res) => {
   }
 };
 
+/**
+ * Get temperature data from the CountryAverageTemperature collection for the 
+ * supplied country inclusively between the supplied years,
+ * then calculates the average temperature for each of those years and sends it in a response.
+ * @param {Object} req - Express request object
+ * @param {Object} res - Express response object
+ */
 export const getAvgTemperatureDataInRange = async (req, res) => {
   const stubData = [
     { country: 'Afganistan', year: '2008', average: '16' },
