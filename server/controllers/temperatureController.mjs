@@ -41,3 +41,11 @@ export const getTemperatureData = async (req, res) => {
     res.status(500).json({ error: 'Failed to fetch temperature data' });
   }
 };
+
+export const getAvgTemperatureDataInRange = async (req, res) => {
+  const stubData = [
+    { country: 'Afganistan', year: '2008', average: '16' },
+    { country: 'Afganistan', year: '2009', average: '15.5'}
+  ];
+  res.json(stubData);
+};
