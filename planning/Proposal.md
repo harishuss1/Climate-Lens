@@ -23,10 +23,13 @@ This project will use two datasets to analyze the relationship between CO2 emiss
      - `:country` (optional): Filter data by country (case-insensitive).  
      - `:year` (optional): Filter data by year.  
 
-3. **GET /api/random**  
-   - **Description:** Returns data for a random country and year.  
+3. **GET /api/temp/range/:country/:startYear/:endYear**  
+   - **Description:** Returns data for a country between 2 specified years.  
    - **Response:**  
-     - A random country and a random year with both temperature and emission data.
+   - **Parameters:**  
+     - `:country` (optional): Filter data by country (case-insensitive).  
+     - `:startYear`: start of the year.  
+     - `:endYear`: start of the year.  
 
 ---
 
@@ -35,6 +38,7 @@ This project will use two datasets to analyze the relationship between CO2 emiss
   - A **line chart** will display temperature trends over time.  
   - A **pie chart** will show the causes of CO2 emissions for a selected country and year.  
   - **Legends** will categorize the different sources of emissions.  
+  - A **Map** will display the average temperature in each country
 
 - **User Story:**  
   Users will be able to visualize both climate change and emissions data, with the ability to filter by country and year. The goal is to help users explore trends in global warming and understand the contributions of various countries to CO2 emissions.
@@ -56,8 +60,9 @@ On Mobile the fold should be right below the graph, just above the legend.
   - Select a year and up to two countries to filter the data, via three dropdown boxes or checkboxes. When a country is selected,
   the data for that country will appear on the line chart. Unselecting it will remove that country's data from the chart.
   By selecting two countries, users can compare the data of the two countries simultaneously on the same line chart.
-  - View temperature trends and emission sources using interactive charts.
+  - A graph showcasing the temperature trend of the selected country over a selected range of years.
   - Hover over charts to see specific data points.
+  - A world map, with each country having a colour based on the average temperature in that country for the selected year. clicking/pressing on a country will open a popup that shows the average temperature and the emissions breakdown (fossil fuel, etc.)
 ---
 
 ## Features and Priorities
@@ -65,6 +70,7 @@ On Mobile the fold should be right below the graph, just above the legend.
   - Interactive line chart for temperature data.  
   - Pie chart showing CO2 emission breakdown based on the selected countries (max 2)
   - Filter functionality by country and year.
+  - Map showing the average temperature in each country
   
 - **Potential Cuts (if needed):**  
   - Advanced filtering for specific fossil fuel categories.  
