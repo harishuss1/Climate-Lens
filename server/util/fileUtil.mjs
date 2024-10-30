@@ -36,6 +36,14 @@ async function isFile(path) {
   }
 }
 
+/**
+ * Reads and parses JSON data from a file at the specified path.
+ *
+ * @param {string} path - The path to the file to read.
+ * @throws Will throw an error if the file does not exist or is not a file.
+ * @returns {Promise<Object>} - A promise that resolves to the parsed JSON object.
+ */
+
 async function readData(path) {
   if (await validatePath(path) && await isFile(path)) {
     const data = await fs.readFile(path, 'utf-8');
