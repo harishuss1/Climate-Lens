@@ -1,5 +1,6 @@
 import express from 'express';
 import tempRouter from './routers/temperature.js';
+import emissionRouter from  './routers/emissions.js';
 
 //import your route just like the example below
 //import  quotes from './routes/quotes.js';
@@ -13,6 +14,7 @@ app.use(express.static('../client/dist'));
 // uses your route e.g below
 
 app.use('/api/temp', tempRouter);
+app.use('/api/emissions', emissionRouter);
 
 ///other routes
 
