@@ -1,0 +1,10 @@
+*.pdf
+.lastcommit
+.vscode
+markdown_tools/
+**/node_modules/
+.env
+.ssh
+.bash_history
+deploy.zip
+

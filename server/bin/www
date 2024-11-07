@@ -1,0 +1,30 @@
+#!/usr/bin/env node
+import app from '../app.js'
+import {db} from '../db/db.js';
+const port = process.env.PORT || 3000;
+
+
+/**
+ * Start the server and establish a database connection.
+ * 
+ * This script attempts to connect to a MongoDB database and starts the
+ * server on the specified port. If the database connection fails, it logs
+ * the error and exits the process.
+ *
+ * @async
+ * @function
+ * @throws {Error} Will throw an error if the database connection fails.
+ */
+
+(async () => {
+  try {
+    await db.connect('Cluster520Web2024', 'CO2Emissions');
+  } catch (e) {
+    console.error('could not connect');
+    console.dir(e);
+    process.exit();
+  }
+  app.listen(port, () => {
+    console.log(`Server listening http://localhost:3000 on port ${port}!`);
+  });
+})();
