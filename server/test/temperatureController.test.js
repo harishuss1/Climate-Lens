@@ -127,3 +127,98 @@ describe('GET /api/temp/:country/:year?', () => {
     expect(response.body).to.have.property('error', 'Failed to fetch temperature data');
   });
 });
+
+describe('GET /api/temp/:country/:startYear/:endYear', () => {
+  let stubChangeCollection;
+  let stubReadFiltered;
+
+  beforeEach(() => {
+    stubChangeCollection = sinon.stub(db, 'changeCollection');
+    stubReadFiltered = sinon.stub(db, 'readFiltered');
+  });
+
+  afterEach(() => {
+    // Restore the stubbed methods after each test
+    sinon.restore();
+  });
+
+  /**
+   * Test case for valid country and valid year range.
+   * Expected outcome: Returns temperature data for the specified range.
+   */
+  it('should return temperature data for a valid country and year range', async () => {
+    stubChangeCollection.resolves();
+    stubReadFiltered.resolves([
+      { dt: '2008-03-01', AverageTemperature: 13.506, Country: 'Afghanistan' },
+      { dt: '2009-05-01', AverageTemperature: 15.123, Country: 'Afghanistan' }
+    ]);
+
+    const response = await request(app).get('/api/temp/Afghanistan/2008/2009');
+
+    expect(stubChangeCollection.calledOnceWith('CountryAverageTemperature')).to.be.true;
+    expect(stubReadFiltered.calledOnceWith({
+      Country: { $regex: /^Afghanistan$/i },
+      dt: { $gte: '2008-01-01', $lte: '2009-12-31' }
+    })).to.be.true;
+
+    expect(response.status).to.equal(200);
+    expect(response.body).to.deep.equal([
+      { dt: '2008-03-01', AverageTemperature: 13.506, Country: 'Afghanistan' },
+      { dt: '2009-05-01', AverageTemperature: 15.123, Country: 'Afghanistan' }
+    ]);
+  });
+
+  /**
+   * Test case for a valid country but no data in the specified range.
+   * Expected outcome: Returns a 404 error with message "No data found".
+   */
+  it('should return a 404 error if no data is found for the specified range', async () => {
+    stubChangeCollection.resolves();
+    stubReadFiltered.resolves([]);
+
+    const response = await request(app).get('/api/temp/Afghanistan/2008/2009');
+
+    expect(stubChangeCollection.calledOnceWith('CountryAverageTemperature')).to.be.true;
+    expect(stubReadFiltered.calledOnceWith({
+      Country: { $regex: /^Afghanistan$/i },
+      dt: { $gte: '2008-01-01', $lte: '2009-12-31' }
+    })).to.be.true;
+
+    expect(response.status).to.equal(404);
+    // eslint-disable-next-line max-len
+    expect(response.body).to.have.property('error', 'No data found for the given range and country');
+  });
+
+  /**
+   * Test case when changeCollection fails.
+   * Expected outcome: Returns a 500 error with message "Failed to switch collection".
+   */
+  it('should return a 500 error if changeCollection fails', async () => {
+    stubChangeCollection.rejects(new Error('Failed to switch collection'));
+
+    const response = await request(app).get('/api/temp/Afghanistan/2008/2009');
+
+    expect(stubChangeCollection.calledOnceWith('CountryAverageTemperature')).to.be.true;
+    expect(response.status).to.equal(500);
+    expect(response.body).to.have.property('error', 'Failed to switch collection');
+  });
+
+  /**
+   * Test case when readFiltered fails.
+   * Expected outcome: Returns a 500 error with message "Failed to fetch temperature data".
+   */
+  it('should return a 500 error if readFiltered fails', async () => {
+    stubChangeCollection.resolves();
+    stubReadFiltered.rejects(new Error('Failed to fetch temperature data'));
+
+    const response = await request(app).get('/api/temp/Afghanistan/2008/2009');
+
+    expect(stubChangeCollection.calledOnceWith('CountryAverageTemperature')).to.be.true;
+    expect(stubReadFiltered.calledOnceWith({
+      Country: { $regex: /^Afghanistan$/i },
+      dt: { $gte: '2008-01-01', $lte: '2009-12-31' }
+    })).to.be.true;
+    expect(response.status).to.equal(500);
+    expect(response.body).to.have.property('error', 'Failed to fetch temperature data');
+  });
+});
