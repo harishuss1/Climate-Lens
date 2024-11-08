@@ -9,10 +9,10 @@ export default function PieChart1({ data }) {
   return (
     <Line
       data={{
-        labels: ['A','B'] //data.map((d) => d['dt'] || 'test'),
+        labels: ['A', 'B'], //data.map((d) => d['dt'] || 'test'),
         datasets: [
           {
-            label: [1,2],
+            label: [1, 2],
             data: data.map((d) => d['AverageTemperature']),
             backgroundColor: [
               'rgba(255, 99, 132, 0.2)',
