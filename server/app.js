@@ -21,12 +21,10 @@ app.use(express.json());
 
 app.use(express.static('../client/dist'));
 
-// uses your route e.g below
 
 app.use('/api/temp', tempRouter);
 app.use('/api/emissions', emissionRouter);
 
-///other routes
 
 app.use((req, res) => {
   res.status(404).send('invalid path');
