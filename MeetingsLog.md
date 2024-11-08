@@ -103,3 +103,15 @@ Note taker: Haris
 * Asked each other questions fron the retrospective meeting
 * Most of the phase 1 went well, we had a few issues to talk about, such as time management, last- minute work, the lack of usage of gitlab issues, What we need to change: more code review, make sure we are pushing working code.
 * So far , we decided that there isn't much to change, we discussed on how to do our third view, since we didn't have any lat, long data. We will look for a libarary takes in a country instead.
+
+# 11/08/2024 Friday 1:00pm, 1:15h, in person
+## Retrospective Meeting
+Attendees: Tommy, Haris, Aidan
+
+Note taker: Tommy
+
+## discussion / work we have done during the meeting
+* Reviewed and update our issues in the gitlab
+* We discussed the phase 1 feedbacks and small issues that have to fix.
+* We cleared up confusion about our design
+* We discussed about adding new api to get all the countries name
