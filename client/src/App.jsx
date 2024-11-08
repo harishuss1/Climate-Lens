@@ -1,6 +1,5 @@
 import './App.css';
 import co2Logo from '/co2.svg';
-import TemperatureStub from './TemperatureStub';
 import View1 from './components/View1.jsx';
 function App() {
 

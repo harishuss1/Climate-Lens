@@ -7,9 +7,10 @@ export default function PieChart1({ data }) {
     return <h2>no data</h2>;
   }
   return (
-    <Line
+    <PieChart
       data={{
-        labels: ['A', 'B'], //data.map((d) => d['dt'] || 'test'),
+        //data.map((d) => d['dt'] || 'test'),
+        labels: ['A', 'B'], 
         datasets: [
           {
             label: [1, 2],
