@@ -1,4 +1,4 @@
-import BarChart1 from './LineChart.jsx';
+import LineChart from './LineChart.jsx';
 import { useState } from 'react';
 
 export default function View1() {
@@ -22,7 +22,7 @@ export default function View1() {
   
   return (
     <div className="flex">
-      <BarChart1 data={chartData} />
+      <LineChart data={chartData} />
       <input type="text"
         placeholder="Country"
         value={country}
