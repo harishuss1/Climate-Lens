@@ -12,7 +12,7 @@ export default function BarChart1({ data }) {
         labels: data.map((d) => d['dt'] || 'test'),
         datasets: [
           {
-            label: 'Revenue',
+            label: data[0]['Country'],
             data: data.map((d) => d['AverageTemperature']),
           }
         ]
