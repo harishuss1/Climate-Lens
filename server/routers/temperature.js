@@ -8,6 +8,6 @@ const router = express.Router();
 router.get('/:country/:year?', getTemperatureData);
 
 // GET /api/temp/range/:country/:startYear/:endYear
-router.get('/range/:country/:startYear/:endYear', getAvgTemperatureDataInRange);
+router.get('/:country/:startYear/:endYear', getAvgTemperatureDataInRange);
 
 export default router;

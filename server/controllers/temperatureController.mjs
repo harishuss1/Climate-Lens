@@ -53,17 +53,47 @@ export const getTemperatureData = async (req, res) => {
   }
 };
 
+
 /**
- * Get temperature data from the CountryAverageTemperature collection for the 
- * supplied country inclusively between the supplied years,
- * then calculates the average temperature for each of those years and sends it in a response.
+ * Get average temperature data for a country within a range of years.
+ * 
  * @param {Object} req - Express request object
+ * @param {string} req.params.country - Country name (case-insensitive)
+ * @param {string} req.params.startYear - Start year of the range
+ * @param {string} req.params.endYear - End year of the range
  * @param {Object} res - Express response object
+ * @returns Responds with JSON data or an error message
  */
 export const getAvgTemperatureDataInRange = async (req, res) => {
-  const stubData = [
-    { country: 'Afganistan', year: '2008', average: '16' },
-    { country: 'Afganistan', year: '2009', average: '15.5'}
-  ];
-  res.json(stubData);
+  const { country, startYear, endYear } = req.params;
+
+  const validYears = ['2008', '2009', '2010', '2011', '2012', '2013'];
+  if (!validYears.includes(startYear) || !validYears.includes(endYear)) {
+    return res.status(400).json({ error: 'Enter a valid year range (2008-2013)' });
+  }
+
+  try {
+    await db.changeCollection('CountryAverageTemperature');
+  } catch (error) {
+    console.error('Error switching collection:', error);
+    return res.status(500).json({ error: 'Failed to switch collection' });
+  }
+
+  const query = {
+    Country: { $regex: new RegExp(`^${country}$`, 'i') },
+    dt: { $gte: `${startYear}-01-01`, $lte: `${endYear}-12-31` }
+  };
+
+  try {
+    const tempData = await db.readFiltered(query);
+
+    if (!tempData || tempData.length === 0) {
+      return res.status(404).json({ error: 'No data found for the given range and country' });
+    }
+
+    res.json(tempData);
+  } catch (error) {
+    console.error('Error fetching temperature data:', error);
+    res.status(500).json({ error: 'Failed to fetch temperature data' });
+  }
 };
