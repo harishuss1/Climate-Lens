@@ -1,4 +1,4 @@
-import BarChart1 from './BarChart1.jsx';
+import BarChart1 from './LineChart.jsx';
 import { useState } from 'react';
 
 export default function View1() {
