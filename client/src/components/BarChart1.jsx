@@ -9,11 +9,11 @@ export default function BarChart1({ data }) {
   return (
     <Line
       data={{
-        labels: ['A', 'B', 'C'],//data.map((d) => d['dt'] || 'test'),
+        labels: data.map((d) => d['dt'] || 'test'),
         datasets: [
           {
             label: 'Revenue',
-            data: [12, 24, 55], // data.map((d) => d['AverageTemperature']),
+            data: data.map((d) => d['AverageTemperature']),
           }
         ]
       }}
