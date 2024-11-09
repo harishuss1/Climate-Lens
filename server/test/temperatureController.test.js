@@ -144,12 +144,13 @@ describe('GET /api/temp/:country/:startYear/:endYear', () => {
 
   /**
    * Test case for valid country and valid year range.
-   * Expected outcome: Returns temperature data for the specified range.
+   * Expected outcome: Returns average temperature data for each year in the specified range.
    */
-  it('should return temperature data for a valid country and year range', async () => {
+  it('should return average temperature data for each year in the specified range', async () => {
     stubChangeCollection.resolves();
     stubReadFiltered.resolves([
       { dt: '2008-03-01', AverageTemperature: 13.506, Country: 'Afghanistan' },
+      { dt: '2008-07-01', AverageTemperature: 20.123, Country: 'Afghanistan' },
       { dt: '2009-05-01', AverageTemperature: 15.123, Country: 'Afghanistan' }
     ]);
 
@@ -163,14 +164,15 @@ describe('GET /api/temp/:country/:startYear/:endYear', () => {
 
     expect(response.status).to.equal(200);
     expect(response.body).to.deep.equal([
-      { dt: '2008-03-01', AverageTemperature: 13.506, Country: 'Afghanistan' },
-      { dt: '2009-05-01', AverageTemperature: 15.123, Country: 'Afghanistan' }
+      { year: '2008', avgTemperature: (13.506 + 20.123) / 2 },
+      { year: '2009', avgTemperature: 15.123 }
     ]);
   });
 
   /**
    * Test case for a valid country but no data in the specified range.
-   * Expected outcome: Returns a 404 error with message "No data found".
+   * Expected outcome: Returns a 404 error with message 
+   * "No data found for the given range and country".
    */
   it('should return a 404 error if no data is found for the specified range', async () => {
     stubChangeCollection.resolves();

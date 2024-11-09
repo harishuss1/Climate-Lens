@@ -91,7 +91,22 @@ export const getAvgTemperatureDataInRange = async (req, res) => {
       return res.status(404).json({ error: 'No data found for the given range and country' });
     }
 
-    res.json(tempData);
+    const avgTempByYear = tempData.reduce((acc, record) => {
+      const year = record.dt.split('-')[0];
+      if (!acc[year]) {
+        acc[year] = { sum: 0, count: 0 };
+      }
+      acc[year].sum += record.AverageTemperature;
+      acc[year].count += 1;
+      return acc;
+    }, {});
+
+    const result = Object.keys(avgTempByYear).map(year => ({
+      year,
+      avgTemperature: avgTempByYear[year].sum / avgTempByYear[year].count
+    }));
+
+    res.json(result);
   } catch (error) {
     console.error('Error fetching temperature data:', error);
     res.status(500).json({ error: 'Failed to fetch temperature data' });
