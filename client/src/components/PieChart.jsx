@@ -1,26 +1,31 @@
 
 // eslint-disable-next-line no-unused-vars
 import { Chart as ChartJS } from 'chart.js/auto';
-import { PieChart } from 'react-chartjs-2';
+import { Pie } from 'react-chartjs-2';
 
 //name to be changed?
 export default function PieChart1({ data }) {
   if (!data || data.length === 0) {
     return <h2>no data</h2>;
   }
+
+  //get all the keys except total,country,year and id for the pie chart label
+  const labels = Object.keys(data[0]).filter(key =>
+    key !== 'Total' && key !== 'Country' && key !== 'Year' && key !== '_id'
+  );
+
   return (
-    <PieChart
+    <Pie
       data={{
-        //data.map((d) => d['dt'] || 'test'),
-        labels: ['A', 'B'], 
+        labels: labels,
         datasets: [
           {
-            label: [1, 2],
-            data: data.map((d) => d['AverageTemperature']),
-            backgroundColor: [
-              'rgba(255, 99, 132, 0.2)',
-              'rgba(54, 162, 235, 0.2)',
-            ],
+            //for each key, get its value 
+            data: labels.map(label => data[0][label]),
+            backgroundColor: labels.map((label, index) =>
+              `rgba(${Math.floor(Math.random() * 256)}, 
+            ${Math.floor(Math.random() * 256)}, ${Math.floor(Math.random() * 256)})`
+            ),
             borderWidth: 1,
           }
         ]

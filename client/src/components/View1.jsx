@@ -1,10 +1,12 @@
 import LineChart from './LineChart.jsx';
+import PieChart from './PieChart.jsx';
 import { useState } from 'react';
 
 export default function View1() {
   const [country, setCountry] = useState('');
   const [year, setYear] = useState('');
   const [chartData, setChartData] = useState(null);
+  const [pieData, setPieData] = useState(null);
   const fetchData = async () => {
     try {
       const response = await fetch(`/api/temp/${country}/${year}`);
@@ -15,6 +17,15 @@ export default function View1() {
       const data = await response.json();
       console.log(data);
       setChartData(data);
+
+      const response2 = await fetch(`/api/emissions/${country}/${year}`);
+      if (!response.ok){
+        throw new ArgumentException('Fetch went wrong');
+      }
+
+      const data2 = await response2.json();
+      setPieData(data2);
+
     } catch (error) {
       console.error('error fetching: ', error);
     }
@@ -40,6 +51,8 @@ export default function View1() {
       </select>
 
       <button onClick={fetchData}>Retrieve</button>
+
+      <PieChart data={pieData}/>
     </div>
   );
 }
