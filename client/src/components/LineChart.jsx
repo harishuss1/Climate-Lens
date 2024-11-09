@@ -5,8 +5,20 @@ import { Line } from 'react-chartjs-2';
 //name to be changed?
 export default function LineChart({ data }) {
   if (!data || data.length === 0) {
-    return <h2>no data</h2>;
+    return (
+      <Line
+        data={{
+          labels: [],
+          datasets: [
+            {
+              label: 'No data available',
+              data: [],
+            }
+          ]
+        }}
+      />);
   }
+
   return (
     <Line
       data={{

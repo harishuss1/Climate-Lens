@@ -9,22 +9,24 @@ export default function View1() {
   const [pieData, setPieData] = useState(null);
   const fetchData = async () => {
     try {
-      const response = await fetch(`/api/temp/${country}/${year}`);
-      if (!response.ok) {
-        throw new ArgumentException('Fetch went wrong');
+      const [tempResponse, emissionsResponse] = await Promise.all([
+        fetch(`/api/temp/${country}/${year}`),
+        fetch(`/api/emissions/${country}/${year}`)
+      ]);
+
+      if (!tempResponse.ok) {
+        throw new Error('Fetch from /api/temp... went wrong');
       }
 
-      const data = await response.json();
-      console.log(data);
-      setChartData(data);
-
-      const response2 = await fetch(`/api/emissions/${country}/${year}`);
-      if (!response.ok) {
-        throw new ArgumentException('Fetch went wrong');
+      if (!emissionsResponse.ok) {
+        throw new Error('Fetch from /api/emissions went wrong');
       }
 
-      const data2 = await response2.json();
-      setPieData(data2);
+      const tempData = await tempResponse.json();
+      const emissionsData = await emissionsResponse.json();
+
+      setChartData(tempData);
+      setPieData(emissionsData);
 
     } catch (error) {
       console.error('error fetching: ', error);
@@ -34,7 +36,7 @@ export default function View1() {
   return (
     <div className="flex">
       <LineChart data={chartData} />
-      <Search setCountry={setCountry} /> 
+      <Search setCountry={setCountry} />
 
       <select value={year} onChange={(e) => setYear(e.target.value)}>
         <option value="">Select Year</option>

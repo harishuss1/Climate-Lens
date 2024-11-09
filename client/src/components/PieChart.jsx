@@ -6,7 +6,22 @@ import { Pie } from 'react-chartjs-2';
 
 export default function PieChart({ data }) {
   if (!data || data.length === 0) {
-    return <h2>no data</h2>;
+    return (
+      <div style={{ width: '300px', height: '300px' }}>
+        <Pie
+          data={{
+            labels: ['No data availabe. Select a country!'],
+            datasets: [
+              {
+                label: 'No Data',
+                data: [1],
+                backgroundColor: ['#e0e0e0']
+              }
+            ]
+          }}
+        />
+      </div>
+    );
   }
 
   const totalEmissions = data[0]['Total'];

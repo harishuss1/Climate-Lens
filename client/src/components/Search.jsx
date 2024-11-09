@@ -33,9 +33,9 @@ export default function SearchFilter({ setCountry }) {
         onChange={handleSearch}
         onClick={() => setIsDropdownOpen(true)}
       />
-      
+
       {isDropdownOpen && searchCountry &&
-        <ul style={{ maxHeight: '200px', color: '#000', overflowY: 'auto' }}>
+        <ul style={{ maxHeight: '100px', color: '#000', overflowY: 'auto' }}>
           {filteredCountries.length > 0 ? (
             filteredCountries.map((country, index) => (
               <li key={index} onClick={() => handleSelect(country)}>
