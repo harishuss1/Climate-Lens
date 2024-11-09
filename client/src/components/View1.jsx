@@ -49,7 +49,6 @@ export default function View1() {
       <button onClick={fetchData}>Retrieve</button>
 
       <PieChart data={pieData} />
-      <Search />
     </div>
   );
 }
