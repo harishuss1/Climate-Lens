@@ -1,6 +1,6 @@
 import './App.css';
 import co2Logo from '/co2.svg';
-import TemperatureStub from './TemperatureStub';
+import View1 from './components/View1.jsx';
 function App() {
 
   return (
@@ -9,7 +9,7 @@ function App() {
       <a href="https://vite.dev" target="_blank">
         <img src={co2Logo} className="logo" alt="co2 logo" />
       </a>
-      <TemperatureStub />
+      <View1/>
     </div>
       
     
