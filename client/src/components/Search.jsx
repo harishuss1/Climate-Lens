@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import countries from '../../data/countries.json';
 
-export default function SearchFilter({ setCountry }) {
+export default function SearchFilter({ setCountry, setIsValid }) {
   const [searchCountry, setSearchCountry] = useState('');
   const [filteredCountries, setFilteredCountries] = useState([]);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
@@ -15,6 +15,12 @@ export default function SearchFilter({ setCountry }) {
     );
     setFilteredCountries(filtered);
     setIsDropdownOpen(query.length > 0);
+
+    if (query && !filtered.includes(query)) {
+      setIsValid(false);
+    } else {
+      setIsValid(true);
+    }
   };
 
 
@@ -22,6 +28,7 @@ export default function SearchFilter({ setCountry }) {
     setSearchCountry(country);
     setCountry(country);
     setIsDropdownOpen(false);
+    setIsValid(true);
   };
 
   const handleKeyDown = (event) => {
@@ -34,9 +41,11 @@ export default function SearchFilter({ setCountry }) {
       if (selectedCountry) {
         setSearchCountry(selectedCountry);
         setCountry(selectedCountry);
+        setIsValid(true);
       } else {
         //Clear the input if the input isnt in the filtered list
         setSearchCountry('');
+        setIsValid(false);
       }
       setIsDropdownOpen(false);
     }
@@ -54,7 +63,7 @@ export default function SearchFilter({ setCountry }) {
       />
 
       {isDropdownOpen && searchCountry &&
-        <ul style={{ maxHeight: '100px', color: '#000', overflowY: 'auto' }}>
+        <ul className="dropdown">
           {filteredCountries.length > 0 ? (
             filteredCountries.map((country, index) => (
               <li key={index} onClick={() => handleSelect(country)}>

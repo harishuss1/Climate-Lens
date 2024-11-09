@@ -8,7 +8,16 @@ export default function View1() {
   const [year, setYear] = useState('');
   const [chartData, setChartData] = useState(null);
   const [pieData, setPieData] = useState(null);
+  const [isValidCountry, setIsValidCountry] = useState(false);
+  const [showErrorMessage, setShowErrorMessage] = useState(false);
+
   const fetchData = async () => {
+    if (!isValidCountry || !year) {
+      setShowErrorMessage(true);
+      return;
+    }
+
+    setShowErrorMessage(false);
     try {
       const [tempResponse, emissionsResponse] = await Promise.all([
         fetch(`/api/temp/${country}/${year}`),
@@ -42,9 +51,13 @@ export default function View1() {
         <section className="lineChart">
           <LineChart data={chartData} />
         </section>
-
         <section className="search">
-          <Search setCountry={setCountry} />
+          {!isValidCountry && showErrorMessage &&
+            <p className="error">Please select a valid country</p>}
+
+          {!year && showErrorMessage && <p className="error"> Please select a year</p>}
+
+          <Search setCountry={setCountry} setIsValid={setIsValidCountry} />
 
           <select value={year} onChange={(e) => setYear(e.target.value)}>
             <option value="">Select Year</option>

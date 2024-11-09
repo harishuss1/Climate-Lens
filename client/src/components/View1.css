@@ -17,11 +17,25 @@ div.flex {
   justify-content: center;
   align-items: center;
 }
-.search{
-  display:flex;
-  flex-direction:column;
 
+.search {
+  display: flex;
+  flex-direction: column;
 }
+/*Css for dropdown options*/
+.dropdown {
+  max-height: 100px;
+  color: #000;
+  overflow-y: auto;
+  list-style-type: none;
+  padding: 0;
+}
+
+
 canvas {
   border: 1px dotted red;
+}
+
+.error{
+  color:red;
 }
