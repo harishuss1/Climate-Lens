@@ -51,10 +51,11 @@ export default function View1() {
         <section className="lineChart">
           <LineChart data={chartData} />
         </section>
+
         <section className="search">
+          {/*show error message if input is invalid*/}
           {!isValidCountry && showErrorMessage &&
             <p className="error">Please select a valid country</p>}
-
           {!year && showErrorMessage && <p className="error"> Please select a year</p>}
 
           <Search setCountry={setCountry} setIsValid={setIsValidCountry} />

@@ -6,6 +6,7 @@ export default function SearchFilter({ setCountry, setIsValid }) {
   const [filteredCountries, setFilteredCountries] = useState([]);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
+  //Called everytime the user types in the input field
   const handleSearch = (event) => {
     const query = event.target.value;
     setSearchCountry(query);
@@ -23,7 +24,7 @@ export default function SearchFilter({ setCountry, setIsValid }) {
     }
   };
 
-
+  // Used for when the user selects the country from the dropdown
   const handleSelect = (country) => {
     setSearchCountry(country);
     setCountry(country);
@@ -31,6 +32,7 @@ export default function SearchFilter({ setCountry, setIsValid }) {
     setIsValid(true);
   };
 
+  // to check the input after the enter key is pressed
   const handleKeyDown = (event) => {
     if (event.key === 'Enter') {
       //console.log('pressed');
@@ -61,7 +63,7 @@ export default function SearchFilter({ setCountry, setIsValid }) {
         onClick={() => setIsDropdownOpen(true)}
         onKeyDown={handleKeyDown}
       />
-
+      {/* display dropdown list */}
       {isDropdownOpen && searchCountry &&
         <ul className="dropdown">
           {filteredCountries.length > 0 ? (

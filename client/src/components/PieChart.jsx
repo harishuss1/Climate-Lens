@@ -68,6 +68,7 @@ export default function PieChart({ data }) {
               },
             }
           },
+          // To make the chart resizeable when resizing the page
           responsive: true,
           maintainAspectRatio: false
         }
