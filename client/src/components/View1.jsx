@@ -1,3 +1,4 @@
+import './View1.css';
 import LineChart from './LineChart.jsx';
 import PieChart from './PieChart.jsx';
 import Search from './Search.jsx';
@@ -34,23 +35,33 @@ export default function View1() {
   };
 
   return (
-    <div className="flex">
-      <LineChart data={chartData} />
-      <Search setCountry={setCountry} />
+    <div>
 
-      <select value={year} onChange={(e) => setYear(e.target.value)}>
-        <option value="">Select Year</option>
-        <option value="2008">2008</option>
-        <option value="2009">2009</option>
-        <option value="2010">2010</option>
-        <option value="2011">2011</option>
-        <option value="2012">2012</option>
-        <option value="2013">2013</option>
-      </select>
+      <div className="flex">
 
-      <button onClick={fetchData}>Retrieve</button>
+        <section className="lineChart">
+          <LineChart data={chartData} />
+        </section>
 
-      <PieChart data={pieData} />
-    </div>
+        <section className="search">
+          <Search setCountry={setCountry} />
+
+          <select value={year} onChange={(e) => setYear(e.target.value)}>
+            <option value="">Select Year</option>
+            <option value="2008">2008</option>
+            <option value="2009">2009</option>
+            <option value="2010">2010</option>
+            <option value="2011">2011</option>
+            <option value="2012">2012</option>
+            <option value="2013">2013</option>
+          </select>
+
+          <button onClick={fetchData}>Retrieve</button>
+        </section>
+      </div>
+      <section className="pieChart">
+        <PieChart data={pieData} />
+      </section>
+    </div >
   );
 }

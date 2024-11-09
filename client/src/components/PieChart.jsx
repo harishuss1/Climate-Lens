@@ -41,7 +41,7 @@ export default function PieChart({ data }) {
   });
 
   return (
-    <div style={{ width: '100%', height: '800px' }}>
+    <div style={{ width: '100%', height: '600px' }}>
       <Pie
         data={{
           labels: percentageLabels,
@@ -67,9 +67,11 @@ export default function PieChart({ data }) {
                 }
               },
             }
-
-          }
+          },
+          responsive: true,
+          maintainAspectRatio: false
         }
+
         }
       />
     </div>
