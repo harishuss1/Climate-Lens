@@ -11,7 +11,7 @@ export default function LineChart({ data }) {
           labels: [],
           datasets: [
             {
-              label: 'No data available',
+              label: 'No data available. Select a country!',
               data: [],
             }
           ]
