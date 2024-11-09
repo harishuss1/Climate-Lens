@@ -1,7 +1,7 @@
 import LineChart from './LineChart.jsx';
 import PieChart from './PieChart.jsx';
+import Search from './Search.jsx';
 import { useState } from 'react';
-
 export default function View1() {
   const [country, setCountry] = useState('');
   const [year, setYear] = useState('');
@@ -19,7 +19,7 @@ export default function View1() {
       setChartData(data);
 
       const response2 = await fetch(`/api/emissions/${country}/${year}`);
-      if (!response.ok){
+      if (!response.ok) {
         throw new ArgumentException('Fetch went wrong');
       }
 
@@ -30,15 +30,11 @@ export default function View1() {
       console.error('error fetching: ', error);
     }
   };
-  
+
   return (
     <div className="flex">
       <LineChart data={chartData} />
-      <input type="text"
-        placeholder="Country"
-        value={country}
-        onChange={(e) => setCountry(e.target.value)}
-      ></input>
+      <Search setCountry={setCountry} /> 
 
       <select value={year} onChange={(e) => setYear(e.target.value)}>
         <option value="">Select Year</option>
@@ -52,7 +48,8 @@ export default function View1() {
 
       <button onClick={fetchData}>Retrieve</button>
 
-      <PieChart data={pieData}/>
+      <PieChart data={pieData} />
+      <Search />
     </div>
   );
 }
