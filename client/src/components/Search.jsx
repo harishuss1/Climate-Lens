@@ -24,6 +24,24 @@ export default function SearchFilter({ setCountry }) {
     setIsDropdownOpen(false);
   };
 
+  const handleKeyDown = (event) => {
+    if (event.key === 'Enter') {
+      //console.log('pressed');
+      const selectedCountry = filteredCountries.find(
+        (country) => country.toLowerCase() === searchCountry.toLowerCase()
+      );
+
+      if (selectedCountry) {
+        setSearchCountry(selectedCountry);
+        setCountry(selectedCountry);
+      } else {
+        //Clear the input if the input isnt in the filtered list
+        setSearchCountry('');
+      }
+      setIsDropdownOpen(false);
+    }
+  };
+
   return (
     <div>
       <input
@@ -32,6 +50,7 @@ export default function SearchFilter({ setCountry }) {
         value={searchCountry}
         onChange={handleSearch}
         onClick={() => setIsDropdownOpen(true)}
+        onKeyDown={handleKeyDown}
       />
 
       {isDropdownOpen && searchCountry &&
