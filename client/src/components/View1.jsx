@@ -45,9 +45,9 @@ export default function View1() {
 
   return (
     <div>
-      <h2>Average Monthly Temperature</h2>
       <div className="flex">
         <section className="chart-container">
+          <h2>Average Monthly Temperature</h2>
           <LineChart data={chartData} />
         </section>
 
@@ -68,8 +68,8 @@ export default function View1() {
           <button onClick={fetchData}>Retrieve</button>
         </section>
       </div>
-      <h2>Causes of CO2 Emissions</h2>
       <section className="chart-container">
+        <h2>Causes of CO2 Emissions</h2>
         <PieChart data={pieData} />
       </section>
     </div>

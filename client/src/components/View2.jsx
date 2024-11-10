@@ -74,10 +74,13 @@ export default function View2() {
   return (
     <div className="view2-container">
       <div className="chart-container">
+        <h2>Average Temperature Comparison by Country</h2> 
         <BarChart data={chartData} />
       </div>
 
       <div className="controls-container">
+        {errorMessage && <p className="error-message">{errorMessage}</p>}
+
         {countries.map((item, index) => (
           <div key={index} className="country-input-group">
             <SearchFilter
@@ -115,7 +118,6 @@ export default function View2() {
 
         <button onClick={fetchAllData} className="retrieve-all-btn">Retrieve All Data</button>
 
-        {errorMessage && <p className="error-message">{errorMessage}</p>}
       </div>
     </div>
   );
