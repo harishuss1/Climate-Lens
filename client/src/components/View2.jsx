@@ -23,6 +23,7 @@ export default function View2() {
       const data = await response.json();
       if (data.length === 0) {
         setErrorMessage(`No data found for ${country} in the selected year range.`);
+        countries[index].data = { country, dataPoints: [] };
       } else {
         setErrorMessage('');
         const updatedCountries = [...countries];
@@ -59,13 +60,20 @@ export default function View2() {
     countries.forEach((_, index) => fetchData(index));
   };
 
-  return (
-    <div className="flex">
-      <BarChart data={countries.map(c => c.data).filter(Boolean)} />
+  // Prepare chart data; if no data, show an empty structure
+  const chartData = countries.some(c => c.data)
+    ? countries.map(c => c.data).filter(Boolean)
+    : [{ country: '', dataPoints: [] }];
 
-      <div>
+  return (
+    <div className="view2-container">
+      <div className="chart-container">
+        <BarChart data={chartData} />
+      </div>
+
+      <div className="controls-container">
         {countries.map((item, index) => (
-          <div key={index} style={{ marginBottom: '10px' }}>
+          <div key={index} className="country-input-group">
             <input
               type="text"
               placeholder={`Country ${index + 1}`}
@@ -79,33 +87,37 @@ export default function View2() {
           </div>
         ))}
         {countries.length < maxCountries && (
-          <button onClick={addCountryField}>Add Another Country</button>
+          <button onClick={addCountryField} className="add-country-btn">
+            Add Another Country
+          </button>
         )}
+
+        <select className="year-select" value={startYear} onChange={(e) => 
+          setStartYear(e.target.value)}>
+          <option value="">Start Year</option>
+          <option value="2008">2008</option>
+          <option value="2009">2009</option>
+          <option value="2010">2010</option>
+          <option value="2011">2011</option>
+          <option value="2012">2012</option>
+          <option value="2013">2013</option>
+        </select>
+        
+        <select className="year-select" value={endYear} onChange={(e) => 
+          setEndYear(e.target.value)}>
+          <option value="">End Year</option>
+          <option value="2008">2008</option>
+          <option value="2009">2009</option>
+          <option value="2010">2010</option>
+          <option value="2011">2011</option>
+          <option value="2012">2012</option>
+          <option value="2013">2013</option>
+        </select>
+
+        <button onClick={fetchAllData} className="retrieve-all-btn">Retrieve All Data</button>
+
+        {errorMessage && <p className="error-message">{errorMessage}</p>}
       </div>
-
-      <select value={startYear} onChange={(e) => setStartYear(e.target.value)}>
-        <option value="">Start Year</option>
-        <option value="2008">2008</option>
-        <option value="2009">2009</option>
-        <option value="2010">2010</option>
-        <option value="2011">2011</option>
-        <option value="2012">2012</option>
-        <option value="2013">2013</option>
-      </select>
-      <select value={endYear} onChange={(e) => setEndYear(e.target.value)}>
-        <option value="">End Year</option>
-        <option value="2008">2008</option>
-        <option value="2009">2009</option>
-        <option value="2010">2010</option>
-        <option value="2011">2011</option>
-        <option value="2012">2012</option>
-        <option value="2013">2013</option>
-      </select>
-
-      <button onClick={fetchAllData}>Retrieve All Data</button>
-
-      {/* Display error message if there is one */}
-      {errorMessage && <p style={{ color: 'red' }}>{errorMessage}</p>}
     </div>
   );
 }

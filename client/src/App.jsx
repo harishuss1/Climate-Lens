@@ -8,14 +8,16 @@ function App() {
 
   return (
     
-    <div>
+    <div id="app-container">
       <Header />
-      <View1/>
-      <View2 />
+      <section className="page-section">
+        <View1 />
+      </section>
+      <section className="page-section">
+        <View2 />
+      </section>
       <Footer />
-
     </div>
-      
   );
 }
 
