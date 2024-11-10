@@ -47,8 +47,17 @@ function MapChart(props) {
     );
 
     polygonSeries.mapPolygons.template.setAll({
-      tooltipText: '{text}',
       templateField: 'polygonSettings', 
+    });
+
+    polygonSeries.mapPolygons.template.adapters.add('tooltipText', (text, target) => {
+      const dataContext = target.dataItem.dataContext;
+      
+      if(dataContext.text){
+        return dataContext.text;
+      } else {
+        return 'No data for this country';
+      }
     });
 
     polygonSeries.data.setAll(templateData);
