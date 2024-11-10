@@ -17,7 +17,8 @@ function MapChart(props) {
     let chart = root.container.children.push(
       am5map.MapChart.new(root, {
         panX: 'rotateX',
-        projection: am5map.geoNaturalEarth1()
+        panY: 'rotateY',
+        projection: am5map.geoOrthographic()
       })
     );
     
@@ -50,6 +51,7 @@ function MapChart(props) {
       templateField: 'polygonSettings', 
     });
 
+    
     polygonSeries.mapPolygons.template.adapters.add('tooltipText', (text, target) => {
       const dataContext = target.dataItem.dataContext;
       
