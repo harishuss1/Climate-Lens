@@ -11,6 +11,8 @@
   "author": "Haris Hussain, Tommy Tran, Aidan Holmes",
   "license": "ISC",
   "dependencies": {
+    "@amcharts/amcharts5": "^5.10.7",
+    "@amcharts/amcharts5-geodata": "^5.1.4",
     "520-project-hussain-tran-holmes": "file:"
   }
 }
