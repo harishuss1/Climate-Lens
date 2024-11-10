@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState } from 'react'; 
 import BarChart from './BarChart.jsx';
 import SearchFilter from './SearchFilter.jsx';
 
@@ -9,26 +9,31 @@ export default function View2() {
   const [errorMessage, setErrorMessage] = useState('');
 
   const maxCountries = 3;
-  
+
   const fetchData = async (index) => {
-    const { country } = countries[index];
-    if (!country || !startYear || !endYear || !countries[index].isValid) {
-      setErrorMessage('Please enter a valid country and select both start and end years.');
+    const { country, isValid } = countries[index];
+    if (!country || !isValid || !startYear || !endYear) {
+      setErrorMessage('Please select a valid country and both start and end years.');
       return;
     }
-
     try {
       const response = await fetch(`/api/temp/${country}/${startYear}/${endYear}`);
       if (!response.ok) {
         throw new Error('Failed to fetch data');
       }
       const data = await response.json();
-      const updatedCountries = [...countries];
-      updatedCountries[index].data = data.length
-        ? { country, dataPoints: data }
-        : { country, dataPoints: [] };
-      setCountries(updatedCountries);
-      setErrorMessage(data.length ? '' : `No data found for ${country} in the selected range.`);
+      if (data.length === 0) {
+        setErrorMessage(`No data found for ${country} in the selected year range.`);
+        countries[index].data = { country, dataPoints: [] };
+      } else {
+        setErrorMessage('');
+        const updatedCountries = [...countries];
+        updatedCountries[index].data = {
+          country,
+          dataPoints: data,
+        };
+        setCountries(updatedCountries);
+      }
     } catch (error) {
       console.error(error);
       setErrorMessage(`Error fetching data for ${country}. Please try again.`);
@@ -42,7 +47,8 @@ export default function View2() {
   };
 
   const removeCountryField = (index) => {
-    setCountries(countries.filter((_, i) => i !== index));
+    const updatedCountries = countries.filter((_, i) => i !== index);
+    setCountries(updatedCountries);
   };
 
   const fetchAllData = () => {

@@ -9,17 +9,25 @@ const colorPalette = [
 ];
 
 export default function BarChart({ data }) {
-  if (!data || data.length === 0) {
-    return <h2>No data</h2>;
-  }
+  const hasData = data && data.length > 0 && data.some(countryData => 
+    countryData.dataPoints.length > 0);
 
+  // Chart data with actual or placeholder data if no actual data is provided
   const chartData = {
-    labels: [...new Set(data.flatMap(countryData => countryData.dataPoints.map(d => d.year)))],
-    datasets: data.map((countryData, index) => ({
-      label: countryData.country,
-      data: countryData.dataPoints.map(d => d.avgTemperature),
-      backgroundColor: colorPalette[index % colorPalette.length],
-    })),
+    labels: hasData 
+      ? [...new Set(data.flatMap(countryData => countryData.dataPoints.map(d => d.year)))]
+      : [''],  
+    datasets: hasData 
+      ? data.map((countryData, index) => ({
+        label: countryData.country,
+        data: countryData.dataPoints.map(d => d.avgTemperature),
+        backgroundColor: colorPalette[index % colorPalette.length],
+      }))
+      : [{
+        label: 'No Data Available',
+        data: [0], 
+        backgroundColor: 'rgba(211, 211, 211, 0.5)', 
+      }],
   };
 
   return <Bar data={chartData} />;
