@@ -1,69 +1,69 @@
 import { useState } from 'react';
 import BarChart from './BarChart.jsx';
+import SearchFilter from './SearchFilter.jsx';
 
 export default function View2() {
-  const [countries, setCountries] = useState([{ country: '', data: null }]);
+  const [countries, setCountries] = useState([{ country: '', data: null, isValid: false }]);
   const [startYear, setStartYear] = useState('');
   const [endYear, setEndYear] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
 
   const maxCountries = 3;
-
+  
   const fetchData = async (index) => {
     const { country } = countries[index];
-    if (!country || !startYear || !endYear) {
-      setErrorMessage('Please enter a country and select both start and end years.');
+    if (!country || !startYear || !endYear || !countries[index].isValid) {
+      setErrorMessage('Please enter a valid country and select both start and end years.');
       return;
     }
+
     try {
       const response = await fetch(`/api/temp/${country}/${startYear}/${endYear}`);
       if (!response.ok) {
         throw new Error('Failed to fetch data');
       }
       const data = await response.json();
-      if (data.length === 0) {
-        setErrorMessage(`No data found for ${country} in the selected year range.`);
-        countries[index].data = { country, dataPoints: [] };
-      } else {
-        setErrorMessage('');
-        const updatedCountries = [...countries];
-        updatedCountries[index].data = {
-          country,
-          dataPoints: data,
-        };
-        setCountries(updatedCountries);
-      }
+      const updatedCountries = [...countries];
+      updatedCountries[index].data = data.length
+        ? { country, dataPoints: data }
+        : { country, dataPoints: [] };
+      setCountries(updatedCountries);
+      setErrorMessage(data.length ? '' : `No data found for ${country} in the selected range.`);
     } catch (error) {
-      console.error('Error fetching data:', error);
-      setErrorMessage(`An error occurred while fetching data for ${country}. Please try again.`);
+      console.error(error);
+      setErrorMessage(`Error fetching data for ${country}. Please try again.`);
     }
-  };
-
-  const handleCountryChange = (index, value) => {
-    const updatedCountries = [...countries];
-    updatedCountries[index].country = value;
-    setCountries(updatedCountries);
   };
 
   const addCountryField = () => {
     if (countries.length < maxCountries) {
-      setCountries([...countries, { country: '', data: null }]);
+      setCountries([...countries, { country: '', data: null, isValid: false }]);
     }
   };
 
   const removeCountryField = (index) => {
-    const updatedCountries = countries.filter((_, i) => i !== index);
-    setCountries(updatedCountries);
+    setCountries(countries.filter((_, i) => i !== index));
   };
 
   const fetchAllData = () => {
     countries.forEach((_, index) => fetchData(index));
   };
 
-  // Prepare chart data; if no data, show an empty structure
-  const chartData = countries.some(c => c.data)
-    ? countries.map(c => c.data).filter(Boolean)
-    : [{ country: '', dataPoints: [] }];
+  const updateCountry = (index, country) => {
+    const updatedCountries = [...countries];
+    updatedCountries[index].country = country;
+    setCountries(updatedCountries);
+  };
+
+  const updateValidity = (index, isValid) => {
+    const updatedCountries = [...countries];
+    updatedCountries[index].isValid = isValid;
+    setCountries(updatedCountries);
+  };
+
+  const chartData = countries
+    .filter((c) => c.data && c.data.dataPoints)
+    .map((c) => c.data);
 
   return (
     <div className="view2-container">
@@ -74,11 +74,9 @@ export default function View2() {
       <div className="controls-container">
         {countries.map((item, index) => (
           <div key={index} className="country-input-group">
-            <input
-              type="text"
-              placeholder={`Country ${index + 1}`}
-              value={item.country}
-              onChange={(e) => handleCountryChange(index, e.target.value)}
+            <SearchFilter
+              setCountry={(country) => updateCountry(index, country)}
+              setIsValid={(isValid) => updateValidity(index, isValid)}
             />
             <button onClick={() => fetchData(index)}>Fetch Data</button>
             {index > 0 && (
@@ -86,6 +84,7 @@ export default function View2() {
             )}
           </div>
         ))}
+        
         {countries.length < maxCountries && (
           <button onClick={addCountryField} className="add-country-btn">
             Add Another Country
@@ -95,23 +94,17 @@ export default function View2() {
         <select className="year-select" value={startYear} onChange={(e) => 
           setStartYear(e.target.value)}>
           <option value="">Start Year</option>
-          <option value="2008">2008</option>
-          <option value="2009">2009</option>
-          <option value="2010">2010</option>
-          <option value="2011">2011</option>
-          <option value="2012">2012</option>
-          <option value="2013">2013</option>
+          {[2008, 2009, 2010, 2011, 2012, 2013].map((year) => (
+            <option key={year} value={year}>{year}</option>
+          ))}
         </select>
-        
+
         <select className="year-select" value={endYear} onChange={(e) => 
           setEndYear(e.target.value)}>
           <option value="">End Year</option>
-          <option value="2008">2008</option>
-          <option value="2009">2009</option>
-          <option value="2010">2010</option>
-          <option value="2011">2011</option>
-          <option value="2012">2012</option>
-          <option value="2013">2013</option>
+          {[2008, 2009, 2010, 2011, 2012, 2013].map((year) => (
+            <option key={year} value={year}>{year}</option>
+          ))}
         </select>
 
         <button onClick={fetchAllData} className="retrieve-all-btn">Retrieve All Data</button>
