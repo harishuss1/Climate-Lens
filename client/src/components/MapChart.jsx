@@ -6,9 +6,10 @@ import * as am5map from '@amcharts/amcharts5/map';
 import am5geodata_worldLow from '@amcharts/amcharts5-geodata/worldLow';
 import am5themes_Animated from '@amcharts/amcharts5/themes/Animated';
 
-const fakeData = {
+const fakeData = [{
   Year: 2008, 
-  Country: 'AFGHANISTAN',
+  Country: 'Afganistan',
+  CountryCode: 'AF',
   Total: 1161,
   SolidFuel: 294,
   LiquidFuel: 781,
@@ -18,7 +19,25 @@ const fakeData = {
   PerCapita: 0.044834513,
   BunkerfuelsNotInTotal: 41,
   AverageTemp: 10
-};
+}];
+
+
+function formatData(data){
+  const formattedText = 
+  `${data.Country} \n` +
+  `Total emissions: ${data.Total} MMT (million metric tons)\n` +
+  `Solid fuel: ${data.SolidFuel} MMT\n` +
+  `Liquid Fuel: ${data.LiquidFuel} MMT\n` +
+  `Gas Fuel: ${data.GasFuel} MMT\n` +
+  `Cement: ${data.Cement} MMT\n` +
+  `Gas Flaring: ${data.GasFlaring} MMT\n` +
+  `\n` +
+  `Bunker fuels (not included in total): ${data.BunkerfuelsNotInTotal} MMT\n` +
+  `Per Capita:      ${data.PerCapita} MMT\n` +
+  `\n` +
+  `AverageTemp ${data.AverageTemp} °C`;
+  return formattedText;
+}
 
 
 function MapChart(props) {
@@ -37,17 +56,27 @@ function MapChart(props) {
       })
     );
     
-    let active = ['US', 'CA', 'AF', 'JP',];
+    // let active = ['US', 'CA', 'AF', 'JP',];
 
-    let templateData = active.map((value) => {
+    let templateData = fakeData.map((value) => {
       return {
-        id: value, 
+        id: value.CountryCode, 
         polygonSettings: {
           fill: am5.color(0x0000FF)
         },
-        gaming: '100',
+        Country: value.Country,
+        Total: value.Total,
+        SolidFuel: value.SolidFuel,
+        LiquidFuel: value.LiquidFuel,
+        GasFuel: value.GasFuel,
+        Cement: value.Cement,
+        GasFlaring: value.GasFlaring,
+        PerCapita: value.PerCapita,
+        BunkerfuelsNotInTotal: value.BunkerfuelsNotInTotal,
+        AverageTemp: value.AverageTemp,
+
         get text(){
-          return this.gaming;
+          return formatData(this);
         }
       };
     });
