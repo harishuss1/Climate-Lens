@@ -6,7 +6,7 @@ import * as am5map from '@amcharts/amcharts5/map';
 import am5geodata_worldLow from '@amcharts/amcharts5-geodata/worldLow';
 import am5themes_Animated from '@amcharts/amcharts5/themes/Animated';
 
-function Chart(props) {
+function MapChart(props) {
   useLayoutEffect(() => {
     let root = am5.Root.new('chartdiv');
 
@@ -66,4 +66,4 @@ function Chart(props) {
     <div id="chartdiv" style={{ width: '1000px', height: '500px' }}></div>
   );
 }
-export default Chart;
+export default MapChart;

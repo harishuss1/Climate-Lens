@@ -2,6 +2,7 @@ import './App.css';
 import co2Logo from '/co2.svg';
 import View1 from './components/View1.jsx';
 import View2 from './components/View2.jsx';
+import MapView from './components/MapView.jsx';
 
 function App() {
 
@@ -13,6 +14,7 @@ function App() {
       </a>
       <View1/>
       <View2 />
+      <MapView />
     </div>
       
     
