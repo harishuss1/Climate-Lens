@@ -1,42 +1,187 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
+/* App.css */
+
+/* CSS Variables for colors */
+:root {
+  --primary-color: #1e88e5;
+  --secondary-color: #e53935;
+  --background-color: #f5f5f5;
+  --text-color: #333;
+  --light-text-color: #666;
+  --accent-color: #ffca28;
+}
+
+html, body, #root, #app-container {
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  font-family: Arial, sans-serif;
+  background-color: var(--background-color);
+  color: var(--text-color);
+}
+
+#app-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+.page-section {
+  width: 100%;
+  max-width: 1200px;
+  padding: 40px 20px;
+  margin-bottom: 40px;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+}
+
+.page-section:hover {
+  transform: translateY(-5px);
+}
+
+/* Header Styling */
+.header {
+  background-color: var(--primary-color);
+  color: #fff;
   text-align: center;
+  padding: 20px;
+  border-radius: 8px;
+  margin-bottom: 20px;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-/* .logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+.header .title {
+  font-size: 2rem;
+  margin: 0;
+  font-weight: bold;
 }
 
-@keyframes logo-spin {
+/* Footer Styling */
+.footer {
+  background-color: var(--primary-color);
+  color: #fff;
+  text-align: center;
+  padding: 15px;
+  width: 100%;
+  border-radius: 8px;
+}
+
+.footer .text {
+  font-size: 0.9rem;
+  margin: 5px 0;
+}
+
+.footer .contributors {
+  font-size: 0.8rem;
+}
+
+/* Chart container styling for each view */
+.chart-container {
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto;
+  max-height: 400px;
+  overflow: hidden;
+}
+
+.flex {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+/* Control container styling */
+.controls-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+  max-width: 400px;
+  margin: 20px auto;
+  padding: 20px;
+  background-color: var(--background-color);
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Inputs, buttons, and dropdown styling */
+.controls-container input[type="text"], .controls-container select {
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  width: 100%;
+  max-width: 300px;
+  transition: border-color 0.3s;
+}
+
+.controls-container input[type="text"]:focus, .controls-container select:focus {
+  border-color: var(--primary-color);
+  outline: none;
+}
+
+.controls-container button {
+  padding: 10px 20px;
+  background-color: var(--primary-color);
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.3s, transform 0.2s;
+}
+
+.controls-container button:hover {
+  background-color: var(--accent-color);
+  transform: scale(1.05);
+}
+
+/* Dropdown styling for country search */
+.dropdown {
+  max-height: 100px;
+  overflow-y: auto;
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  width: 100%;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.dropdown li {
+  padding: 8px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.dropdown li:hover {
+  background-color: var(--background-color);
+}
+
+.error {
+  color: var(--secondary-color);
+  font-size: 0.9rem;
+}
+
+/* Add subtle animations for error messages */
+.error-message {
+  color: var(--secondary-color);
+  margin-top: 10px;
+  font-size: 0.9rem;
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+/* Keyframes for fade-in animation */
+@keyframes fadeIn {
   from {
-    transform: rotate(0deg);
+    opacity: 0;
+    transform: translateY(-10px);
   }
   to {
-    transform: rotate(360deg);
+    opacity: 1;
+    transform: translateY(0);
   }
 }
-
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
-}
-
-.card {
-  padding: 2em;
-}
-
-.read-the-docs {
-  color: #888;
-} */

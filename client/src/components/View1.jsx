@@ -1,8 +1,8 @@
-import './View1.css';
-import LineChart from './LineChart.jsx';
-import PieChart from './PieChart.jsx';
-import Search from './Search.jsx';
+import LineChart from './LineChart';
+import PieChart from './PieChart';
+import Search from './SearchFilter.jsx';
 import { useState } from 'react';
+
 export default function View1() {
   const [country, setCountry] = useState('');
   const [year, setYear] = useState('');
@@ -45,21 +45,17 @@ export default function View1() {
 
   return (
     <div>
-      <h2>Average Monthly Temperature</h2>
       <div className="flex">
-
-        <section className="lineChart">
+        <section className="chart-container">
+          <h2>Average Monthly Temperature</h2>
           <LineChart data={chartData} />
         </section>
 
-        <section className="search">
-          {/*show error message if input is invalid*/}
-          {!isValidCountry && showErrorMessage &&
-            <p className="error">Please select a valid country</p>}
-          {!year && showErrorMessage && <p className="error"> Please select a year</p>}
-
+        <section className="controls-container">
+          {showErrorMessage && (!isValidCountry || !year) && (
+            <p className="error">Please select a valid country and year</p>
+          )}
           <Search setCountry={setCountry} setIsValid={setIsValidCountry} />
-
           <select value={year} onChange={(e) => setYear(e.target.value)}>
             <option value="">Select Year</option>
             <option value="2008">2008</option>
@@ -69,14 +65,13 @@ export default function View1() {
             <option value="2012">2012</option>
             <option value="2013">2013</option>
           </select>
-
           <button onClick={fetchData}>Retrieve</button>
         </section>
       </div>
-      <h2> Emissions Breakdown </h2>
-      <section className="pieChart">
+      <section className="chart-container">
+        <h2>Causes of CO2 Emissions</h2>
         <PieChart data={pieData} />
       </section>
-    </div >
+    </div>
   );
 }
