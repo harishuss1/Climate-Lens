@@ -67,6 +67,9 @@ export default function View2() {
     setCountries(updatedCountries);
   };
 
+  const selectedCountries = countries.map(c => c.country);
+
+
   const chartData = countries
     .filter((c) => c.data && c.data.dataPoints)
     .map((c) => c.data);
@@ -86,6 +89,7 @@ export default function View2() {
             <SearchFilter
               setCountry={(country) => updateCountry(index, country)}
               setIsValid={(isValid) => updateValidity(index, isValid)}
+              excludedCountries={selectedCountries.filter((_, i) => i !== index)}
             />
             <button onClick={() => fetchData(index)}>Fetch Data</button>
             {index > 0 && (
