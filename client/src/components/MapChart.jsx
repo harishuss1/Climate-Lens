@@ -6,20 +6,7 @@ import * as am5map from '@amcharts/amcharts5/map';
 import am5geodata_worldLow from '@amcharts/amcharts5-geodata/worldLow';
 import am5themes_Animated from '@amcharts/amcharts5/themes/Animated';
 
-const fakeData = [{
-  Year: 2008, 
-  Country: 'Afganistan',
-  CountryCode: 'AF',
-  Total: 1161,
-  SolidFuel: 294,
-  LiquidFuel: 781,
-  GasFuel: 81,
-  Cement: 4,
-  GasFlaring: '',
-  PerCapita: 0.044834513,
-  BunkerfuelsNotInTotal: 41,
-  AverageTemp: 10
-}];
+
 
 
 function formatData(data){
@@ -40,7 +27,7 @@ function formatData(data){
 }
 
 
-function MapChart(props) {
+function MapChart({data}) {
   useLayoutEffect(() => {
     let root = am5.Root.new('chartdiv');
 
@@ -58,7 +45,7 @@ function MapChart(props) {
     
     // let active = ['US', 'CA', 'AF', 'JP',];
 
-    let templateData = fakeData.map((value) => {
+    let templateData = data.map((value) => {
       return {
         id: value.CountryCode, 
         polygonSettings: {
