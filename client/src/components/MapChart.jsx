@@ -60,7 +60,7 @@ function MapChart({data}) {
         GasFlaring: value.GasFlaring,
         PerCapita: value.PerCapita,
         BunkerfuelsNotInTotal: value.BunkerfuelsNotInTotal,
-        AverageTemp: value.AverageTemp,
+        AverageTemp: value.averageTemp,
 
         get text(){
           return formatData(this);
@@ -102,7 +102,7 @@ function MapChart({data}) {
     return () => {
       root.dispose();
     };
-  }, []);
+  }, [data]);
 
   return (
     <div id="chartdiv" style={{ width: '1000px', height: '500px' }}></div>
