@@ -115,3 +115,15 @@ Note taker: Tommy
 * We discussed the phase 1 feedbacks and small issues that have to fix.
 * We cleared up confusion about our design
 * We discussed about adding new api to get all the countries name
+
+# 11/11/2024 Friday 6:30pm, 30min, online
+## Retrospective Meeting
+Attendees: Tommy, Haris, Aidan
+
+Note taker: Aidan
+
+## discussion / work we have done during the meeting
+* Decided on a timeframe for MapChart to be finished.
+* Recapped on the feedback for the phase 1 submission, and what needed else needed to be done to fufill it.
+* Discussed what would be needed in the phase 2 submission.
+* Assigned tasks to meet goals decided upon goals.
