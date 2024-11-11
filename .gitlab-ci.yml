@@ -24,6 +24,8 @@ stages:
   - lint
   - build
   - test
+  - size-check
+
 
 # Lint job for server
 lint-server:
@@ -56,6 +58,19 @@ build-client:
     paths:
       - client/dist/
     expire_in: 1 day
+  only:
+    refs:
+      - main
+      - staging
+
+# Size check 
+bundlesize-check:
+  stage: size-check
+  dependencies:
+    - build-client
+  script:
+    - npm run bundlesize
+  allow_failure: false
   only:
     refs:
       - main
