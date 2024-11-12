@@ -1,8 +1,9 @@
-import { useState } from 'react';
+import { useState } from 'react'; 
 import BarChart from './BarChart.jsx';
+import SearchFilter from './SearchFilter.jsx';
 
 export default function View2() {
-  const [countries, setCountries] = useState([{ country: '', data: null }]);
+  const [countries, setCountries] = useState([{ country: '', data: null, isValid: false }]);
   const [startYear, setStartYear] = useState('');
   const [endYear, setEndYear] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
@@ -10,9 +11,9 @@ export default function View2() {
   const maxCountries = 3;
 
   const fetchData = async (index) => {
-    const { country } = countries[index];
-    if (!country || !startYear || !endYear) {
-      setErrorMessage('Please enter a country and select both start and end years.');
+    const { country, isValid } = countries[index];
+    if (!country || !isValid || !startYear || !endYear) {
+      setErrorMessage('Please select a valid country and both start and end years.');
       return;
     }
     try {
@@ -23,6 +24,7 @@ export default function View2() {
       const data = await response.json();
       if (data.length === 0) {
         setErrorMessage(`No data found for ${country} in the selected year range.`);
+        countries[index].data = { country, dataPoints: [] };
       } else {
         setErrorMessage('');
         const updatedCountries = [...countries];
@@ -33,20 +35,14 @@ export default function View2() {
         setCountries(updatedCountries);
       }
     } catch (error) {
-      console.error('Error fetching data:', error);
-      setErrorMessage(`An error occurred while fetching data for ${country}. Please try again.`);
+      console.error(error);
+      setErrorMessage(`Error fetching data for ${country}. Please try again.`);
     }
-  };
-
-  const handleCountryChange = (index, value) => {
-    const updatedCountries = [...countries];
-    updatedCountries[index].country = value;
-    setCountries(updatedCountries);
   };
 
   const addCountryField = () => {
     if (countries.length < maxCountries) {
-      setCountries([...countries, { country: '', data: null }]);
+      setCountries([...countries, { country: '', data: null, isValid: false }]);
     }
   };
 
@@ -59,18 +55,41 @@ export default function View2() {
     countries.forEach((_, index) => fetchData(index));
   };
 
-  return (
-    <div className="flex">
-      <BarChart data={countries.map(c => c.data).filter(Boolean)} />
+  const updateCountry = (index, country) => {
+    const updatedCountries = [...countries];
+    updatedCountries[index].country = country;
+    setCountries(updatedCountries);
+  };
 
-      <div>
+  const updateValidity = (index, isValid) => {
+    const updatedCountries = [...countries];
+    updatedCountries[index].isValid = isValid;
+    setCountries(updatedCountries);
+  };
+
+  const selectedCountries = countries.map(c => c.country);
+
+
+  const chartData = countries
+    .filter((c) => c.data && c.data.dataPoints)
+    .map((c) => c.data);
+
+  return (
+    <div className="view2-container">
+      <div className="chart-container">
+        <h2>Average Temperature Comparison by Country</h2> 
+        <BarChart data={chartData} />
+      </div>
+
+      <div className="controls-container">
+        {errorMessage && <p className="error-message">{errorMessage}</p>}
+
         {countries.map((item, index) => (
-          <div key={index} style={{ marginBottom: '10px' }}>
-            <input
-              type="text"
-              placeholder={`Country ${index + 1}`}
-              value={item.country}
-              onChange={(e) => handleCountryChange(index, e.target.value)}
+          <div key={index} className="country-input-group">
+            <SearchFilter
+              setCountry={(country) => updateCountry(index, country)}
+              setIsValid={(isValid) => updateValidity(index, isValid)}
+              excludedCountries={selectedCountries.filter((_, i) => i !== index)}
             />
             <button onClick={() => fetchData(index)}>Fetch Data</button>
             {index > 0 && (
@@ -78,34 +97,32 @@ export default function View2() {
             )}
           </div>
         ))}
+        
         {countries.length < maxCountries && (
-          <button onClick={addCountryField}>Add Another Country</button>
+          <button onClick={addCountryField} className="add-country-btn">
+            Add Another Country
+          </button>
         )}
+
+        <select className="year-select" value={startYear} onChange={(e) => 
+          setStartYear(e.target.value)}>
+          <option value="">Start Year</option>
+          {[2008, 2009, 2010, 2011, 2012, 2013].map((year) => (
+            <option key={year} value={year}>{year}</option>
+          ))}
+        </select>
+
+        <select className="year-select" value={endYear} onChange={(e) => 
+          setEndYear(e.target.value)}>
+          <option value="">End Year</option>
+          {[2008, 2009, 2010, 2011, 2012, 2013].map((year) => (
+            <option key={year} value={year}>{year}</option>
+          ))}
+        </select>
+
+        <button onClick={fetchAllData} className="retrieve-all-btn">Retrieve All Data</button>
+
       </div>
-
-      <select value={startYear} onChange={(e) => setStartYear(e.target.value)}>
-        <option value="">Start Year</option>
-        <option value="2008">2008</option>
-        <option value="2009">2009</option>
-        <option value="2010">2010</option>
-        <option value="2011">2011</option>
-        <option value="2012">2012</option>
-        <option value="2013">2013</option>
-      </select>
-      <select value={endYear} onChange={(e) => setEndYear(e.target.value)}>
-        <option value="">End Year</option>
-        <option value="2008">2008</option>
-        <option value="2009">2009</option>
-        <option value="2010">2010</option>
-        <option value="2011">2011</option>
-        <option value="2012">2012</option>
-        <option value="2013">2013</option>
-      </select>
-
-      <button onClick={fetchAllData}>Retrieve All Data</button>
-
-      {/* Display error message if there is one */}
-      {errorMessage && <p style={{ color: 'red' }}>{errorMessage}</p>}
     </div>
   );
 }

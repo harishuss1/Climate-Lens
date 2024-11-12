@@ -1,23 +1,27 @@
 import './App.css';
-import co2Logo from '/co2.svg';
 import View1 from './components/View1.jsx';
 import View2 from './components/View2.jsx';
 import MapView from './components/MapView.jsx';
+import Header from './components/Header.jsx';
+import Footer from './components/Footer.jsx';
 
 function App() {
 
   return (
     
-    <div>
-      <a href="https://vite.dev" target="_blank">
-        <img src={co2Logo} className="logo" alt="co2 logo" />
-      </a>
-      <View1/>
-      <View2 />
-      <MapView />
+    <div id="app-container">
+      <Header />
+      <section className="page-section">
+        <View1 />
+      </section>
+      <section className="page-section">
+        <View2 />
+      </section>
+      <section className="page-section">
+        <MapView />
+      </section>
+      <Footer />
     </div>
-      
-    
   );
 }
 

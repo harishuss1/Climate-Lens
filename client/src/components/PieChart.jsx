@@ -41,7 +41,7 @@ export default function PieChart({ data }) {
   });
 
   return (
-    <div style={{ width: '100%', height: '600px' }}>
+    <div className="pie-chart-container">
       <Pie
         data={{
           labels: percentageLabels,

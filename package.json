@@ -1,19 +1,38 @@
 {
   "name": "520-project-hussain-tran-holmes",
   "version": "1.0.0",
+  "bundlesize": [
+    {
+      "path": "client/dist/assets/*.js",
+      "maxSize": "130 kB"
+    },
+    {
+      "path": "client/dist/assets/*.css",
+      "maxSize": "10 kB"
+    }
+  ],
+
   "description": "Express + React app",
   "main": "index.js",
   "scripts": {
     "start": "cd server && node bin/www",
     "build": "cd client && npm install && npm run build && cd ../server && npm install",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "bundlesize" : "bundlesize"
   },
   "author": "Haris Hussain, Tommy Tran, Aidan Holmes",
   "license": "ISC",
   "dependencies": {
+<<<<<<< HEAD
     "@amcharts/amcharts5": "^5.10.7",
     "@amcharts/amcharts5-geodata": "^5.1.4",
     "520-project-hussain-tran-holmes": "file:",
     "country-list": "^2.3.0"
+=======
+    "520-project-hussain-tran-holmes": "file:"
+  },
+  "devDependencies": {
+    "bundlesize2": "^0.0.31"
+>>>>>>> c5f17420c9a446305308ff6d07d3ce79e53a543b
   }
 }
