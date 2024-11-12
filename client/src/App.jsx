@@ -1,6 +1,7 @@
 import './App.css';
 import View1 from './components/View1.jsx';
 import View2 from './components/View2.jsx';
+import MapView from './components/MapView.jsx';
 import Header from './components/Header.jsx';
 import Footer from './components/Footer.jsx';
 
@@ -15,6 +16,9 @@ function App() {
       </section>
       <section className="page-section">
         <View2 />
+      </section>
+      <section className="page-section">
+        <MapView />
       </section>
       <Footer />
     </div>

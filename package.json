@@ -11,19 +11,21 @@
       "maxSize": "10 kB"
     }
   ],
-
   "description": "Express + React app",
   "main": "index.js",
   "scripts": {
     "start": "cd server && node bin/www",
     "build": "cd client && npm install && npm run build && cd ../server && npm install",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "bundlesize" : "bundlesize"
+    "bundlesize": "bundlesize"
   },
   "author": "Haris Hussain, Tommy Tran, Aidan Holmes",
   "license": "ISC",
   "dependencies": {
-    "520-project-hussain-tran-holmes": "file:"
+    "@amcharts/amcharts5": "^5.10.7",
+    "@amcharts/amcharts5-geodata": "^5.1.4",
+    "520-project-hussain-tran-holmes": "file:",
+    "country-list": "^2.3.0"
   },
   "devDependencies": {
     "bundlesize2": "^0.0.31"
