@@ -24,9 +24,18 @@ async function startServer() {
     console.dir(e);
     process.exit();
   }
-  app.listen(port, () => {
+  const server = app.listen(port, () => {
     console.log(`Server listening http://localhost:3000 on port ${port}!`);
   });
+  // Handle the SIGINT signal (Ctrl+C) to shut down the server
+  process.on('SIGINT', () => {
+    console.debug('SIGINT signal received: closing HTTP server');
+    server.close(() => {
+      console.debug('HTTP server closed');
+      process.exit(0); 
+    });
+  });
+
 }
 
 startServer();
