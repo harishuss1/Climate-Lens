@@ -13,6 +13,7 @@
   "dependencies": {
     "@amcharts/amcharts5": "^5.10.7",
     "@amcharts/amcharts5-geodata": "^5.1.4",
-    "520-project-hussain-tran-holmes": "file:"
+    "520-project-hussain-tran-holmes": "file:",
+    "country-list": "^2.3.0"
   }
 }

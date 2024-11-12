@@ -1,6 +1,7 @@
 import MapChart from './MapChart';
 import { useState } from 'react';
 import { useEffect } from 'react';
+import { getCode } from 'country-list';
 
 export default function MapView() {
 
@@ -11,12 +12,14 @@ export default function MapView() {
     setData(fakeData.map((value) => {
       const filteredTemp = tempuratureData.filter(
         (data) => data.Country.toLowerCase() === value.Country.toLowerCase());
+        
+      console.log('TODO: floor this at like 1 or 2 decimal places');
       const averageTemp = filteredTemp.reduce(
         (sum, currentValue) => sum + currentValue.AverageTemperature, 0) / filteredTemp.length;
-      // TODO: floor this at like 1 or 2 decimal places
+      // lazy way to repalce the all-caps country with the properly capitalized one
+      value.Country = filteredTemp[0].Country;
       value.averageTemp = averageTemp;
-      // this is the super annoying part
-      // value.countryCode = getCountryCode(value.Country); 
+      value.CountryCode = getCode(value.Country);
       return value;
     }));
   }, [setData]);
@@ -55,8 +58,8 @@ emissionData.map((value) => {
 
 const fakeData = [{
   Year: 2008, 
-  Country: 'Afghanistan',
-  CountryCode: 'AF',
+  Country: 'AFGHANISTAN',
+  // CountryCode: 'AF',
   Total: 1161,
   SolidFuel: 294,
   LiquidFuel: 781,
