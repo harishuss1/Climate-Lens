@@ -46,7 +46,14 @@ const router = express.Router();
  */
 
 // GET /api/temp/:year
-router.get('/:year', getAllTemperatureSpecificYear);
+router.get('/:year',  (req, res, next) => {
+  if(!isNaN(req.params.year)){
+    getAllTemperatureSpecificYear(req, res);
+  } else {
+    console.log('redirect');
+    next();
+  }
+});
 
 /**
  * @swagger
