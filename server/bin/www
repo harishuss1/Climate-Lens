@@ -16,7 +16,7 @@ const port = process.env.PORT || 3000;
  * @throws {Error} Will throw an error if the database connection fails.
  */
 
-(async () => {
+async function startServer() {
   try {
     await db.connect('Cluster520Web2024', 'CO2Emissions');
   } catch (e) {
@@ -27,4 +27,6 @@ const port = process.env.PORT || 3000;
   app.listen(port, () => {
     console.log(`Server listening http://localhost:3000 on port ${port}!`);
   });
-})();
+}
+
+startServer();
