@@ -4,6 +4,48 @@ import { getTemperatureData,
   getAllTemperatureSpecificYear } from '../controllers/temperatureController.mjs';
 
 const router = express.Router();
+
+
+/**
+ * @swagger
+ * /api/temp/{year}:
+ *   get:
+ *     summary: Get temperature data of all countries for a specific year.
+ *     parameters:
+ *       - in: path
+ *         name: year
+ *         required: true
+ *         schema:
+ *           type: string
+ *           example: 2008
+ *         description: "Year for the temperature data (valid values: 2008-2013)."
+ *     responses:
+ *       200:
+ *         description: Temperature data retrieved successfully.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 type: object
+ *                 properties:
+ *                   dt:
+ *                     type: string
+ *                     description: Date in YYYY-MM-DD format.
+ *                   AverageTemperature:
+ *                     type: number
+ *                     format: float
+ *                     description: The average temperature.
+ *                   Country:
+ *                     type: string
+ *                     description: The country name.
+ *       400:
+ *         description: Invalid year parameter or no data found for the specified year.
+ *       500:
+ *         description: Internal server error.
+ */
+
+// GET /api/temp/:year
 router.get('/:year', getAllTemperatureSpecificYear);
 
 /**
@@ -108,7 +150,6 @@ router.get('/:country/:year?', getTemperatureData);
 
 // GET /api/temp/range/:country/:startYear/:endYear
 router.get('/:country/:startYear/:endYear', getAvgTemperatureDataInRange);
-
 
 
 export default router;

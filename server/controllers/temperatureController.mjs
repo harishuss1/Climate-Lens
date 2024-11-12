@@ -124,8 +124,13 @@ export const getAllTemperatureSpecificYear = async (req, res) => {
   const query = {
     'dt': new RegExp(`^${year}`)
   };
-  
 
+  try {
+    await db.changeCollection('CountryAverageTemperature');
+  } catch (error) {
+    console.error('Error switching collection:', error);
+    return res.status(500).json({ error: 'Failed to switch collection' });
+  }
 
   try {
     const tempData = await db.readFiltered(query);
