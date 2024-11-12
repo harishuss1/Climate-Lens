@@ -126,4 +126,4 @@ Note taker: Aidan
 * Decided on a timeframe for MapChart to be finished.
 * Recapped on the feedback for the phase 1 submission, and what needed else needed to be done to fufill it.
 * Discussed what would be needed in the phase 2 submission.
-* Assigned tasks to meet the decided upon goals.
+* Assigned tasks to meet the decided upon goals, and made corressponding issues.
