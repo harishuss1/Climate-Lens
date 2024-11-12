@@ -51,16 +51,16 @@ function MapChart({data}) {
         polygonSettings: {
           fill: am5.color(0x0000FF)
         },
-        Country: value.Country,
-        Total: value.Total,
-        SolidFuel: value.SolidFuel,
-        LiquidFuel: value.LiquidFuel,
-        GasFuel: value.GasFuel,
-        Cement: value.Cement,
-        GasFlaring: value.GasFlaring,
-        PerCapita: value.PerCapita,
-        BunkerfuelsNotInTotal: value.BunkerfuelsNotInTotal,
-        AverageTemp: value.averageTemp,
+        Country: value['Country'],
+        Total: value['Total'],
+        SolidFuel: value['Solid Fuel'],
+        LiquidFuel: value['Liquid Fuel'],
+        GasFuel: value['Gas Fuel'],
+        Cement: value['Cement'],
+        GasFlaring: value['Gas Flaring'],
+        PerCapita: value['Per Capita'],
+        BunkerfuelsNotInTotal: value['Bunker fuels (Not in Total)'],
+        AverageTemp: value['averageTemp'],
 
         get text(){
           return formatData(this);
