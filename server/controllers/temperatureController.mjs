@@ -27,7 +27,7 @@ export const getTemperatureData = async (req, res) => {
   }
 
   let query = {
-    Country: { $regex: new RegExp(`^${country}$`, 'i') } 
+    Country: { $regex: new RegExp(`^${country}$`, 'i') }
   };
 
   if (year) {
@@ -111,4 +111,32 @@ export const getAvgTemperatureDataInRange = async (req, res) => {
     console.error('Error fetching temperature data:', error);
     res.status(500).json({ error: 'Failed to fetch temperature data' });
   }
+};
+
+export const getAllTemperatureSpecificYear = async (req, res) => {
+  const year = req.params.year;
+
+  const validYears = ['2008', '2009', '2010', '2011', '2012', '2013'];
+  if (!validYears.includes(year)) {
+    return res.status(400).json({ error: 'Enter a valid year (2008-2013)' });
+  }
+  //query to select dt that starts with specified year
+  const query = {
+    'dt': new RegExp(`^${year}`)
+  };
+  
+
+
+  try {
+    const tempData = await db.readFiltered(query);
+    if (!tempData || tempData.length === 0) {
+      return res.status(400).json({ error: 'No data for the specified year' });
+    }
+
+    res.json(tempData);
+  } catch (error) {
+    console.error('Error fetching temperature data:', error);
+    res.status(500).json({ error: 'Failed to fetch temperature data' });
+  }
+  
 };
