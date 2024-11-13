@@ -6,7 +6,6 @@ import tempRouter from '../routers/temperature.js';
 import { db } from '../db/db.js';
 
 const app = express();
-app.use(express.json());
 app.use('/api/temp', tempRouter);
 
 
