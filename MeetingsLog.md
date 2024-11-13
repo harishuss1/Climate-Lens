@@ -127,3 +127,16 @@ Note taker: Aidan
 * Recapped on the feedback for the phase 1 submission, and what needed else needed to be done to fufill it.
 * Discussed what would be needed in the phase 2 submission.
 * Assigned tasks to meet the decided upon goals, and made corressponding issues.
+
+# 11/12/2024 Friday 7:00pm, 2:45h, online
+## Retrospective Meeting
+Attendees: Tommy, Haris, Aidan
+
+Note taker: Haris
+
+## discussion / work we have done during the meeting
+* Went over Phase 2 requirements.
+* Finished up and polished everything.
+* Fixed bugs we had gotten into.
+* Bug hunting , searched for any bugs.
+* Submission for phase 2!
