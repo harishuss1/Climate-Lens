@@ -3,6 +3,14 @@ import PieChart from './PieChart';
 import Search from './SearchFilter.jsx';
 import { useState } from 'react';
 
+
+/**
+ * View1 component displays the temperature and CO2 emissions data 
+ * for a selected country and year. It allows users to choose a country, 
+ * select a year, and then fetch and visualize the corresponding data 
+ * in a LineChart and a PieChart.
+ */
+
 export default function View1() {
   const [country, setCountry] = useState('');
   const [year, setYear] = useState('');
@@ -11,12 +19,19 @@ export default function View1() {
   const [isValidCountry, setIsValidCountry] = useState(false);
   const [showErrorMessage, setShowErrorMessage] = useState(false);
 
+
+  /**
+   * fetchData function retrieves temperature and emissions data based on the selected
+   * country and year. It displays an error message if the country or year is not selected.
+   * If data is fetched successfully, it updates the state with the new chart data.
+   */
   const fetchData = async () => {
     if (!isValidCountry || !year) {
       setShowErrorMessage(true);
       return;
     }
-
+    
+    // Hide the error message if both fields are valid
     setShowErrorMessage(false);
     try {
       const [tempResponse, emissionsResponse] = await Promise.all([

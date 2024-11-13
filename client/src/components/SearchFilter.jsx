@@ -6,17 +6,28 @@ export default function SearchFilter({ setCountry, setIsValid, excludedCountries
   const [filteredCountries, setFilteredCountries] = useState([]);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
+
+  /**
+   * Handles the search input and filters the list of countries based on the query.
+   * Updates the dropdown visibility and validity status.
+   * 
+   * @param {Object} event - The input event containing the user's search query.
+   */
   const handleSearch = (event) => {
     const query = event.target.value;
     setSearchCountry(query);
 
+    // Filter the countries based on the query and exclude specified countries
     const filtered = countries.filter((country) =>
       country.toLowerCase().includes(query.toLowerCase()) &&
       !excludedCountries.includes(country)
     );
+
+    // Update the filtered countries and dropdown visibility
     setFilteredCountries(filtered);
     setIsDropdownOpen(query.length > 0);
 
+    // Validate the input based on whether it's found in the filtered list
     if (query && !filtered.includes(query)) {
       setIsValid(false);
     } else {
@@ -24,7 +35,12 @@ export default function SearchFilter({ setCountry, setIsValid, excludedCountries
     }
   };
 
-  // Used for when the user selects the country from the dropdown
+  /**
+  * Handles the selection of a country from the dropdown.
+  * Sets the selected country and closes the dropdown.
+  * 
+  * @param {string} country - The country selected from the dropdown list.
+  */
   const handleSelect = (country) => {
     setSearchCountry(country);
     setCountry(country);
@@ -32,7 +48,12 @@ export default function SearchFilter({ setCountry, setIsValid, excludedCountries
     setIsValid(true);
   };
 
-  // to check the input after the enter key is pressed
+  /**
+  * Handles the "Enter" key press to select a country from the filtered list.
+  * If the input matches a filtered country, it's selected. Otherwise, the input is cleared.
+  * 
+  * @param {Object} event - The keyboard event triggered by the "Enter" key press.
+  */
   const handleKeyDown = (event) => {
     if (event.key === 'Enter') {
       //console.log('pressed');
