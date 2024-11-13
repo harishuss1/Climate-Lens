@@ -70,21 +70,24 @@ export default function View2() {
   const selectedCountries = countries.map(c => c.country);
 
 
-  const chartData = countries
-    .filter((c) => c.data && c.data.dataPoints)
-    .map((c) => c.data);
+  const chartData = countries.
+    filter((c) => c.data && c.data.dataPoints).
+    map((c) => c.data);
 
   return (
     <div className="view2-container">
       <div className="chart-container">
-        <h2>Average Temperature Comparison by Country</h2> 
+        <h2 className="view-title">Compare Average Temperatures by Country</h2>
+        <p className="view-description">
+        Select multiple countries to compare average temperatures over a selected time range.
+        </p>
         <BarChart data={chartData} />
       </div>
 
       <div className="controls-container">
         {errorMessage && <p className="error-message">{errorMessage}</p>}
 
-        {countries.map((item, index) => (
+        {countries.map((item, index) => 
           <div key={index} className="country-input-group">
             <SearchFilter
               setCountry={(country) => updateCountry(index, country)}
@@ -92,32 +95,32 @@ export default function View2() {
               excludedCountries={selectedCountries.filter((_, i) => i !== index)}
             />
             <button onClick={() => fetchData(index)}>Fetch Data</button>
-            {index > 0 && (
+            {index > 0 && 
               <button onClick={() => removeCountryField(index)}>Remove</button>
-            )}
+            }
           </div>
-        ))}
+        )}
         
-        {countries.length < maxCountries && (
+        {countries.length < maxCountries && 
           <button onClick={addCountryField} className="add-country-btn">
             Add Another Country
           </button>
-        )}
+        }
 
         <select className="year-select" value={startYear} onChange={(e) => 
           setStartYear(e.target.value)}>
           <option value="">Start Year</option>
-          {[2008, 2009, 2010, 2011, 2012, 2013].map((year) => (
+          {[2008, 2009, 2010, 2011, 2012, 2013].map((year) => 
             <option key={year} value={year}>{year}</option>
-          ))}
+          )}
         </select>
 
         <select className="year-select" value={endYear} onChange={(e) => 
           setEndYear(e.target.value)}>
           <option value="">End Year</option>
-          {[2008, 2009, 2010, 2011, 2012, 2013].map((year) => (
+          {[2008, 2009, 2010, 2011, 2012, 2013].map((year) => 
             <option key={year} value={year}>{year}</option>
-          ))}
+          )}
         </select>
 
         <button onClick={fetchAllData} className="retrieve-all-btn">Retrieve All Data</button>
