@@ -16,7 +16,7 @@ import { db } from '../db/db.js';
  * country or year is provided, it returns a 400 error. If the collection switch or 
  * database read fails, it returns a 500 error.
  */
-export const getTemperatureData = async (req, res) => {
+export async function getTemperatureData (req, res) {
   const { country, year } = req.params;
 
   try {
@@ -64,7 +64,7 @@ export const getTemperatureData = async (req, res) => {
  * @param {Object} res - Express response object
  * @returns Responds with JSON data or an error message
  */
-export const getAvgTemperatureDataInRange = async (req, res) => {
+export async function getAvgTemperatureDataInRange (req, res) {
   const { country, startYear, endYear } = req.params;
 
   const validYears = ['2008', '2009', '2010', '2011', '2012', '2013'];
@@ -113,7 +113,7 @@ export const getAvgTemperatureDataInRange = async (req, res) => {
   }
 };
 
-export const getAllTemperatureSpecificYear = async (req, res) => {
+export async function getAllTemperatureSpecificYear  (req, res) {
   const year = req.params.year;
 
   const validYears = ['2008', '2009', '2010', '2011', '2012', '2013'];
