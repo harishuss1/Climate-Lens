@@ -1,5 +1,4 @@
 import * as fs from 'node:fs/promises';
-'use strict';
 
 /**
  * Validates if the specified path exists.

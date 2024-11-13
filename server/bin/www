@@ -16,7 +16,7 @@ const port = process.env.PORT || 3000;
  * @throws {Error} Will throw an error if the database connection fails.
  */
 
-(async () => {
+async function startServer() {
   try {
     await db.connect('Cluster520Web2024', 'CO2Emissions');
   } catch (e) {
@@ -24,7 +24,18 @@ const port = process.env.PORT || 3000;
     console.dir(e);
     process.exit();
   }
-  app.listen(port, () => {
+  const server = app.listen(port, () => {
     console.log(`Server listening http://localhost:3000 on port ${port}!`);
   });
-})();
+  // Handle the SIGINT signal (Ctrl+C) to shut down the server
+  process.on('SIGINT', () => {
+    console.debug('SIGINT signal received: closing HTTP server');
+    server.close(() => {
+      console.debug('HTTP server closed');
+      process.exit(0); 
+    });
+  });
+
+}
+
+startServer();
