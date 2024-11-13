@@ -49,8 +49,8 @@ export default function View1() {
 
       const tempData = await tempResponse.json();
       const emissionsData = await emissionsResponse.json();
-
-      setChartData(tempData);
+      //sort the date before setting
+      setChartData(tempData.sort((a, b) => new Date(a.dt) - new Date(b.dt)) );
       setPieData(emissionsData);
 
     } catch (error) {
