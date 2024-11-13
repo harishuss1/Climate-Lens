@@ -45,7 +45,7 @@ describe('GET /api/temp/:country/:year?', () => {
     const response = await request(app).get('/api/temp/InvalidCountry');
 
     expect(stubChangeCollection.calledOnceWith('CountryAverageTemperature')).to.be.true;
-    expect(stubReadFiltered.calledOnceWith({ Country: { $regex: /^InvalidCountry$/i } })).to.be.true;
+    expect(stubReadFiltered.calledOnceWith({Country: { $regex: /^InvalidCountry$/i } })).to.be.true;
     expect(response.status).to.equal(400);
     expect(response.body).to.have.property('error', 'Enter a valid country');
   });
