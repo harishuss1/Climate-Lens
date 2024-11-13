@@ -78,6 +78,7 @@ The goal of this project is to provide a user-friendly platform that enables use
   - [Node.js](https://nodejs.org/) - JavaScript runtime for the backend.
   - [dotenv](https://www.npmjs.com/package/dotenv) - Used for loading environment variables.
   - [MongoDB](https://www.mongodb.com/) - Database for App
+  - [country-list](https://www.npmjs.com/package/country-list) - Library used to convert country names into the ISO 3166-1-alpha-2 codes that amCharts uses.
 
 - **Testing and CI/CD**
   - [bundlesize2](https://www.npmjs.com/package/bundlesize2) - Monitors the size of client-side bundles.
