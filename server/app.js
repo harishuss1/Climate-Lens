@@ -37,8 +37,6 @@ app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
  * - Returns 404 for unknown routes
  */
 
-app.use(express.json());
-
 app.use(express.static('../client/dist'));
 
 
