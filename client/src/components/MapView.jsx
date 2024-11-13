@@ -17,7 +17,6 @@ export default function MapView() {
           (await fetch(`/api/emissions/${year}`)).json(),
           (await fetch(`/api/temp/${year}`)).json()
         ]);
-        console.log(tempuratureData);
         setData(formatData(emmisonsData, tempuratureData));
       }
     }
@@ -50,15 +49,18 @@ function formatData(emmisonsData, tempuratureData){
   return emmisonsData.map((value) => {
     const filteredTemp = tempuratureData.filter(
       (data) => data.Country.toLowerCase() === value.Country.toLowerCase());
-    
-    console.log('TODO: floor this at like 1 or 2 decimal places');
+  
     const averageTemp = filteredTemp.reduce(
       (sum, currentValue) => sum + currentValue.AverageTemperature, 0) / filteredTemp.length;
+    if(averageTemp){
+      value.averageTemp = Math.round(averageTemp * 100) / 100;
+    } else {
+      value.averageTemp = 'Data missing, ?';
+    }
     // lazy way to repalce the all-caps country with the properly capitalized one
     if(filteredTemp[0] && filteredTemp[0].Country){
       value.Country = filteredTemp[0].Country;
     }
-    value.averageTemp = averageTemp;
     value.CountryCode = getCode(value.Country);
     return value;
   });
