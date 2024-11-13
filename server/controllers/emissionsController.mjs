@@ -6,8 +6,7 @@ import { db } from '../db/db.js';
  * @param {Object} req - Express request object
  * @param {Object} res - Express response object
  */
-export const getEmissionData = async (
-  req, res,) => {
+export async function getEmissionData (req, res,) {
 
   const { country, year } = req.params;
 
