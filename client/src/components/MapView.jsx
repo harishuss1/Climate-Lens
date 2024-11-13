@@ -27,8 +27,12 @@ export default function MapView() {
 
 
   return (
-    <div>
-      <select value={year} onChange={(e) => setYear(e.target.value)}>
+    <div className="map-view-container">
+      <h2 className="view-title">Global Emissions and Temperature Map</h2>
+      <p className="view-description">
+        Explore the global CO2 emissions and temperature averages by selecting a year below.
+      </p>
+      <select value={year} onChange={(e) => setYear(e.target.value)} className="year-select">
         <option value="">Select Year</option>
         <option value="2008">2008</option>
         <option value="2009">2009</option>

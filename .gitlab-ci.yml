@@ -69,6 +69,7 @@ bundlesize-check:
   dependencies:
     - build-client
   script:
+    - cd client
     - npm run bundlesize
   allow_failure: false
   only:

@@ -47,14 +47,17 @@ export default function View1() {
     <div>
       <div className="flex">
         <section className="chart-container">
-          <h2>Average Monthly Temperature</h2>
+          <h2 className="view-title">Temperature and Emissions Analysis</h2>
+          <p className="view-description">
+        Analyze the average monthly temperatures and CO2 emissions for a selected country and year.
+          </p>
           <LineChart data={chartData} />
         </section>
 
         <section className="controls-container">
-          {showErrorMessage && (!isValidCountry || !year) && (
+          {showErrorMessage && (!isValidCountry || !year) && 
             <p className="error">Please select a valid country and year</p>
-          )}
+          }
           <Search setCountry={setCountry} setIsValid={setIsValidCountry} />
           <select value={year} onChange={(e) => setYear(e.target.value)}>
             <option value="">Select Year</option>
