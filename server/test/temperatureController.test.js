@@ -7,7 +7,7 @@ import { db } from '../db/db.js';
 
 const app = express();
 app.use(express.json());
-app.use('/api/temp', tempRouter); 
+app.use('/api/temp', tempRouter);
 
 
 /**
@@ -45,7 +45,7 @@ describe('GET /api/temp/:country/:year?', () => {
     const response = await request(app).get('/api/temp/InvalidCountry');
 
     expect(stubChangeCollection.calledOnceWith('CountryAverageTemperature')).to.be.true;
-    expect(stubReadFiltered.calledOnceWith({ Country: { $regex: /^InvalidCountry$/i }})).to.be.true;
+    expect(stubReadFiltered.calledOnceWith({ Country: { $regex: /^InvalidCountry$/i } })).to.be.true;
     expect(response.status).to.equal(400);
     expect(response.body).to.have.property('error', 'Enter a valid country');
   });
@@ -57,8 +57,10 @@ describe('GET /api/temp/:country/:year?', () => {
    */
   it('should return temperature data for a valid country', async () => {
     stubChangeCollection.resolves();
-    stubReadFiltered.resolves([{ dt: '2008-03-01',
-      AverageTemperature: 13.506, Country: 'Afghanistan' }]);
+    stubReadFiltered.resolves([{
+      dt: '2008-03-01',
+      AverageTemperature: 13.506, Country: 'Afghanistan'
+    }]);
 
     // Make a GET request with a valid country
     const response = await request(app).get('/api/temp/Afghanistan');
@@ -66,8 +68,10 @@ describe('GET /api/temp/:country/:year?', () => {
     expect(stubChangeCollection.calledOnceWith('CountryAverageTemperature')).to.be.true;
     expect(stubReadFiltered.calledOnceWith({ Country: { $regex: /^Afghanistan$/i } })).to.be.true;
     expect(response.status).to.equal(200);
-    expect(response.body).to.deep.equal([{ dt: '2008-03-01',
-      AverageTemperature: 13.506, Country: 'Afghanistan' }]);
+    expect(response.body).to.deep.equal([{
+      dt: '2008-03-01',
+      AverageTemperature: 13.506, Country: 'Afghanistan'
+    }]);
   });
 
 
@@ -77,8 +81,10 @@ describe('GET /api/temp/:country/:year?', () => {
    */
   it('should return temperature data for a valid country and year', async () => {
     stubChangeCollection.resolves();
-    stubReadFiltered.resolves([{ dt: '2008-03-01',
-      AverageTemperature: 13.506, Country: 'Afghanistan' }]);
+    stubReadFiltered.resolves([{
+      dt: '2008-03-01',
+      AverageTemperature: 13.506, Country: 'Afghanistan'
+    }]);
 
     // Make a GET request with a valid country and year
     const response = await request(app).get('/api/temp/Afghanistan/2008');
@@ -89,8 +95,10 @@ describe('GET /api/temp/:country/:year?', () => {
       dt: /^2008/
     })).to.be.true;
     expect(response.status).to.equal(200);
-    expect(response.body).to.deep.equal([{ dt: '2008-03-01',
-      AverageTemperature: 13.506, Country: 'Afghanistan' }]);
+    expect(response.body).to.deep.equal([{
+      dt: '2008-03-01',
+      AverageTemperature: 13.506, Country: 'Afghanistan'
+    }]);
   });
 
 
@@ -222,5 +230,76 @@ describe('GET /api/temp/:country/:startYear/:endYear', () => {
     })).to.be.true;
     expect(response.status).to.equal(500);
     expect(response.body).to.have.property('error', 'Failed to fetch temperature data');
+  });
+});
+
+
+
+describe('GET /api/temp/:year', () => {
+  let stubChangeCollection;
+  let stubReadFiltered;
+
+
+  beforeEach(() => {
+    // Mock the db.changeCollection and db.readFiltered methods
+    stubChangeCollection = sinon.stub(db, 'changeCollection');
+    stubReadFiltered = sinon.stub(db, 'readFiltered');
+  });
+
+  afterEach(() => {
+    // Restore the stubbed methods after each test
+    sinon.restore();
+  });
+
+  /**
+   * Test case for invalid year
+   * Expected outcome: Returns a 400 error with 'Enter a valid year (2008-2013)' message.
+   */
+  it('should return a 400 error if it is an invalid year', async () => {
+    stubChangeCollection.resolves();
+    stubReadFiltered.resolves([]);
+
+    const response = await request(app).get('/api/temp/222222');
+
+    expect(stubReadFiltered.called).to.be.false;
+    expect(response.status).to.equal(400);
+    expect(response.body).to.have.property('error', 'Enter a valid year (2008-2013)');
+  });
+
+  /**
+   * Test case for valid year but no data
+   * Expected outcome: Returns a 400 error with 'No data for the specified year' message.
+   */
+  it('should return a 400 error if it is an valid year but has no data', async () => {
+    stubChangeCollection.resolves();
+    stubReadFiltered.resolves([]);
+
+    const response = await request(app).get('/api/temp/2008');
+
+    expect(stubReadFiltered.called).to.be.true;
+    expect(response.status).to.equal(400);
+    expect(response.body).to.have.property('error', 'No data for the specified year');
+  });
+
+  /**
+   * Test case for valid year that contains temperature datas for countries
+   * Expected outcome: Returns a 400 error with 'No data for the specified year' message.
+   */
+  it('should return temperature data for all countries for the specific year', async () => {
+
+    const mockData = [
+      { dt: '2008-01-01', AverageTemperature: -21.083, Country: 'Canada' },
+      { dt: '2008-02-01', AverageTemperature: -21.751, Country: 'China' },
+      { dt: '2008-03-01', AverageTemperature: -16.669, Country: 'Australia' }
+    ];
+
+    stubChangeCollection.resolves();
+    stubReadFiltered.resolves(mockData);
+
+    const response = await request(app).get('/api/temp/2008');
+
+    expect(stubReadFiltered.called).to.be.true;
+    expect(response.status).to.equal(200);
+    expect(response.body).to.deep.equal(mockData);
   });
 });
