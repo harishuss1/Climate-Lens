@@ -49,7 +49,7 @@ function MapChart({data}) {
       return {
         id: value.CountryCode, 
         polygonSettings: {
-          fill: am5.color(0x0000FF)
+          fill: am5.color(0x1e88e5)
         },
         Country: value['Country'],
         Total: value['Total'],
@@ -96,7 +96,7 @@ function MapChart({data}) {
     polygonSeries.data.setAll(templateData);
       
     polygonSeries.mapPolygons.template.states.create('hover', {
-      fill: am5.color(0x677935)
+      fill: am5.color(0xffca28)
     });
 
     return () => {
@@ -105,7 +105,7 @@ function MapChart({data}) {
   }, [data]);
 
   return (
-    <div id="chartdiv" style={{ width: '1000px', height: '500px' }}></div>
+    <div id="chartdiv" className="map-chart-container"></div>
   );
 }
 export default MapChart;
