@@ -27,7 +27,7 @@ export default function PieChart({ data }) {
   const totalEmissions = data[0]['Total'];
   //get all the keys except total,country,year and id for the pie chart label
   const labels = Object.keys(data[0]).filter(key =>
-    key !== 'Total' && key !== 'Country' && key !== 'Year' && key !== '_id'
+    key !== 'Total' && key !== 'Country' && key !== 'Year' && key !== '_id' && key !== 'Per Capita'
   );
 
   const filteredData = labels.map(label => data[0][label]);
