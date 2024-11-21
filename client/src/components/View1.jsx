@@ -13,7 +13,7 @@ import { useState, useEffect } from 'react';
 
 export default function View1() {
   const [country, setCountry] = useState('Canada');
-  const [year, setYear] = useState('2013');
+  const [year, setYear] = useState('2012');
   const [chartData, setChartData] = useState(null);
   const [pieData, setPieData] = useState(null);
   const [isValidCountry, setIsValidCountry] = useState(true);
