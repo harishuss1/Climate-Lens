@@ -6,7 +6,6 @@ export default function SearchFilter({ setCountry, setIsValid, excludedCountries
   const [filteredCountries, setFilteredCountries] = useState([]);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
-
   /**
    * Handles the search input and filters the list of countries based on the query.
    * Updates the dropdown visibility and validity status.

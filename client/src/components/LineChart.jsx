@@ -18,10 +18,16 @@ export default function LineChart({ data }) {
       />);
   }
 
+  const monthNames = [
+    'January', 'February', 'March', 'April', 'May', 'June',
+    'July', 'August', 'September', 'October', 'November', 'December'
+  ];
+  
+  const year = data[0]['dt'].split('-')[0];
   return (
     <Line
       data={{
-        labels: data.map((d) => d['dt'] || 'test'),
+        labels: monthNames,
         datasets: [
           {
             label: data[0]['Country'],
@@ -30,8 +36,20 @@ export default function LineChart({ data }) {
         ]
       }}
       options={{
-        responsive: true,
-        maintainAspectRatio: false
+        scales: {
+          x: {
+            title: {
+              display: true,
+              text: `Year: ${year}`,
+            },
+          },
+          y: {
+            title: {
+              display: true,
+              text: 'Average temperature',
+            },
+          },
+        },
       }}
     />
   );

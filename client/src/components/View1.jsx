@@ -1,7 +1,7 @@
 import LineChart from './LineChart';
 import PieChart from './PieChart';
 import Search from './SearchFilter.jsx';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 
 /**
@@ -12,13 +12,17 @@ import { useState } from 'react';
  */
 
 export default function View1() {
-  const [country, setCountry] = useState('');
-  const [year, setYear] = useState('');
+  const [country, setCountry] = useState('Canada');
+  const [year, setYear] = useState('2012');
   const [chartData, setChartData] = useState(null);
   const [pieData, setPieData] = useState(null);
-  const [isValidCountry, setIsValidCountry] = useState(false);
+  const [isValidCountry, setIsValidCountry] = useState(true);
   const [showErrorMessage, setShowErrorMessage] = useState(false);
 
+  useEffect(() => {
+    fetchData();
+    setIsValidCountry(false);
+  }, []);
 
   /**
    * fetchData function retrieves temperature and emissions data based on the selected
@@ -49,8 +53,8 @@ export default function View1() {
 
       const tempData = await tempResponse.json();
       const emissionsData = await emissionsResponse.json();
-
-      setChartData(tempData);
+      //sort the date before setting
+      setChartData(tempData.sort((a, b) => new Date(a.dt) - new Date(b.dt)) );
       setPieData(emissionsData);
 
     } catch (error) {
