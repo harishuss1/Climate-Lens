@@ -6,7 +6,6 @@ import emissionRouter from '../routers/emissions.js';
 import { db } from '../db/db.js';
 
 const app = express();
-app.use(express.json());
 app.use('/api/emissions', emissionRouter); 
 
 const exampleData = {

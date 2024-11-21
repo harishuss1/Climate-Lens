@@ -1,9 +1,29 @@
 import express from 'express';
 import tempRouter from './routers/temperature.js';
 import emissionRouter from  './routers/emissions.js';
+import swaggerJSDoc from 'swagger-jsdoc';
+import swaggerUi from 'swagger-ui-express';
 
+// app.js
+const swaggerDefinition = {
+  openapi: '3.0.0',
+  info: {
+    title: 'Express API for climate data visualization',
+    version: '1.0.0',
+  },
+};
 
-const app = express();
+const options = {
+  swaggerDefinition,
+  // Paths to files containing OpenAPI definitions
+  apis: ['./routers/*.js'],
+};
+
+const swaggerSpec = swaggerJSDoc(options);
+var app = express();
+
+app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
+
 
 /**
  * Express application setup.
@@ -17,16 +37,12 @@ const app = express();
  * - Returns 404 for unknown routes
  */
 
-app.use(express.json());
-
 app.use(express.static('../client/dist'));
 
-// uses your route e.g below
 
 app.use('/api/temp', tempRouter);
 app.use('/api/emissions', emissionRouter);
 
-///other routes
 
 app.use((req, res) => {
   res.status(404).send('invalid path');
