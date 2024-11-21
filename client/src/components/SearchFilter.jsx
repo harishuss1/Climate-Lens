@@ -2,10 +2,16 @@ import { useState } from 'react';
 import countries from '../../data/countries.json';
 
 export default function SearchFilter({ setCountry, setIsValid, excludedCountries = [] }) {
-  const [searchCountry, setSearchCountry] = useState('');
+  const [searchCountry, setSearchCountry] = useState('Canada'); 
   const [filteredCountries, setFilteredCountries] = useState([]);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
+
+  useState(() => {
+    setCountry('Canada');
+    setIsValid(true);
+  }, []);
+  
   /**
    * Handles the search input and filters the list of countries based on the query.
    * Updates the dropdown visibility and validity status.
