@@ -21,7 +21,7 @@ export default function View1() {
 
   useEffect(() => {
     fetchData();
-    setIsValidCountry(false);
+    
   }, []);
 
   /**
