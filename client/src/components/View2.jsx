@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import BarChart from './BarChart.jsx';
 import SearchFilter from './SearchFilter.jsx';
 
@@ -8,12 +8,17 @@ import SearchFilter from './SearchFilter.jsx';
  */
 
 export default function View2() {
-  const [countries, setCountries] = useState([{ country: '', data: null, isValid: false }]);
-  const [startYear, setStartYear] = useState('');
-  const [endYear, setEndYear] = useState('');
+  const [countries, setCountries] = useState([{ country: 'Canada', data: null, isValid: true }]);
+  const [startYear, setStartYear] = useState('2012');
+  const [endYear, setEndYear] = useState('2013');
   const [errorMessage, setErrorMessage] = useState('');
 
   const maxCountries = 3;
+
+  // Fetch Canada's data on initial load
+  useEffect(() => {
+    fetchData(0); 
+  }, []);
 
   /**
    * Fetches data for the specified country and year range.
