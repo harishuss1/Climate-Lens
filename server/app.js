@@ -44,7 +44,12 @@ app.use(express.static('../client/dist', {
   }
 })); 
 
-// Add Cache-control to all responses
+app.use('/api', (req, res, next) => {
+  res.set('Cache-Control', 'public, max-age=31536000');
+  next();
+});
+
+// Add Cache-control to all other responses
 app.use(function (req, res, next) {
   res.set('Cache-control', 'no-cache');
   next();
