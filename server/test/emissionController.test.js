@@ -4,6 +4,8 @@ import request from 'supertest';
 import express from 'express';
 import emissionRouter from '../routers/emissions.js';
 import { db } from '../db/db.js';
+import cache from 'memory-cache';
+
 
 const app = express();
 app.use('/api/emissions', emissionRouter); 
@@ -21,6 +23,9 @@ const exampleData = {
   'Bunker fuels (Not in Total)':'41'
 };
 
+afterEach(() => {
+  cache.clear();
+});
 
 describe('GET /api/emissions/:country/:year?', () => {
   let stubChangeCollection;

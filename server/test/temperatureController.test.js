@@ -4,10 +4,14 @@ import request from 'supertest';
 import express from 'express';
 import tempRouter from '../routers/temperature.js';
 import { db } from '../db/db.js';
+import cache from 'memory-cache';
 
 const app = express();
 app.use('/api/temp', tempRouter);
 
+afterEach(() => {
+  cache.clear();
+});
 
 /**
  * Test suite for GET /api/temp/:country/:year? endpoint.
