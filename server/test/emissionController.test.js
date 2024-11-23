@@ -23,10 +23,6 @@ const exampleData = {
   'Bunker fuels (Not in Total)':'41'
 };
 
-afterEach(() => {
-  cache.clear();
-});
-
 describe('GET /api/emissions/:country/:year?', () => {
   let stubChangeCollection;
   let stubReadFiltered;
@@ -40,6 +36,7 @@ describe('GET /api/emissions/:country/:year?', () => {
   });
 
   afterEach(() => {
+    cache.clear();
     // Restore the stubbed methods after each test
     sinon.restore();
   });

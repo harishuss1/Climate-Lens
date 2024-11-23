@@ -9,10 +9,6 @@ import cache from 'memory-cache';
 const app = express();
 app.use('/api/temp', tempRouter);
 
-afterEach(() => {
-  cache.clear();
-});
-
 /**
  * Test suite for GET /api/temp/:country/:year? endpoint.
  */
@@ -33,6 +29,7 @@ describe('GET /api/temp/:country/:year?', () => {
    * Restore the stubs after each test.
    */
   afterEach(() => {
+    cache.clear();
     // Restore the stubbed methods after each test
     sinon.restore();
   });
@@ -149,6 +146,7 @@ describe('GET /api/temp/:country/:startYear/:endYear', () => {
   });
 
   afterEach(() => {
+    cache.clear();
     // Restore the stubbed methods after each test
     sinon.restore();
   });
@@ -250,6 +248,7 @@ describe('GET /api/temp/:year', () => {
   });
 
   afterEach(() => {
+    cache.clear();
     // Restore the stubbed methods after each test
     sinon.restore();
   });
