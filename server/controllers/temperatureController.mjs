@@ -1,10 +1,5 @@
 import { db } from '../db/db.js';
 import cache from 'memory-cache';
-// memory-cache uses 32-bit signed integer so it can only be cached
-// for a maximum of 24 days.
-
-// expiration time for 20 days. 
-const CACHE_EXPIRATION_TIME = 1728000000; 
 
 /**
  * Get temperature data from the CountryAverageTemperature collection.
@@ -61,7 +56,7 @@ export async function getTemperatureData (req, res) {
     }
 
     //catch the data
-    cache.put(cacheKey, tempData, CACHE_EXPIRATION_TIME);
+    cache.put(cacheKey, tempData);
 
     res.json(tempData);
   } catch (error) {
@@ -130,7 +125,7 @@ export async function getAvgTemperatureDataInRange (req, res) {
     }));
 
     // Cache the data
-    cache.put(cacheKey, result, CACHE_EXPIRATION_TIME);
+    cache.put(cacheKey, result);
 
     res.json(result);
   } catch (error) {
@@ -172,7 +167,7 @@ export async function getAllTemperatureSpecificYear  (req, res) {
       return res.status(400).json({ error: 'No data for the specified year' });
     }
     //cache the data
-    cache.put(year, tempData, CACHE_EXPIRATION_TIME);
+    cache.put(year, tempData);
     res.json(tempData);
   } catch (error) {
     console.error('Error fetching temperature data:', error);
