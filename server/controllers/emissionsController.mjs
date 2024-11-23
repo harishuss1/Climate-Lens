@@ -1,5 +1,10 @@
 import { db } from '../db/db.js';
+import cache from 'memory-cache';
+// memory-cache uses 32-bit signed integer so it can only be cached
+// for a maximum of 24 days.
 
+// expiration time for 20 days. 
+const CACHE_EXPIRATION_TIME = 1728000000; 
 
 /**
  * Get emissions data from the CO2Emissions collection
@@ -9,6 +14,15 @@ import { db } from '../db/db.js';
 export async function getEmissionData (req, res,) {
 
   const { country, year } = req.params;
+
+  const cacheKey = `emissions_${country || ''}_${year || ''}`;
+
+  // check cache
+  const cachedData = cache.get(cacheKey);
+  if (cachedData) {
+    console.log('EmissionData from cache');
+    return res.json(cachedData);
+  }
 
   try {
     await db.changeCollection('CO2Emissions');
@@ -42,7 +56,9 @@ export async function getEmissionData (req, res,) {
     if (!data || data.length === 0) {
       return res.status(400).json({ error: 'No data was Found' });
     }
-
+    //catch the data
+    cache.put(cacheKey, data, CACHE_EXPIRATION_TIME);
+    
     res.json(data);
   } catch (error) {
     console.error('Error fetching emission data:', error);
