@@ -3,6 +3,8 @@ import tempRouter from './routers/temperature.js';
 import emissionRouter from  './routers/emissions.js';
 import swaggerJSDoc from 'swagger-jsdoc';
 import swaggerUi from 'swagger-ui-express';
+import compression from 'compression';
+
 
 // app.js
 const swaggerDefinition = {
@@ -21,6 +23,9 @@ const options = {
 
 const swaggerSpec = swaggerJSDoc(options);
 var app = express();
+
+app.use(compression());
+
 
 app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
