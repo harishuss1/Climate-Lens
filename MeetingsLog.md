@@ -138,5 +138,17 @@ Note taker: Haris
 * Went over Phase 2 requirements.
 * Finished up and polished everything.
 * Fixed bugs we had gotten into.
-* Bug hunting , searched for any bugs.
-* Submission for phase 2!
+
+# 11/23/2024 Saturday 8:00pm, 30min, online
+
+Attendees: Tommy, Haris, Aidan
+
+Note taker: Tommy
+
+## discussion / work we have done during the meeting
+* Discussed about updating our gitlab issues more often
+* Decided on a timeframe to finish the gitlab-ci job to produce an release artifact for AWS
+* Discussed what would be needed in the phase 3 submission.
+* Went over the app on render to see the effect on caching.
+* Assigned everyone to do/show their performance report by leaving comments in the gitlab issue. This way, everyone can easily keep track of progress
+* Agreed to have another meeting on Sunday.
