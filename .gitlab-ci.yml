@@ -65,7 +65,7 @@ build-client:
       - main
       - staging
       - aws
-      - tag
+      - tags
 
 # Size check 
 bundlesize-check:
@@ -81,7 +81,7 @@ bundlesize-check:
       - main
       - staging
       - aws
-      - tag
+      - tags
 
 
 # make artifact for aws deployment
@@ -90,7 +90,7 @@ aws-artifact:
   dependencies:
     - build-client
   only: 
-    - tag
+    - tags
   script:
     - tar -czvf 520-project-hussain-tran-holmes.tar.gz README.md client/dist package-lock.json package.json  planning/ screenshot.png  server/
   artifacts:
