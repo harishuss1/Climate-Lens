@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import countries from '../../data/countries.json';
-
-export default function SearchFilter({ setCountry, setIsValid, excludedCountries = [] }) {
+import React from 'react';
+const SearchFilter = React.memo(({ setCountry, setIsValid, excludedCountries = []  }) => {
   const [searchCountry, setSearchCountry] = useState('Canada'); 
   const [filteredCountries, setFilteredCountries] = useState([]);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
@@ -105,4 +105,7 @@ export default function SearchFilter({ setCountry, setIsValid, excludedCountries
       }
     </div>
   );
-}
+});
+
+SearchFilter.displayName = 'SearchFilter';
+export default SearchFilter;
