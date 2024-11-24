@@ -65,6 +65,7 @@ build-client:
       - main
       - staging
       - aws
+      - tag
 
 # Size check 
 bundlesize-check:
@@ -80,6 +81,7 @@ bundlesize-check:
       - main
       - staging
       - aws
+      - tag
 
 
 # make artifact for aws deployment
