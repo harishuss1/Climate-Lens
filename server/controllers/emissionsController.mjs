@@ -51,7 +51,7 @@ export async function getEmissionData (req, res,) {
     if (!data || data.length === 0) {
       return res.status(400).json({ error: 'No data was Found' });
     }
-    //catch the data
+    //cache the data
     cache.put(cacheKey, data);
     
     res.json(data);

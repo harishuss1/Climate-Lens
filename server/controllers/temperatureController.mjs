@@ -55,7 +55,7 @@ export async function getTemperatureData (req, res) {
       return res.status(400).json({ error: 'Enter a valid country' });
     }
 
-    //catch the data
+    //cache the data
     cache.put(cacheKey, tempData);
 
     res.json(tempData);
