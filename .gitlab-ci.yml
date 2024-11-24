@@ -6,7 +6,6 @@ workflow:
     - if: $CI_COMMIT_TAG
     - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
     - if: $CI_COMMIT_BRANCH == 'staging'
-    - if: $CI_COMMIT_BRANCH == 'aws' #temp
 
 default:
   cache:
@@ -64,6 +63,7 @@ build-client:
     refs:
       - main
       - staging
+      - aws
 
 # Size check 
 bundlesize-check:
@@ -78,6 +78,8 @@ bundlesize-check:
     refs:
       - main
       - staging
+      - aws
+
 
 # make artifact for aws deployment
 aws-artifact:
