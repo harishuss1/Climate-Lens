@@ -235,3 +235,27 @@ html, body, #root, #app-container {
   margin: 10px auto 20px;
   line-height: 1.6;
 }
+
+.narrative-container {
+  margin: 20px auto;
+  padding: 20px;
+  max-width: 800px;
+  background-color: var(--background-color);
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+.narrative-title {
+  font-size: 1.8rem;
+  color: var(--primary-color);
+  margin-bottom: 10px;
+  font-weight: bold;
+}
+
+.narrative-text {
+  font-size: 1.2rem;
+  color: var(--text-color);
+  line-height: 1.6;
+}
+
