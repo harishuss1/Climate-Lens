@@ -18,6 +18,8 @@ The main areas that needed improvement were:
 
 Caching: Enabling caching to reduce the number of network requests and allow the browser to use locally stored assets and data.
 
+Optimize re-renders: 
+
 ## Summary of Changes 
 
 <!-- Briefly describe each change and the impact it had on performance (be specific). If there
@@ -41,10 +43,30 @@ After-Cache on AWS:
 
 After-Cache on Render:
 ![Cache Render](./cacheReport/screenshots/CacheRender.png)
-### <!-- Change n -->
 
-Lead: <!-- name of main contributor to this change -->
 
+### Unoptimized re-renders
+
+Lead: Tommy Tran
+
+Problem: Certain components (such as charts) were being re-rendered too frequently, even when their props hadn't changed. 
+This happens every time the user selects a year or type anything in the country input field. 
+
+Action: I added React.memo to wrap certain components (charts) that were being re-rendered too frequently. This change helped prevent re-renders of components unless their props changed. 
+
+Impact: This significantly reduced unnecessary rendering during interactions with the user input on country/year selection. It also helps to optimize memory usage
+In terms of performance, I didn't see any major improvement as the components themselves were not big.
+
+Tool: I used the React Developer Tools' "Profiler" tab to check the re-rendering behavior
+
+This issue could only be tested in development, as 'Profiler' is only available in development builds
+
+Pre-optimization fix: Tested by changing the date selection input in our first view, and the result showed that all components in this parent component were being re-rendered
+![unoptimized](./unoptimized_Rerender_Report/screenshots/unoptimized.png)
+
+
+Post-optimization fix: Selecting a year or a country doesn't cause re-rendering on components.
+![postOptimization](./unoptimized_Rerender_Report/screenshots/postMemo.png)
 ## Conclusion
 
 <!-- Summarize which changes had the greatest impact, note any surprising results and list 2-3 main 
