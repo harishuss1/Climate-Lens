@@ -138,6 +138,8 @@ Note taker: Haris
 * Went over Phase 2 requirements.
 * Finished up and polished everything.
 * Fixed bugs we had gotten into.
+* Bug hunting , searched for any bugs.
+* Submission for phase 2!
 
 # 11/23/2024 Saturday 8:00pm, 30min, online
 
