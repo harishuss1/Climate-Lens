@@ -1,5 +1,5 @@
 import { db } from '../db/db.js';
-
+import cache from 'memory-cache';
 
 /**
  * Get emissions data from the CO2Emissions collection
@@ -9,6 +9,15 @@ import { db } from '../db/db.js';
 export async function getEmissionData (req, res,) {
 
   const { country, year } = req.params;
+
+  const cacheKey = `emissions_${country || ''}_${year || ''}`;
+
+  // check cache
+  const cachedData = cache.get(cacheKey);
+  if (cachedData) {
+    console.log('EmissionData from cache');
+    return res.json(cachedData);
+  }
 
   try {
     await db.changeCollection('CO2Emissions');
@@ -42,7 +51,9 @@ export async function getEmissionData (req, res,) {
     if (!data || data.length === 0) {
       return res.status(400).json({ error: 'No data was Found' });
     }
-
+    //cache the data
+    cache.put(cacheKey, data);
+    
     res.json(data);
   } catch (error) {
     console.error('Error fetching emission data:', error);

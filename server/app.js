@@ -24,6 +24,11 @@ var app = express();
 
 app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
+// Add Cache-control to all responses
+app.use(function (req, res, next) {
+  res.set('Cache-control', 'public, max-age=31536000');
+  next();
+});
 
 /**
  * Express application setup.
