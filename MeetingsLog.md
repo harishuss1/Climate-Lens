@@ -154,3 +154,16 @@ Note taker: Tommy
 * Went over the app on render to see the effect on caching.
 * Assigned everyone to do/show their performance report by leaving comments in the gitlab issue. This way, everyone can easily keep track of progress
 * Agreed to have another meeting on Sunday.
+
+# 11/24/2024 Sunday 8:00pm, 1h, online
+
+Attendees: Tommy, Haris, Aidan
+
+Note taker: Aidan
+
+## discussion / work we have done during the meeting
+* Looked at Haris's merge request reguarding storytelling and compression
+* Discussed what was missing in aidan's changes to the ci fille
+* Went through Tommy's merge request for performance
+* Discussed how Aidan and Tommy need to do one performance improvement.
+* Discussed using our oops token for a one day extension to ensure everythign is completed.
