@@ -26,7 +26,7 @@ stages:
   - build
   - test
   - size-check
-  - deploy
+  - release
 
 
 # Lint job for server
@@ -85,12 +85,16 @@ bundlesize-check:
 
 
 # make artifact for aws deployment
-aws-artifact:
-  stage: deploy
+build-app-archive:
+  stage: release
   dependencies:
     - build-client
   only: 
     - tags
+  before_script:
+    - cd server
+    - npm ci --omit=dev
+    - cd ..
   script:
     - tar -czvf 520-project-hussain-tran-holmes.tar.gz README.md client/dist package-lock.json package.json  planning/ screenshot.png  server/
   artifacts:
