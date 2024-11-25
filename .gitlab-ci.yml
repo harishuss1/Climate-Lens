@@ -95,7 +95,7 @@ build-app-archive:
     - npm ci --omit=dev
     - cd ..
   script:
-    - tar -czvf $RELEASE_FILE README.md client/dist server/bin server/controllers server/db server/node_modules server/public server/routers server/util server/*.json server/app.js
+    - tar -czvf $RELEASE_FILE client/dist server/bin server/controllers server/db server/node_modules server/routers server/util server/*.json server/app.js
   artifacts:
       paths:
         - ./$RELEASE_FILE
