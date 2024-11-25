@@ -25,6 +25,7 @@ stages:
   - build
   - test
   - size-check
+  - release
 
 
 # Lint job for server
@@ -62,6 +63,7 @@ build-client:
     refs:
       - main
       - staging
+      - tags
 
 # Size check 
 bundlesize-check:
@@ -76,3 +78,26 @@ bundlesize-check:
     refs:
       - main
       - staging
+      - tags
+
+
+# make artifact for aws deployment
+build-app-archive:
+  stage: release
+  variables:
+    RELEASE_FILE: release-$CI_PROJECT_NAME-$CI_COMMIT_TAG-$CI_COMMIT_SHORT_SHA.tar.gz
+  dependencies:
+    - build-client
+  only: 
+    - tags
+  before_script:
+    - cd server
+    - npm ci --omit=dev
+    - cd ..
+  script:
+    - tar -czvf $RELEASE_FILE client/dist server/bin server/controllers server/db server/node_modules server/routers server/util server/*.json server/app.js
+  artifacts:
+      paths:
+        - ./$RELEASE_FILE
+      expire_in: 7 days
+
