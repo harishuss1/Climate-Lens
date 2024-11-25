@@ -12,7 +12,7 @@ export default function View2() {
   const [startYear, setStartYear] = useState('2012');
   const [endYear, setEndYear] = useState('2013');
   const [errorMessage, setErrorMessage] = useState('');
-
+  const [chartData, setChartData] = useState('');
   const maxCountries = 3;
 
   // Fetch Canada's data on initial load
@@ -47,6 +47,9 @@ export default function View2() {
           dataPoints: data,
         };
         setCountries(updatedCountries);
+        setChartData( countries.
+          filter((c) => c.data && c.data.dataPoints).
+          map((c) => c.data));
       }
     } catch (error) {
       console.error(error);
@@ -107,10 +110,6 @@ export default function View2() {
 
   const selectedCountries = countries.map(c => c.country);
 
-
-  const chartData = countries.
-    filter((c) => c.data && c.data.dataPoints).
-    map((c) => c.data);
 
   return (
     <div className="view2-container">

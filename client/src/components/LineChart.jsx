@@ -1,8 +1,9 @@
 // eslint-disable-next-line no-unused-vars
 import { Chart as ChartJS } from 'chart.js/auto';
 import { Line } from 'react-chartjs-2';
+import React from 'react';
 
-export default function LineChart({ data }) {
+const LineChart = React.memo(({ data }) => {
   if (!data || data.length === 0) {
     return (
       <Line
@@ -53,4 +54,6 @@ export default function LineChart({ data }) {
       }}
     />
   );
-}
+});
+LineChart.displayName = 'LineChart';
+export default LineChart;

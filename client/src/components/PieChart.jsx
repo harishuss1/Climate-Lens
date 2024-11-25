@@ -2,9 +2,9 @@
 // eslint-disable-next-line no-unused-vars
 import { Chart as ChartJS } from 'chart.js/auto';
 import { Pie } from 'react-chartjs-2';
+import React from 'react';
 
-
-export default function PieChart({ data }) {
+const PieChart = React.memo(({ data }) => {
   if (!data || data.length === 0) {
     return (
       <div style={{ width: '300px', height: '300px' }}>
@@ -77,4 +77,6 @@ export default function PieChart({ data }) {
       />
     </div>
   );
-}
+});
+PieChart.displayName = 'PieChart';
+export default PieChart;
