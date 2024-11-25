@@ -84,6 +84,8 @@ bundlesize-check:
 # make artifact for aws deployment
 build-app-archive:
   stage: release
+  variables:
+    RELEASE_FILE: release-$CI_PROJECT_NAME-$CI_COMMIT_TAG-$CI_COMMIT_SHORT_SHA.tar.gz
   dependencies:
     - build-client
   only: 
@@ -93,9 +95,9 @@ build-app-archive:
     - npm ci --omit=dev
     - cd ..
   script:
-    - tar -czvf 520-project-hussain-tran-holmes.tar.gz README.md client/dist package-lock.json package.json  planning/ screenshot.png  server/
+    - tar -czvf $RELEASE_FILE README.md client/dist package-lock.json package.json  planning/ screenshot.png  server/bin server/controllers server/db server/node_modules server/public server/routers server/util server/*.json server/app.js
   artifacts:
       paths:
-        - ./520-project-hussain-tran-holmes.tar.gz
+        - ./$RELEASE_FILE
       expire_in: 7 days
 
