@@ -2,6 +2,7 @@ import MapChart from './MapChart';
 import { useState } from 'react';
 import { useEffect } from 'react';
 import { getCode } from 'country-list';
+import Narrative from './Narrative';
 
 export default function MapView() {
 
@@ -40,6 +41,11 @@ export default function MapView() {
         <option value="2013">2013</option>
       </select>
       <MapChart data={data} />
+      <Narrative
+        title="Visualizing Global Climate Patterns"
+        // eslint-disable-next-line max-len
+        text="The global map provides a holistic view of CO2 emissions and average temperatures across different countries and regions. By observing these patterns, we can identify hotspots of emissions and regions most affected by rising temperatures. This visualization underscores the interconnected nature of climate change, emphasizing the need for a global response to mitigate its effects. It also helps identify countries requiring more support to combat climate-related challenges."
+      />
     </div>
   );
 }

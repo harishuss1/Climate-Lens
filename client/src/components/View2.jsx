@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import BarChart from './BarChart.jsx';
 import SearchFilter from './SearchFilter.jsx';
-
+import Narrative from './Narrative.jsx';
 /**
  * View2 Component for comparing average temperatures of 
  * multiple countries over a selected year range.
@@ -163,6 +163,11 @@ export default function View2() {
         <button onClick={fetchAllData} className="retrieve-all-btn">Retrieve All Data</button>
 
       </div>
+      <Narrative
+        title="Cross-Country Climate Insights"
+        // eslint-disable-next-line max-len
+        text="This view compares the average temperatures of multiple countries over a selected time range. Such a comparison enables us to understand which regions are experiencing the greatest impact of climate change. For instance, while some countries may see moderate temperature increases, others may face extreme changes due to factors like geographical location or emissions intensity. This analysis provides a foundation for cooperative climate efforts between nations."
+      />
     </div>
   );
 }
