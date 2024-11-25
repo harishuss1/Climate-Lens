@@ -18,7 +18,7 @@ The main areas that needed improvement were:
 
 Caching: Enabling caching to reduce the number of network requests and allow the browser to use locally stored assets and data.
 
-Optimize re-renders: 
+Optimize re-renders: Reducing unnecessary when props remain unchanged.
 
 ## Summary of Changes 
 
