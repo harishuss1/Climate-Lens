@@ -44,7 +44,7 @@ After-Cache on AWS:
 After-Cache on Render:
 ![Cache Render](./cacheReport/screenshots/CacheRender.png)
 
-
+---
 ### Unoptimized re-renders
 
 Lead: Tommy Tran
@@ -67,6 +67,37 @@ Pre-optimization fix: Tested by changing the date selection input in our first v
 
 Post-optimization fix: Selecting a year or a country doesn't cause re-rendering on components.
 ![postOptimization](./unoptimized_Rerender_Report/screenshots/postMemo.png)
+
+---
+### Compression
+
+Lead: Haris Hussain
+
+Problem: Static assets such as JavaScript and CSS were being served uncompressed, resulting in large payloads and slow loading times, particularly on slower networks.
+
+Action: To address the issue, I enabled Gzip Compression on the server using the compression middleware in the Express framework. This middleware ensured that all static files, such as .js, .css, and .html, were transmitted in a compressed format. Additionally, I focused on compressing large JSON API responses to further optimize the data payload. To verify the effectiveness of this change, I used the Network tab in Chrome DevTools, specifically checking for the Content-Encoding: gzip header in the server's response.
+
+Impact: The implementation of Gzip Compression  reduced the size of transmitted assets, resulting in an improvement in the app's load time. This change directly improved metrics  particularly for users accessing the app on slower networks. Users experienced faster content delivery, which enhanced the overall usability of the app.
+
+- Pre-compression:
+  - load : 429ms
+  - .js 952kb 8ms
+  - .css 4.1kb 3ms
+  - 2012 1.5kb 24ms (API)
+  - 2012 513B 19ms (API)
+  - 2013 383B 104ms (API)
+- Post-compression
+  - load : 395ms
+  - .js 303kb 30ms
+  - .css 1.5kb 3ms
+  - 2012 583B 3ms (API)
+  - 2012 536B 2ms (API)
+  - 2013 406B 2ms (API)
+  
+Tool Used: Lighthouse and Chrome DevTools to verify compressed asset delivery and measure the performance improvement.
+
+
+
 ## Conclusion
 
 <!-- Summarize which changes had the greatest impact, note any surprising results and list 2-3 main 
