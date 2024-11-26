@@ -18,7 +18,7 @@ The main areas that needed improvement were:
 
 Caching: Enabling caching to reduce the number of network requests and allow the browser to use locally stored assets and data.
 
-Optimize re-renders: Reducing unnecessary when props remain unchanged.
+Optimize re-renders: Reducing unnecessary re-renders when props remain unchanged.
 
 Lazy-Loading Components: Deferring the loading of components that are not immediately visible.
 
@@ -33,9 +33,11 @@ was no performance improvement, explain why that might be the case -->
 
 Lead: Tommy Tran
 
-Action: I configured the server to add cache control headers which allows the browser to cache static resource and API data for one year. Additionally, I added caching for API data on the server's memory with no TTL (Time to Live), as our historical emissions/temperature data do not change.
+Action: I configured the server to add cache control headers which allows the browser to cache static resource and API data for one year. The cache-control for index.html is no-cache to always revalidate with the server before using the cache version. Additionally, I added caching for API data on the server's memory with no TTL (Time to Live), as our historical emissions/temperature data do not change.
 
 Impact: By setting a long cache duration for the browser and utilizing memory caching on the server, the page load times drastically improved. Subsequent visits loaded much faster, as the browser could reuse cached resources and the server didn't need to re-fetch the dataset.
+
+Tool: I used devTools to check the response headers
 
 Pre-Cache on AWS:
 ![No Cache AWS](./cacheReport/screenshots/NoCacheAWS.png)

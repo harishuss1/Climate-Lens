@@ -29,11 +29,6 @@ app.use(compression());
 
 app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
-// Add Cache-control to all responses
-app.use(function (req, res, next) {
-  res.set('Cache-control', 'public, max-age=31536000');
-  next();
-});
 
 /**
  * Express application setup.
@@ -47,8 +42,22 @@ app.use(function (req, res, next) {
  * - Returns 404 for unknown routes
  */
 
-app.use(express.static('../client/dist'));
+app.use(express.static('../client/dist', {
+  setHeaders: (res, path) => {
+    if (path.endsWith('index.html')) {
+      res.set('Cache-Control', 'no-cache');
+    } else {
+      res.set('Cache-control', 'public, max-age=31536000');
+    }
+  }
+}
+));
 
+// Add Cache-control to all other responses
+app.use(function (req, res, next) {
+  res.set('Cache-control', 'public, max-age=31536000');
+  next();
+});
 
 app.use('/api/temp', tempRouter);
 app.use('/api/emissions', emissionRouter);
