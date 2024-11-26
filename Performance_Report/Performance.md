@@ -139,7 +139,17 @@ Problem: the entirety of our css is loaded immediately, slowing down the inital 
 
 Action: i made a new uncriticalApp.css file and moved all css rules which where not relvent for the inital load to it, i then did the "media=print onload="this.media='all'"" trick when linking uncriticalApp.css so that it would only load afterwards 
 
-Impact: the inital transfer size was reduced from 1.4 Kib, to 1.1 Kib. aproximately being 20ms faster then before.
+Impact: the inital transfer size was reduced from 1.4 Kib, to 1.1 Kib. aproximately being 20ms faster then before according to the lighthouse report. however on other tabs it seemed somewhat slower for some reason, perhaps there simply isnt enough non-critical css to make it worthwhile? im not sure.
+
+#### pre uncritical css
+![unoptimized](./uncriticalCSS/Before.PNG)
+![unoptimized](./uncriticalCSS/BeforeNetwork.PNG)
+![unoptimized](./uncriticalCSS/BeforePerformance.PNG)
+
+#### post uncritical css
+![unoptimized](./uncriticalCSS/after.PNG)
+![unoptimized](./uncriticalCSS/afterNetwork.PNG)
+![unoptimized](./uncriticalCSS/afterPerformance.PNG)
 
 ## Conclusion
 
