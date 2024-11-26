@@ -20,6 +20,10 @@ Caching: Enabling caching to reduce the number of network requests and allow the
 
 Optimize re-renders: Reducing unnecessary when props remain unchanged.
 
+Lazy-Loading Components: Deferring the loading of components that are not immediately visible.
+
+Reducing Unused JavaScript: Optimizing imports and removing unused code from third-party libraries 
+
 ## Summary of Changes 
 
 <!-- Briefly describe each change and the impact it had on performance (be specific). If there
