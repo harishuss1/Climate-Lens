@@ -90,7 +90,6 @@ If you want to deploy the app as a new deployment or for another branch, follow 
 
 ## Attributions
 
-
 ### Data Sources
 - **Climate Data**: Sourced from [Temperature Data](https://www.kaggle.com/datasets/berkeleyearth/climate-change-earth-surface-temperature-data/data?select=GlobalLandTemperaturesByCountry.csv), including historical temperature records data by country and year.
 - **Emission Data** : Sourced from [Emission Data](https://github.com/datasets/co2-fossil-by-nation/blob/main/data/fossil-fuel-co2-emissions-by-nation.csv), includes CO2 emissions data by country and year.
