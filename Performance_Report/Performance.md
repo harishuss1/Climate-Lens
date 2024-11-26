@@ -130,8 +130,16 @@ Bundlesize post optimization
 ![unoptimized](./lazyloading/after-lazy-loading-bundle%20size.png)
 
  
+---
+### Uncritical css
 
+Lead: Aidan Holmes
 
+Problem: the entirety of our css is loaded immediately, slowing down the inital load of of the website.
+
+Action: i made a new uncriticalApp.css file and moved all css rules which where not relvent for the inital load to it, i then did the "media=print onload="this.media='all'"" trick when linking uncriticalApp.css so that it would only load afterwards 
+
+Impact: the inital transfer size was reduced from 1.4 Kib, to 1.1 Kib. aproximately being 20ms faster then before.
 
 ## Conclusion
 
