@@ -96,6 +96,35 @@ Impact: The implementation of Gzip Compression  reduced the size of transmitted 
   
 Tool Used: Lighthouse and Chrome DevTools to verify compressed asset delivery and measure the performance improvement.
 
+---
+### Lazy Loading
+
+Lead: Haris Hussain
+
+Problem: The MapChart component was included in the initial JavaScript bundle, leading to a significant portion of unused JavaScript on the page load. This impacted the app’s performance by increasing the initial load time and overall bundle size.
+
+Action: To address this issue, I implemented lazy-loading for the MapChart component using React.lazy and Suspense. This ensured that the MapChart was only loaded when it entered the viewport. Additionally, the react-intersection-observer library was used to defer the loading of the map until it became 10% visible on the page.
+
+Impact: This change reduced unused JavaScript flagged by Lighthouse from 88 KB to 44 KB, cutting it in half. The overall JavaScript bundle size decreased from 302 KB to 177 KB, reducing initial page load times. This optimization is especially beneficial for users on slower networks or devices, as it minimizes the resources required for the initial render.
+
+#### Pre-Lazy Loading
+LightHouse performance pre optimization
+![unoptimized](./lazyloading/before-lazy-loading-lighthouse.png)
+
+Bundlesize pre optimization
+![unoptimized](./lazyloading/before-lazy-bundle-size.png)
+
+
+#### Post-Lazy Loading
+LightHouse performance post optimization
+![unoptimized](./lazyloading/after-lazy-loading-lighthouse.png)
+
+Bundlesize post optimization
+
+![unoptimized](./lazyloading/after-lazy-loading-bundle%20size.png)
+
+ 
+
 
 
 ## Conclusion
