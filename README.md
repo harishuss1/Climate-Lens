@@ -59,7 +59,37 @@ The goal of this project is to provide a user-friendly platform that enables use
 6. **View the application**
    Open [http://localhost:3000](http://localhost:3000) in your browser to view the dashboard.
 
+## Render
+Our app is also deployed on Render at https://project-hussain-tran-holmes.onrender.com/. 
+
+It is set to automatically re-deploy whenever the specified branch (in this case, the 'staging' branch) is updated.
+
+If you want to deploy the app as a new deployment or for another branch, follow these steps:
+
+1.  Log in to Render
+2. In the Dashboard, select Web Server
+3. **Configure deployment settings**
+   
+   - **Git provider**: Connect to Gitlab and choose this repository
+   - **Name**: Enter a name for your web service
+   - **Language**: Select Node
+   - **Branch**: Choose the branch to deploy
+   - **Root directory**: Set to . (root of the project)
+   - **Build command**: 
+      ```
+      cd client && npm install && npm run build && cd ../server && npm install --production
+   - **Start command**:
+      ```
+      NODE_ENV=production cd server && node bin/www
+   - **Instance type**: Choose the free one
+   - **Environment variable**: Add necessary environment variable (Your ATLAS_URI)
+4. **Update MongoDB ATLAS**
+   
+   - Click **connect** and copy the outbound IP addresses
+   - In MongoDB Atlas, go to **Security** -> **Network Access** and add these IP addresses to the IP access list.
+
 ## Attributions
+
 
 ### Data Sources
 - **Climate Data**: Sourced from [Temperature Data](https://www.kaggle.com/datasets/berkeleyearth/climate-change-earth-surface-temperature-data/data?select=GlobalLandTemperaturesByCountry.csv), including historical temperature records data by country and year.
