@@ -1,10 +1,10 @@
 /* eslint-disable camelcase */
 import { useLayoutEffect } from 'react';
-import * as am5 from '@amcharts/amcharts5';
-import * as am5map from '@amcharts/amcharts5/map';
-
-import am5geodata_worldLow from '@amcharts/amcharts5-geodata/worldLow';
-import am5themes_Animated from '@amcharts/amcharts5/themes/Animated';
+import { Root, color } from '@amcharts/amcharts5';
+// eslint-disable-next-line max-len
+import { MapChart as Am5MapChart, MapPolygonSeries, geoOrthographic } from '@amcharts/amcharts5/map';
+import worldLow from '@amcharts/amcharts5-geodata/worldLow';
+import  Animated  from '@amcharts/amcharts5/themes/Animated';
 
 
 
@@ -29,27 +29,25 @@ function formatData(data){
 
 function MapChart({data}) {
   useLayoutEffect(() => {
-    let root = am5.Root.new('chartdiv');
+    const root = Root.new('chartdiv');
 
     root.setThemes([
-      am5themes_Animated.new(root)
+      Animated.new(root)
     ]);
 
-    let chart = root.container.children.push(
-      am5map.MapChart.new(root, {
+    const chart = root.container.children.push(
+      Am5MapChart.new(root, {
         panX: 'rotateX',
         panY: 'rotateY',
-        projection: am5map.geoOrthographic()
+        projection: geoOrthographic()
       })
     );
     
-    // let active = ['US', 'CA', 'AF', 'JP',];
-
-    let templateData = data.map((value) => {
+    const templateData = data.map((value) => {
       return {
         id: value.CountryCode, 
         polygonSettings: {
-          fill: am5.color(0x1e88e5)
+          fill: color(0x1e88e5)
         },
         Country: value['Country'],
         Total: value['Total'],
@@ -69,12 +67,12 @@ function MapChart({data}) {
     });
     
     // Create polygon series
-    let polygonSeries = chart.series.push(
-      am5map.MapPolygonSeries.new(root, {
-        geoJSON: am5geodata_worldLow,
+    const polygonSeries = chart.series.push(
+      MapPolygonSeries.new(root, {
+        geoJSON: worldLow,
         // exclude: excluded,
         useGeodata: true,
-        fill: am5.color(0x808080)
+        fill: color(0x808080)
       })
     );
 
@@ -96,7 +94,7 @@ function MapChart({data}) {
     polygonSeries.data.setAll(templateData);
       
     polygonSeries.mapPolygons.template.states.create('hover', {
-      fill: am5.color(0xffca28)
+      fill: color(0xffca28)
     });
 
     return () => {
