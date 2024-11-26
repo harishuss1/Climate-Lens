@@ -24,14 +24,27 @@ const PieChart = React.memo(({ data }) => {
     );
   }
 
-  const totalEmissions = data[0]['Total'];
-  //get all the keys except total,country,year and id for the pie chart label
-  const labels = Object.keys(data[0]).filter(key =>
+  //Include bunker fuels and exclude Per Capital
+  const totalEmissions = data[0]['Total'] + data[0]['Bunker fuels (Not in Total)']
+    - data[0]['Per Capita'];
+  
+  //get all the keys name for labeling except total,country,year, 
+  //Per Capita and id for the pie chart label
+  var labels = Object.keys(data[0]).filter(key =>
     key !== 'Total' && key !== 'Country' && key !== 'Year' && key !== '_id' && key !== 'Per Capita'
   );
 
+  //Get the values of each label (key)
   const filteredData = labels.map(label => data[0][label]);
 
+  //Change the key name for bunker fuels
+  labels = labels.map(label => {
+    if (label === 'Bunker fuels (Not in Total)') {
+      return 'Bunker Fuels';
+    }
+    return label;
+  });
+  
   function calculatePercentage(value, total) {
     return ((value / total) * 100).toFixed(1);
   }
