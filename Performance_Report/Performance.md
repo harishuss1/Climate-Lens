@@ -6,12 +6,37 @@
 (which browsers, what browser versions, what kind of device, OS,
 width and height of viewport as reported in the console with `window.screen`) -->
 
-<!-- Also report overall impact on whatdoesmysitecost results before and after all your changes -->
+We used chrome webtools to gather data about our app performance, 
+particularly the network, performance, and lighthouse devtools.
 
+### Haris
+- pc
+- Chrome v131.0.6778.86 
+- viewport: 1712:252
+
+### Tommy
+- laptop
+- Chrome v131.0.6778.86 
+- viewport: 1536:816
+
+### Aidan
+- laptop
+- Chrome v131.0.6778.86 
+- viewport: 1536:667
+- chrome webtools iphone se size setting: 375:667
+
+
+<!-- Also report overall impact on whatdoesmysitecost results before and after all your changes -->
+<!-- the site doesnt seem to be working -->
 ## Baseline Performance
 
 <!-- Summarize initial results for each tool that you used. Did the tools
 detect all the performance issues you see as a user? -->
+lighthouse gave good perforamnce rating, whcih reflected our experiecneas our site performed pretyt really even wtihotu any optimisation. 
+but there where soem things it said we could improve on.
+
+the netowrk and perforamce tabs did show some slower areas of the website, but as the website was fast to begin with they where not
+particulairly noticable unless we turned on throttling.
 
 ## Areas to Improve
 The main areas that needed improvement were:
