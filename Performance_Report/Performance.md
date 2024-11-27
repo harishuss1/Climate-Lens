@@ -180,3 +180,15 @@ Impact: the inital transfer size was reduced from 1.4 Kib, to 1.1 Kib. aproximat
 
 <!-- Summarize which changes had the greatest impact, note any surprising results and list 2-3 main 
 things you learned from this experience. -->
+The massive decrease in bundlsize and unsused javscript by specifing which parts of amcharts5 to extract 
+where very high, and caching proved very impactful, reducing the DOMContentLoaded by 3 seconds once the cache is active, which is alot in web design time.
+
+We learned how long-term caching for static resources, API data and using no-cache for index.html can improve performance by reducing server load and speeding up page loads. We also learned that the order of these middleware instructions is important for setting up caching properly.
+
+Additonally we learned how impactful lazy loading and compression are in optimizing app performance. reduceding initial load times by deferring non-critical resources, until needed. Compression minimized the size of transmitted assets, improving load times and user experience, especially on slower networks. Together, these strategies significantly enhanced both speed and scalability of the app.
+
+
+
+
+
+
