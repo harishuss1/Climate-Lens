@@ -167,3 +167,15 @@ Note taker: Aidan
 * Went through Tommy's merge request for performance
 * Discussed how Aidan and Tommy need to do one performance improvement.
 * Discussed using our oops token for a one day extension to ensure everythign is completed.
+
+# 11/26/2024 Sunday 8:00pm, 2h, online
+
+Attendees: Tommy, Haris, Aidan
+
+Note taker: Haris
+
+## discussion / work we have done during the meeting
+* Reviewed final submission
+* Looked over instructions to make sure we had everything
+* Make last few adjustments like project title
+* Submit! (It was great working with everyone!)
