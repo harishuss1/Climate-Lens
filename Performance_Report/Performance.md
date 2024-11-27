@@ -32,10 +32,10 @@ particularly the network, performance, and lighthouse devtools.
 
 <!-- Summarize initial results for each tool that you used. Did the tools
 detect all the performance issues you see as a user? -->
-lighthouse gave good perforamnce rating, whcih reflected our experiecneas our site performed pretyt really even wtihotu any optimisation. 
-but there where soem things it said we could improve on.
+lighthouse gave a good performance rating, which reflected our experiences as our site performed pretty really even without any optimisation. 
+but there where some things it said we could improve on.
 
-the netowrk and perforamce tabs did show some slower areas of the website, but as the website was fast to begin with they where not
+the network and perforamce tabs did show some slower areas of the website, but as the website was fast to begin with they where not
 particulairly noticable unless we turned on throttling.
 
 ## Areas to Improve
@@ -180,7 +180,7 @@ Impact: the inital transfer size was reduced from 1.4 Kib, to 1.1 Kib. aproximat
 
 <!-- Summarize which changes had the greatest impact, note any surprising results and list 2-3 main 
 things you learned from this experience. -->
-The massive decrease in bundlsize and unsused javscript by specifing which parts of amcharts5 to extract 
+The massive decrease in bundlesize and unused javscript by specifing which parts of amcharts5 to extract 
 where very high, and caching proved very impactful, reducing the DOMContentLoaded by 3 seconds once the cache is active, which is alot in web design time.
 
 We learned how long-term caching for static resources, API data and using no-cache for index.html can improve performance by reducing server load and speeding up page loads. We also learned that the order of these middleware instructions is important for setting up caching properly.
