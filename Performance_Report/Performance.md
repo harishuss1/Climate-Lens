@@ -27,16 +27,16 @@ particularly the network, performance, and lighthouse devtools.
 
 
 <!-- Also report overall impact on whatdoesmysitecost results before and after all your changes -->
-<!-- the site doesnt seem to be working -->
+<!-- the site doesn't seem to be working -->
 ## Baseline Performance
 
 <!-- Summarize initial results for each tool that you used. Did the tools
 detect all the performance issues you see as a user? -->
 lighthouse gave a good performance rating, which reflected our experiences as our site performed pretty really even without any optimisation. 
-but there where some things it said we could improve on.
+but there were some things it said we could improve on.
 
-the network and perforamce tabs did show some slower areas of the website, but as the website was fast to begin with they where not
-particulairly noticable unless we turned on throttling.
+the network and perforamce tabs did show some slower areas of the website, but as the website was fast to begin with they were not
+particulairly noticeable unless we turned on throttling.
 
 ## Areas to Improve
 The main areas that needed improvement were:
@@ -162,7 +162,7 @@ Lead: Aidan Holmes
 
 Problem: the entirety of our css is loaded immediately, slowing down the inital load of of the website.
 
-Action: i made a new uncriticalApp.css file and moved all css rules which where not relvent for the inital load to it, i then did the "media=print onload="this.media='all'"" trick when linking uncriticalApp.css so that it would only load afterwards 
+Action: i made a new uncriticalApp.css file and moved all css rules which were not relevent for the initial load to it, i then did the "media=print onload="this.media='all'"" trick when linking uncriticalApp.css so that it would only load afterwards 
 
 Impact: the inital transfer size was reduced from 1.4 Kib, to 1.1 Kib. aproximately being 20ms faster then before according to the lighthouse report. however on other tabs it seemed somewhat slower for some reason, perhaps there simply isnt enough non-critical css to make it worthwhile? im not sure.
 
@@ -181,7 +181,7 @@ Impact: the inital transfer size was reduced from 1.4 Kib, to 1.1 Kib. aproximat
 <!-- Summarize which changes had the greatest impact, note any surprising results and list 2-3 main 
 things you learned from this experience. -->
 The massive decrease in bundlesize and unused javscript by specifing which parts of amcharts5 to extract 
-where very high, and caching proved very impactful, reducing the DOMContentLoaded by 3 seconds once the cache is active, which is alot in web design time.
+were very high, and caching proved very impactful, reducing the DOMContentLoaded by 3 seconds once the cache is active, which is alot in web design time.
 
 We learned how long-term caching for static resources, API data and using no-cache for index.html can improve performance by reducing server load and speeding up page loads. We also learned that the order of these middleware instructions is important for setting up caching properly.
 
