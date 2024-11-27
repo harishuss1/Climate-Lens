@@ -6,12 +6,41 @@
 (which browsers, what browser versions, what kind of device, OS,
 width and height of viewport as reported in the console with `window.screen`) -->
 
+We used chrome webtools to gather data about our app performance, 
+particularly the network, performance, and lighthouse devtools.
+
+### Haris
+- pc
+- Chrome v131.0.6778.86 
+- viewport: 1712:252
+
+### Tommy
+- laptop
+- Chrome v131.0.6778.86 
+- viewport: 1536:816
+
+### Aidan
+- laptop
+- Chrome v131.0.6778.86 
+- viewport: 1536:667
+- chrome webtools iphone se size setting: 375:667
+
+
 <!-- Also report overall impact on whatdoesmysitecost results before and after all your changes -->
+### Before
+
+![Before](./cost/before.webp)
+![After](./cost/after.webp)
 
 ## Baseline Performance
 
 <!-- Summarize initial results for each tool that you used. Did the tools
 detect all the performance issues you see as a user? -->
+lighthouse gave a good performance rating, which reflected our experiences as our site performed pretty really even without any optimisation. 
+but there were some things it said we could improve on.
+
+the network and perforamce tabs did show some slower areas of the website, but as the website was fast to begin with they were not
+particulairly noticeable unless we turned on throttling.
 
 ## Areas to Improve
 The main areas that needed improvement were:
@@ -130,10 +159,40 @@ Bundlesize post optimization
 ![unoptimized](./lazyloading/after-lazy-loading-bundle%20size.png)
 
  
+---
+### Uncritical css
 
+Lead: Aidan Holmes
 
+Problem: the entirety of our css is loaded immediately, slowing down the inital load of of the website.
+
+Action: i made a new uncriticalApp.css file and moved all css rules which were not relevent for the initial load to it, i then did the "media=print onload="this.media='all'"" trick when linking uncriticalApp.css so that it would only load afterwards 
+
+Impact: the inital transfer size was reduced from 1.4 Kib, to 1.1 Kib. aproximately being 20ms faster then before according to the lighthouse report. however on other tabs it seemed somewhat slower for some reason, perhaps there simply isnt enough non-critical css to make it worthwhile? im not sure.
+
+#### pre uncritical css
+![unoptimized](./uncriticalCSS/Before.PNG)
+![unoptimized](./uncriticalCSS/BeforeNetwork.PNG)
+![unoptimized](./uncriticalCSS/BeforePerformance.PNG)
+
+#### post uncritical css
+![unoptimized](./uncriticalCSS/after.PNG)
+![unoptimized](./uncriticalCSS/afterNetwork.PNG)
+![unoptimized](./uncriticalCSS/afterPerformance.PNG)
 
 ## Conclusion
 
 <!-- Summarize which changes had the greatest impact, note any surprising results and list 2-3 main 
 things you learned from this experience. -->
+The massive decrease in bundlesize and unused javscript by specifing which parts of amcharts5 to extract 
+were very high, and caching proved very impactful, reducing the DOMContentLoaded by 3 seconds once the cache is active, which is alot in web design time.
+
+We learned how long-term caching for static resources, API data and using no-cache for index.html can improve performance by reducing server load and speeding up page loads. We also learned that the order of these middleware instructions is important for setting up caching properly.
+
+Additonally we learned how impactful lazy loading and compression are in optimizing app performance. reduceding initial load times by deferring non-critical resources, until needed. Compression minimized the size of transmitted assets, improving load times and user experience, especially on slower networks. Together, these strategies significantly enhanced both speed and scalability of the app.
+
+
+
+
+
+
