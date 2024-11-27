@@ -59,6 +59,121 @@ The goal of this project is to provide a user-friendly platform that enables use
 6. **View the application**
    Open [http://localhost:3000](http://localhost:3000) in your browser to view the dashboard.
 
+## Render
+Our app is also deployed on Render at https://project-hussain-tran-holmes.onrender.com/. 
+
+It is set to automatically re-deploy whenever the specified branch (in this case, the 'staging' branch) is updated.
+
+If you want to deploy the app as a new deployment or for another branch, follow these steps:
+
+1.  Log in to Render
+2. In the Dashboard, select Web Server
+3. **Configure deployment settings**
+   
+   - **Git provider**: Connect to Gitlab and choose this repository
+   - **Name**: Enter a name for your web service
+   - **Language**: Select Node
+   - **Branch**: Choose the branch to deploy
+   - **Root directory**: Set to . (root of the project)
+   - **Build command**: 
+      ```
+      cd client && npm install && npm run build && cd ../server && npm install --production
+   - **Start command**:
+      ```
+      NODE_ENV=production cd server && node bin/www
+   - **Instance type**: Choose the free one
+   - **Environment variable**: Add necessary environment variable (Your ATLAS_URI)
+
+4. **Update MongoDB ATLAS to allow Render to connect**
+   - Click **connect** and copy the outbound IP addresses
+   - In MongoDB Atlas, go to **Security** -> **Network Access** and 
+      add 0.0.0.0/0 which allows access from anywhere for render to connect
+
+5. **Back on render**
+   - Click **Deploy** to deploy it
+
+6. **In MongoDB ATLAS again** 
+   - Click **connect** on Render and copy the outbound IP addresses
+   - In MongoDB Atlas, go to **Security** -> **Network Access** 
+      and add those IP addresses.
+
+## AWS Deployment
+
+Our app is deployed on an AWS Lightsail instance and can be accessed at [AWS Deployment](http://35.182.227.115/)
+
+### Deployment Instructions
+
+#### 1. **Create an AWS Lightsail Instance**
+- **Region**: Select `ca-central-1`.
+- **Blueprint**: Choose the Linux > Node.js blueprint.
+  - Ensure the Node.js version matches the one used in development.
+- **SSH Key**: Generate a new key pair and download the `.pem` file. Ensure it's added to `.gitignore` to avoid accidental commits.
+- **Instance Name**: Choose an instance name like `2024-520-Project-TeamName`.
+- **Tags**: Add a tag like `course=2024-520` for easier identification.
+
+#### 2. **Prepare the App Locally**
+- Navigate to the CI/CD > Pipelines section in GitLab.
+- Download the archive from the most recent CI job
+
+#### 3. **Transfer Code to the AWS Instance**
+- copy the project to the AWS instance using `scp`:
+  
+  ```bash
+   scp -i ./key.pem project.tar.gz bitnami@YOURIP:~/ 
+   ```
+- SSH into the instance:
+  ```bash
+   ssh -i ./key.pem bitnami@YOURIP 
+   ```
+- Extract the project:
+  ```bash
+   tar -xzvf project.tar.gz 
+   ```
+- Copy over .env file (already in bitnami):
+  ```bash
+   cp .env ./project 
+   ```
+
+#### 4. **Set Up MongoDB Atlas**
+- Go to MongoDB Atlas > Security > Network Access.
+- Add the public IP of your AWS instance to the IP access list.
+
+#### 5. **Run the Express App**
+- Install `forever` globally on the AWS instance:
+ ```bash
+  sudo npm install -g forever 
+  ```
+- Start the app:
+  ```bash
+   NODE_ENV=production PORT=3001 forever start server/bin/www 
+   ```
+- Use `forever list` to verify that the app is running. Logs can be inspected with `forever logs`.
+
+#### 6. **Set Up Apache Proxy**
+- Configure a virtual host to forward traffic from port 80 to 3001:
+  ```bash
+   sudo nano /opt/bitnami/apache/conf/vhosts/vhost.conf 
+   ```
+  Add the following configuration:
+  ```bash 
+  apache
+  <VirtualHost 127.0.0.1:80 _default_:80>
+    ProxyPass / http://localhost:3001/
+    ProxyPassReverse / http://localhost:3001/
+  </VirtualHost>
+  ```
+
+  - Restart Apache:
+  ```bash
+   sudo /opt/bitnami/ctlscript.sh restart apache 
+   ```
+
+#### 7. **Verify the Deployment**
+- Visit the public IP address of your AWS instance and ensure the app is functioning as expected
+
+#### Redeployment
+- Repeat steps 2 and 3.
+
 ## Attributions
 
 ### Data Sources

@@ -1,19 +1,24 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import BarChart from './BarChart.jsx';
 import SearchFilter from './SearchFilter.jsx';
-
+import Narrative from './Narrative.jsx';
 /**
  * View2 Component for comparing average temperatures of 
  * multiple countries over a selected year range.
  */
 
 export default function View2() {
-  const [countries, setCountries] = useState([{ country: '', data: null, isValid: false }]);
-  const [startYear, setStartYear] = useState('');
-  const [endYear, setEndYear] = useState('');
+  const [countries, setCountries] = useState([{ country: 'Canada', data: null, isValid: true }]);
+  const [startYear, setStartYear] = useState('2012');
+  const [endYear, setEndYear] = useState('2013');
   const [errorMessage, setErrorMessage] = useState('');
-
+  const [chartData, setChartData] = useState('');
   const maxCountries = 3;
+
+  // Fetch Canada's data on initial load
+  useEffect(() => {
+    fetchData(0); 
+  }, []);
 
   /**
    * Fetches data for the specified country and year range.
@@ -42,6 +47,9 @@ export default function View2() {
           dataPoints: data,
         };
         setCountries(updatedCountries);
+        setChartData( countries.
+          filter((c) => c.data && c.data.dataPoints).
+          map((c) => c.data));
       }
     } catch (error) {
       console.error(error);
@@ -103,10 +111,6 @@ export default function View2() {
   const selectedCountries = countries.map(c => c.country);
 
 
-  const chartData = countries.
-    filter((c) => c.data && c.data.dataPoints).
-    map((c) => c.data);
-
   return (
     <div className="view2-container">
       <div className="chart-container">
@@ -159,6 +163,11 @@ export default function View2() {
         <button onClick={fetchAllData} className="retrieve-all-btn">Retrieve All Data</button>
 
       </div>
+      <Narrative
+        title="Cross-Country Climate Insights"
+        // eslint-disable-next-line max-len
+        text="This view compares the average temperatures of multiple countries over a selected time range. Such a comparison enables us to understand which regions are experiencing the greatest impact of climate change. For instance, while some countries may see moderate temperature increases, others may face extreme changes due to factors like geographical location or emissions intensity. This analysis provides a foundation for cooperative climate efforts between nations."
+      />
     </div>
   );
 }

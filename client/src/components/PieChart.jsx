@@ -2,9 +2,9 @@
 // eslint-disable-next-line no-unused-vars
 import { Chart as ChartJS } from 'chart.js/auto';
 import { Pie } from 'react-chartjs-2';
+import React from 'react';
 
-
-export default function PieChart({ data }) {
+const PieChart = React.memo(({ data }) => {
   if (!data || data.length === 0) {
     return (
       <div style={{ width: '300px', height: '300px' }}>
@@ -24,16 +24,27 @@ export default function PieChart({ data }) {
     );
   }
 
-  const totalEmissions = data[0]['Total'];
-  //get all the keys except total,country,year and id for the pie chart label
-  const labels = Object.keys(data[0]).filter(key =>
-    key !== 'Total' && key !== 'Country' && key !== 'Year' && key !== '_id'
-  );
+  //Include bunker fuels
+  const totalEmissions = data[0]['Total'] + data[0]['Bunker fuels (Not in Total)'];
 
+  //get all the keys name for labeling except total,country,year, 
+  //Per Capita and id for the pie chart label
+  var labels = Object.keys(data[0]).filter(key =>
+    key !== 'Total' && key !== 'Country' && key !== 'Year' && key !== '_id' && key !== 'Per Capita'
+  );
+  //Get the values of each label (key)
   const filteredData = labels.map(label => data[0][label]);
 
+  //Change the key name for bunker fuels
+  labels = labels.map(label => {
+    if (label === 'Bunker fuels (Not in Total)') {
+      return 'Bunker Fuels';
+    }
+    return label;
+  });
+  
   function calculatePercentage(value, total) {
-    return ((value / total) * 100).toFixed(1);
+    return ((value / total) * 100).toFixed(2);
   }
   const percentageLabels = labels.map((label, index) => {
     const percentage = calculatePercentage(filteredData[index], totalEmissions);
@@ -77,4 +88,6 @@ export default function PieChart({ data }) {
       />
     </div>
   );
-}
+});
+PieChart.displayName = 'PieChart';
+export default PieChart;

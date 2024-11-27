@@ -1,7 +1,8 @@
 import LineChart from './LineChart';
 import PieChart from './PieChart';
 import Search from './SearchFilter.jsx';
-import { useState } from 'react';
+import Narrative from './Narrative.jsx';
+import { useState, useEffect } from 'react';
 
 
 /**
@@ -12,13 +13,17 @@ import { useState } from 'react';
  */
 
 export default function View1() {
-  const [country, setCountry] = useState('');
-  const [year, setYear] = useState('');
+  const [country, setCountry] = useState('Canada');
+  const [year, setYear] = useState('2012');
   const [chartData, setChartData] = useState(null);
   const [pieData, setPieData] = useState(null);
-  const [isValidCountry, setIsValidCountry] = useState(false);
+  const [isValidCountry, setIsValidCountry] = useState(true);
   const [showErrorMessage, setShowErrorMessage] = useState(false);
 
+  useEffect(() => {
+    fetchData();
+    
+  }, []);
 
   /**
    * fetchData function retrieves temperature and emissions data based on the selected
@@ -49,8 +54,8 @@ export default function View1() {
 
       const tempData = await tempResponse.json();
       const emissionsData = await emissionsResponse.json();
-
-      setChartData(tempData);
+      //sort the date before setting
+      setChartData(tempData.sort((a, b) => new Date(a.dt) - new Date(b.dt)) );
       setPieData(emissionsData);
 
     } catch (error) {
@@ -90,6 +95,11 @@ export default function View1() {
         <h2>Causes of CO2 Emissions</h2>
         <PieChart data={pieData} />
       </section>
+      <Narrative
+        title="Unveiling the Impact of Temperature and Emissions"
+        // eslint-disable-next-line max-len
+        text="This view analyzes average monthly temperatures and CO2 emissions for a selected country and year. By understanding these metrics, we can uncover patterns linking human activity, such as industrial emissions, to rising temperatures. For example, historical data often highlights sharp rises in emissions during periods of industrial growth, which correlate with higher temperature anomalies. This insight can inform both national and global strategies for mitigating climate change."
+      />
     </div>
   );
 }

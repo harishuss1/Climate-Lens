@@ -1,12 +1,17 @@
 import { useState } from 'react';
 import countries from '../../data/countries.json';
-
-export default function SearchFilter({ setCountry, setIsValid, excludedCountries = [] }) {
-  const [searchCountry, setSearchCountry] = useState('');
+import React from 'react';
+const SearchFilter = React.memo(({ setCountry, setIsValid, excludedCountries = []  }) => {
+  const [searchCountry, setSearchCountry] = useState('Canada'); 
   const [filteredCountries, setFilteredCountries] = useState([]);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
 
+  useState(() => {
+    setCountry('Canada');
+    setIsValid(true);
+  }, []);
+  
   /**
    * Handles the search input and filters the list of countries based on the query.
    * Updates the dropdown visibility and validity status.
@@ -56,7 +61,6 @@ export default function SearchFilter({ setCountry, setIsValid, excludedCountries
   */
   const handleKeyDown = (event) => {
     if (event.key === 'Enter') {
-      //console.log('pressed');
       const selectedCountry = filteredCountries.find(
         (country) => country.toLowerCase() === searchCountry.toLowerCase()
       );
@@ -100,4 +104,7 @@ export default function SearchFilter({ setCountry, setIsValid, excludedCountries
       }
     </div>
   );
-}
+});
+
+SearchFilter.displayName = 'SearchFilter';
+export default SearchFilter;

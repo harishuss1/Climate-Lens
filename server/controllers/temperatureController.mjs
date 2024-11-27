@@ -1,4 +1,5 @@
 import { db } from '../db/db.js';
+import cache from 'memory-cache';
 
 /**
  * Get temperature data from the CountryAverageTemperature collection.
@@ -19,6 +20,14 @@ import { db } from '../db/db.js';
 export async function getTemperatureData (req, res) {
   const { country, year } = req.params;
 
+  //check cache
+  const cacheKey = `${country}-${year || 'all'}`;
+  const cachedData = cache.get(cacheKey);
+
+  if(cachedData){
+    return res.json(cachedData);
+  }
+  
   try {
     await db.changeCollection('CountryAverageTemperature');
   } catch (error) {
@@ -41,10 +50,12 @@ export async function getTemperatureData (req, res) {
 
   try {
     const tempData = await db.readFiltered(query);
-
     if (!tempData || tempData.length === 0) {
       return res.status(400).json({ error: 'Enter a valid country' });
     }
+
+    //cache the data
+    cache.put(cacheKey, tempData);
 
     res.json(tempData);
   } catch (error) {
@@ -70,6 +81,11 @@ export async function getAvgTemperatureDataInRange (req, res) {
   const validYears = ['2008', '2009', '2010', '2011', '2012', '2013'];
   if (!validYears.includes(startYear) || !validYears.includes(endYear)) {
     return res.status(400).json({ error: 'Enter a valid year range (2008-2013)' });
+  }
+  const cacheKey = `${country}-${startYear}-${endYear}`;
+  const cachedData = cache.get(cacheKey);
+  if (cachedData) {
+    return res.json(cachedData);
   }
 
   try {
@@ -106,6 +122,9 @@ export async function getAvgTemperatureDataInRange (req, res) {
       avgTemperature: avgTempByYear[year].sum / avgTempByYear[year].count
     }));
 
+    // Cache the data
+    cache.put(cacheKey, result);
+
     res.json(result);
   } catch (error) {
     console.error('Error fetching temperature data:', error);
@@ -120,6 +139,13 @@ export async function getAllTemperatureSpecificYear  (req, res) {
   if (!validYears.includes(year)) {
     return res.status(400).json({ error: 'Enter a valid year (2008-2013)' });
   }
+
+  //check cache
+  const cachedData = cache.get(year);
+  if(cachedData){
+    return res.json(cachedData);
+  }
+
   //query to select dt that starts with specified year
   const query = {
     'dt': new RegExp(`^${year}`)
@@ -137,7 +163,8 @@ export async function getAllTemperatureSpecificYear  (req, res) {
     if (!tempData || tempData.length === 0) {
       return res.status(400).json({ error: 'No data for the specified year' });
     }
-
+    //cache the data
+    cache.put(year, tempData);
     res.json(tempData);
   } catch (error) {
     console.error('Error fetching temperature data:', error);

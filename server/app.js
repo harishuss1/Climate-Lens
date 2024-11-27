@@ -3,6 +3,8 @@ import tempRouter from './routers/temperature.js';
 import emissionRouter from  './routers/emissions.js';
 import swaggerJSDoc from 'swagger-jsdoc';
 import swaggerUi from 'swagger-ui-express';
+import compression from 'compression';
+
 
 // app.js
 const swaggerDefinition = {
@@ -22,6 +24,9 @@ const options = {
 const swaggerSpec = swaggerJSDoc(options);
 var app = express();
 
+app.use(compression());
+
+
 app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
 
@@ -37,8 +42,22 @@ app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
  * - Returns 404 for unknown routes
  */
 
-app.use(express.static('../client/dist'));
+app.use(express.static('../client/dist', {
+  setHeaders: (res, path) => {
+    if (path.endsWith('index.html')) {
+      res.set('Cache-Control', 'no-cache');
+    } else {
+      res.set('Cache-control', 'public, max-age=31536000');
+    }
+  }
+}
+));
 
+// Add Cache-control to all other responses
+app.use(function (req, res, next) {
+  res.set('Cache-control', 'public, max-age=31536000');
+  next();
+});
 
 app.use('/api/temp', tempRouter);
 app.use('/api/emissions', emissionRouter);
