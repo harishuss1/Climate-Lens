@@ -15,7 +15,6 @@ export async function getEmissionData (req, res,) {
   // check cache
   const cachedData = cache.get(cacheKey);
   if (cachedData) {
-    console.log('EmissionData from cache');
     return res.json(cachedData);
   }
 

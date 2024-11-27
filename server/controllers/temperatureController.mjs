@@ -25,7 +25,6 @@ export async function getTemperatureData (req, res) {
   const cachedData = cache.get(cacheKey);
 
   if(cachedData){
-    console.log('getTemperatureData from cache');
     return res.json(cachedData);
   }
   
@@ -86,7 +85,6 @@ export async function getAvgTemperatureDataInRange (req, res) {
   const cacheKey = `${country}-${startYear}-${endYear}`;
   const cachedData = cache.get(cacheKey);
   if (cachedData) {
-    console.log('Average temperature data in range from cache');
     return res.json(cachedData);
   }
 
@@ -145,7 +143,6 @@ export async function getAllTemperatureSpecificYear  (req, res) {
   //check cache
   const cachedData = cache.get(year);
   if(cachedData){
-    //console.log('getAllTemperatureSpecificYear data from cache');
     return res.json(cachedData);
   }
 

@@ -61,7 +61,6 @@ const SearchFilter = React.memo(({ setCountry, setIsValid, excludedCountries = [
   */
   const handleKeyDown = (event) => {
     if (event.key === 'Enter') {
-      //console.log('pressed');
       const selectedCountry = filteredCountries.find(
         (country) => country.toLowerCase() === searchCountry.toLowerCase()
       );

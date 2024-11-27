@@ -30,16 +30,17 @@ particularly the network, performance, and lighthouse devtools.
 ### Before
 
 ![Before](./cost/before.webp)
-![After](./cost/after.webp)
+### After
 
+![After](./Cost/after.webp)
 ## Baseline Performance
 
 <!-- Summarize initial results for each tool that you used. Did the tools
 detect all the performance issues you see as a user? -->
-lighthouse gave a good performance rating, which reflected our experiences as our site performed pretty really even without any optimisation. 
+Lighthouse gave a good performance rating, which reflected our experiences as our site performed pretty really even without any optimisation. 
 but there were some things it said we could improve on.
 
-the network and perforamce tabs did show some slower areas of the website, but as the website was fast to begin with they were not
+The network and perforamce tabs did show some slower areas of the website, but as the website was fast to begin with they were not
 particulairly noticeable unless we turned on throttling.
 
 ## Areas to Improve
@@ -143,18 +144,20 @@ Action: To address this issue, I implemented lazy-loading for the MapChart compo
 Impact: This change reduced unused JavaScript flagged by Lighthouse from 88 KB to 44 KB, cutting it in half. The overall JavaScript bundle size decreased from 302 KB to 177 KB, reducing initial page load times. This optimization is especially beneficial for users on slower networks or devices, as it minimizes the resources required for the initial render.
 
 #### Pre-Lazy Loading
-LightHouse performance pre optimization
+
+##### LightHouse performance pre optimization
 ![unoptimized](./lazyloading/before-lazy-loading-lighthouse.png)
 
-Bundlesize pre optimization
+##### Bundlesize pre optimization
 ![unoptimized](./lazyloading/before-lazy-bundle-size.png)
 
-
+---
 #### Post-Lazy Loading
-LightHouse performance post optimization
+
+##### LightHouse performance post optimization
 ![unoptimized](./lazyloading/after-lazy-loading-lighthouse.png)
 
-Bundlesize post optimization
+##### Bundlesize post optimization
 
 ![unoptimized](./lazyloading/after-lazy-loading-bundle%20size.png)
 
