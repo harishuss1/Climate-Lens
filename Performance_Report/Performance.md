@@ -171,13 +171,13 @@ Action: i made a new uncriticalApp.css file and moved all css rules which were n
 Impact: the inital transfer size was reduced from 1.4 Kib, to 1.1 Kib. aproximately being 20ms faster then before according to the lighthouse report. however on other tabs it seemed somewhat slower for some reason, perhaps there simply isnt enough non-critical css to make it worthwhile? im not sure.
 
 #### pre uncritical css
-![unoptimized](./uncriticalCSS/Before.PNG)
-![unoptimized](./uncriticalCSS/BeforeNetwork.PNG)
-![unoptimized](./uncriticalCSS/BeforePerformance.PNG)
+![unoptimized](./uncriticalCSS/before.PNG)
+![unoptimized](./uncriticalCSS/beforeNetwork.PNG)
+![unoptimized](./uncriticalCSS/beforePerformance.PNG)
 
 #### post uncritical css
-![unoptimized](./uncriticalCSS/after.PNG)
-![unoptimized](./uncriticalCSS/afterNetwork.PNG)
+![unoptimized](./uncriticalCSS/After.PNG)
+![unoptimized](./uncriticalCSS/AfterNetwork.PNG)
 ![unoptimized](./uncriticalCSS/afterPerformance.PNG)
 
 
