@@ -27,7 +27,11 @@ particularly the network, performance, and lighthouse devtools.
 
 
 <!-- Also report overall impact on whatdoesmysitecost results before and after all your changes -->
-<!-- the site doesn't seem to be working -->
+### Before
+
+![Before](./cost/before.webp)
+![After](./cost/after.webp)
+
 ## Baseline Performance
 
 <!-- Summarize initial results for each tool that you used. Did the tools
