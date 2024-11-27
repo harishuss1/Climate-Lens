@@ -94,7 +94,7 @@ In terms of performance, I didn't see any major improvement as the components th
 
 Tool: I used the React Developer Tools' "Profiler" tab to check the re-rendering behavior
 
-This issue could only be tested in development, as 'Profiler' is only available in development builds
+This issue could only be tested in development, as 'Profiler' is only available in development builds. The Lighthouse itself doesn't specifically flag "unnecessary re-renders".
 
 Pre-optimization fix: Tested by changing the date selection input in our first view, and the result showed that all components in this parent component were being re-rendered
 ![unoptimized](./unoptimized_Rerender_Report/screenshots/unoptimized.png)
