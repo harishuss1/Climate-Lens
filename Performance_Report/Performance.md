@@ -180,6 +180,10 @@ Impact: the inital transfer size was reduced from 1.4 Kib, to 1.1 Kib. aproximat
 ![unoptimized](./uncriticalCSS/afterNetwork.PNG)
 ![unoptimized](./uncriticalCSS/afterPerformance.PNG)
 
+
+## Additional Libraries
+We integrated the React Intersection Observer library not only to implement lazy loading for components but also to enhance the user experience with viewport-triggered animations. By leveraging this library, we added animations to text elements, making them fade  into view when they enter the viewport. This approach improved the app's visual appeal and created a dynamic, engaging user interface. The animations were lightweight and only triggered when necessary, ensuring no adverse impact on performance. This combination of lazy loading and animations added both functional and aesthetic value to the app.
+
 ## Conclusion
 
 <!-- Summarize which changes had the greatest impact, note any surprising results and list 2-3 main 

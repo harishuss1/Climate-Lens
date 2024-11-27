@@ -83,10 +83,19 @@ If you want to deploy the app as a new deployment or for another branch, follow 
       NODE_ENV=production cd server && node bin/www
    - **Instance type**: Choose the free one
    - **Environment variable**: Add necessary environment variable (Your ATLAS_URI)
-4. **Update MongoDB ATLAS**
-   
+
+4. **Update MongoDB ATLAS to allow Render to connect**
    - Click **connect** and copy the outbound IP addresses
-   - In MongoDB Atlas, go to **Security** -> **Network Access** and add these IP addresses to the IP access list.
+   - In MongoDB Atlas, go to **Security** -> **Network Access** and 
+      add 0.0.0.0/0 which allows access from anywhere for render to connect
+
+5. **Back on render**
+   - Click **Deploy** to deploy it
+
+6. **In MongoDB ATLAS again** 
+   - Click **connect** on Render and copy the outbound IP addresses
+   - In MongoDB Atlas, go to **Security** -> **Network Access** 
+      and add those IP addresses.
 
 ## AWS Deployment
 
